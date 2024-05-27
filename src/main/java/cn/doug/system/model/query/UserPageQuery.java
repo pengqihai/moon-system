@@ -1,6 +1,6 @@
 package cn.doug.system.model.query;
 
-import cn.doug.system.common.base.BasePageQuery;
+import cn.doug.common.page.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,7 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Schema(description ="用户分页查询对象")
 @Data
-public class UserPageQuery extends BasePageQuery {
+public class UserPageQuery extends PageQuery {
 
     @Schema(description="关键字(用户名/昵称/手机号)")
     private String keywords;

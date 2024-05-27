@@ -1,15 +1,15 @@
 package cn.doug.system.model.entity;
 
+import cn.doug.common.base.BaseMybatisEntity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import cn.doug.system.common.base.BaseEntity;
 import lombok.Data;
 
 /**
  * 部门表
  */
 @Data
-public class SysDept extends BaseEntity {
+public class SysDept extends BaseMybatisEntity {
     /**
      * 主键
      */

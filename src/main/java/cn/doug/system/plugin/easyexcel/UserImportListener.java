@@ -1,5 +1,8 @@
 package cn.doug.system.plugin.easyexcel;
 
+import cn.doug.common.base.IBaseEnum;
+import cn.doug.common.enums.GenderEnum;
+import cn.doug.common.enums.StatusEnum;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.StrUtil;
@@ -7,10 +10,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.excel.context.AnalysisContext;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import cn.doug.system.common.base.IBaseEnum;
 import cn.doug.system.common.constant.SystemConstants;
-import cn.doug.system.common.enums.GenderEnum;
-import cn.doug.system.common.enums.StatusEnum;
 import cn.doug.system.common.converter.UserConverter;
 import cn.doug.system.model.entity.SysRole;
 import cn.doug.system.model.entity.SysUser;

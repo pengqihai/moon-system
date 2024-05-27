@@ -2,14 +2,14 @@ package cn.doug.system.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import cn.doug.system.common.base.BaseEntity;
+import cn.doug.common.base.BaseMybatisEntity;
 import lombok.Data;
 
 /**
  * 用户表
  */
 @Data
-public class SysUser extends BaseEntity {
+public class SysUser extends BaseMybatisEntity {
     /**
      * 
      */

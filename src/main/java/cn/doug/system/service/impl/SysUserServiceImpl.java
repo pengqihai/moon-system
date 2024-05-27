@@ -1,5 +1,6 @@
 package cn.doug.system.service.impl;
 
+import cn.doug.common.utils.DateUtils;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
@@ -9,7 +10,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.doug.system.common.constant.SystemConstants;
-import cn.doug.system.common.util.DateUtils;
 import cn.doug.system.common.converter.UserConverter;
 import cn.doug.system.mapper.SysUserMapper;
 import cn.doug.system.model.bo.UserBO;

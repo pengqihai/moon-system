@@ -1,5 +1,6 @@
 package cn.doug.system.service.impl;
 
+import cn.doug.common.enums.CaptchaTypeEnum;
 import cn.hutool.captcha.AbstractCaptcha;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.generator.CodeGenerator;
@@ -9,7 +10,6 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.jwt.JWTPayload;
 import cn.hutool.jwt.JWTUtil;
 import cn.doug.system.common.constant.SecurityConstants;
-import cn.doug.system.common.enums.CaptchaTypeEnum;
 import cn.doug.system.model.dto.CaptchaResult;
 import cn.doug.system.model.dto.LoginResult;
 import cn.doug.system.plugin.captcha.CaptchaProperties;

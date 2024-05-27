@@ -22,7 +22,7 @@ import org.mapstruct.Mappings;
 public interface UserConverter {
 
     @Mappings({
-            @Mapping(target = "genderLabel", expression = "java(cn.doug.system.common.base.IBaseEnum.getLabelByValue(bo.getGender(), cn.doug.system.common.enums.GenderEnum.class))")
+            @Mapping(target = "genderLabel", expression = "java(cn.doug.common.base.IBaseEnum.getLabelByValue(bo.getGender(), cn.doug.common.enums.GenderEnum.class))")
     })
     UserPageVO bo2PageVo(UserBO bo);
 

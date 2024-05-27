@@ -1,11 +1,11 @@
 package cn.doug.system.plugin.dupsubmit.aspect;
 
+import cn.doug.common.exception.CustomMsgException;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.jwt.JWTUtil;
 import cn.hutool.jwt.RegisteredPayload;
 import cn.doug.system.common.constant.SecurityConstants;
-import cn.doug.system.common.exception.BusinessException;
-import cn.doug.system.common.result.ResultCode;
+import cn.doug.common.result.ResultCode;
 import cn.doug.system.plugin.dupsubmit.annotation.PreventDuplicateSubmit;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -55,7 +55,7 @@ public class DuplicateSubmitAspect {
             RLock lock = redissonClient.getLock(resubmitLockKey);
             boolean lockResult = lock.tryLock(0, expire, TimeUnit.SECONDS); // 获取锁失败，直接返回 false
             if (!lockResult) {
-                throw new BusinessException(ResultCode.REPEAT_SUBMIT_ERROR); // 抛出重复提交提示信息
+                throw new CustomMsgException(ResultCode.REPEAT_SUBMIT_ERROR); // 抛出重复提交提示信息
             }
         }
         return pjp.proceed();

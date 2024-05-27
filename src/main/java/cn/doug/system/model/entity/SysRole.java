@@ -3,7 +3,7 @@ package cn.doug.system.model.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import cn.doug.system.common.base.BaseEntity;
+import cn.doug.common.base.BaseMybatisEntity;
 import lombok.Data;
 
 /**
@@ -11,7 +11,7 @@ import lombok.Data;
  */
 @TableName(value ="sys_role")
 @Data
-public class SysRole extends BaseEntity {
+public class SysRole extends BaseMybatisEntity {
     /**
      * 
      */

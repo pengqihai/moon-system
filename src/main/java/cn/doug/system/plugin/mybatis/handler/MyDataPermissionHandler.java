@@ -3,7 +3,7 @@ package cn.doug.system.plugin.mybatis.handler;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.extension.plugins.handler.DataPermissionHandler;
-import cn.doug.system.common.base.IBaseEnum;
+import cn.doug.common.base.IBaseEnum;
 import cn.doug.system.common.enums.DataScopeEnum;
 import cn.doug.system.plugin.mybatis.annotation.DataPermission;
 import cn.doug.system.security.util.SecurityUtils;

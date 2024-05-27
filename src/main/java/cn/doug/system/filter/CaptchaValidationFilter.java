@@ -1,10 +1,10 @@
 package cn.doug.system.filter;
 
+import cn.doug.common.result.ResultCode;
+import cn.doug.http.response.ResponseUtils;
 import cn.hutool.captcha.generator.CodeGenerator;
 import cn.hutool.core.util.StrUtil;
 import cn.doug.system.common.constant.SecurityConstants;
-import cn.doug.system.common.result.ResultCode;
-import cn.doug.system.common.util.ResponseUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

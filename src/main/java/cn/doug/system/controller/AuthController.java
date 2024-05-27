@@ -1,6 +1,6 @@
 package cn.doug.system.controller;
 
-import cn.doug.system.common.result.Result;
+import cn.doug.common.result.vo.ResultVO;
 import cn.doug.system.model.dto.CaptchaResult;
 import cn.doug.system.model.dto.LoginResult;
 import cn.doug.system.service.AuthService;
@@ -22,26 +22,26 @@ public class AuthController {
 
     @Operation(summary = "登录")
     @PostMapping("/login")
-    public Result<LoginResult> login(
+    public ResultVO<LoginResult> login(
             @Parameter(description = "用户名", example = "admin") @RequestParam String username,
             @Parameter(description = "密码", example = "123456") @RequestParam String password
     ) {
         LoginResult loginResult = authService.login(username, password);
-        return Result.success(loginResult);
+        return ResultVO.success(loginResult);
     }
 
     @Operation(summary = "注销")
     @DeleteMapping("/logout")
-    public Result logout() {
+    public ResultVO logout() {
         authService.logout();
-        return Result.success();
+        return ResultVO.success();
     }
 
     @Operation(summary = "获取验证码")
     @GetMapping("/captcha")
-    public Result<CaptchaResult> getCaptcha() {
+    public ResultVO<CaptchaResult> getCaptcha() {
         CaptchaResult captcha = authService.getCaptcha();
-        return Result.success(captcha);
+        return ResultVO.success(captcha);
     }
 
 }

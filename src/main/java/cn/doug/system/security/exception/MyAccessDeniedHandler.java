@@ -1,7 +1,7 @@
 package cn.doug.system.security.exception;
 
-import cn.doug.system.common.result.ResultCode;
-import cn.doug.system.common.util.ResponseUtils;
+import cn.doug.common.result.ResultCode;
+import cn.doug.http.response.ResponseUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.AccessDeniedException;

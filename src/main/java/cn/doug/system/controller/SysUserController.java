@@ -4,8 +4,8 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import cn.doug.system.common.result.PageResult;
-import cn.doug.system.common.result.Result;
+import cn.doug.common.result.vo.PageResultVO;
+import cn.doug.common.result.vo.ResultVO;
 import cn.doug.system.common.util.ExcelUtils;
 import cn.doug.system.model.entity.SysUser;
 import cn.doug.system.model.form.UserForm;
@@ -52,67 +52,67 @@ public class SysUserController {
 
     @Operation(summary = "用户分页列表")
     @GetMapping("/page")
-    public PageResult<UserPageVO> listPagedUsers(
+    public PageResultVO<UserPageVO> listPagedUsers(
             @ParameterObject UserPageQuery queryParams
     ) {
         IPage<UserPageVO> result = userService.listPagedUsers(queryParams);
-        return PageResult.success(result);
+        return PageResultVO.success(result);
     }
 
     @Operation(summary = "新增用户")
     @PostMapping
     @PreAuthorize("@ss.hasPerm('sys:user:add')")
     @PreventDuplicateSubmit
-    public Result saveUser(
+    public ResultVO saveUser(
             @RequestBody @Valid UserForm userForm
     ) {
         boolean result = userService.saveUser(userForm);
-        return Result.judge(result);
+        return ResultVO.judge(result);
     }
 
     @Operation(summary = "用户表单数据")
     @GetMapping("/{userId}/form")
-    public Result<UserForm> getUserForm(
+    public ResultVO<UserForm> getUserForm(
             @Parameter(description = "用户ID") @PathVariable Long userId
     ) {
         UserForm formData = userService.getUserFormData(userId);
-        return Result.success(formData);
+        return ResultVO.success(formData);
     }
 
     @Operation(summary = "修改用户")
     @PutMapping(value = "/{userId}")
     @PreAuthorize("@ss.hasPerm('sys:user:edit')")
-    public Result updateUser(
+    public ResultVO updateUser(
             @Parameter(description = "用户ID") @PathVariable Long userId,
             @RequestBody @Validated UserForm userForm) {
         boolean result = userService.updateUser(userId, userForm);
-        return Result.judge(result);
+        return ResultVO.judge(result);
     }
 
     @Operation(summary = "删除用户")
     @DeleteMapping("/{ids}")
     @PreAuthorize("@ss.hasPerm('sys:user:delete')")
-    public Result deleteUsers(
+    public ResultVO deleteUsers(
             @Parameter(description = "用户ID，多个以英文逗号(,)分割") @PathVariable String ids
     ) {
         boolean result = userService.deleteUsers(ids);
-        return Result.judge(result);
+        return ResultVO.judge(result);
     }
 
     @Operation(summary = "修改用户密码")
     @PatchMapping(value = "/{userId}/password")
     @PreAuthorize("@ss.hasPerm('sys:user:password:reset')")
-    public Result updatePassword(
+    public ResultVO updatePassword(
             @Parameter(description = "用户ID") @PathVariable Long userId,
             @RequestParam String password
     ) {
         boolean result = userService.updatePassword(userId, password);
-        return Result.judge(result);
+        return ResultVO.judge(result);
     }
 
     @Operation(summary = "修改用户状态")
     @PatchMapping(value = "/{userId}/status")
-    public Result updateUserStatus(
+    public ResultVO updateUserStatus(
             @Parameter(description = "用户ID") @PathVariable Long userId,
             @Parameter(description = "用户状态(1:启用;0:禁用)") @RequestParam Integer status
     ) {
@@ -120,14 +120,14 @@ public class SysUserController {
                 .eq(SysUser::getId, userId)
                 .set(SysUser::getStatus, status)
         );
-        return Result.judge(result);
+        return ResultVO.judge(result);
     }
 
     @Operation(summary = "获取当前登录用户信息")
     @GetMapping("/me")
-    public Result<UserInfoVO> getCurrentUserInfo() {
+    public ResultVO<UserInfoVO> getCurrentUserInfo() {
         UserInfoVO userInfoVO = userService.getCurrentUserInfo();
-        return Result.success(userInfoVO);
+        return ResultVO.success(userInfoVO);
     }
 
     @Operation(summary = "用户导入模板下载")
@@ -148,10 +148,10 @@ public class SysUserController {
 
     @Operation(summary = "导入用户")
     @PostMapping("/import")
-    public Result importUsers(@Parameter(description = "部门ID") Long deptId, MultipartFile file) throws IOException {
+    public ResultVO importUsers(@Parameter(description = "部门ID") Long deptId, MultipartFile file) throws IOException {
         UserImportListener listener = new UserImportListener(deptId);
         String msg = ExcelUtils.importExcel(file.getInputStream(), UserImportVO.class, listener);
-        return Result.success(msg);
+        return ResultVO.success(msg);
     }
 
     @Operation(summary = "导出用户")

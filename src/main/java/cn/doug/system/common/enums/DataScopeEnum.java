@@ -1,6 +1,6 @@
 package cn.doug.system.common.enums;
 
-import cn.doug.system.common.base.IBaseEnum;
+import cn.doug.common.base.IBaseEnum;
 import lombok.Getter;
 
 /**

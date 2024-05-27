@@ -1,6 +1,6 @@
 package cn.doug.system.controller;
 
-import cn.doug.system.common.result.Result;
+import cn.doug.common.result.vo.ResultVO;
 import cn.doug.system.model.dto.FileInfo;
 import cn.doug.system.service.OssService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,20 +21,20 @@ public class FileController {
 
     @PostMapping
     @Operation(summary = "文件上传")
-    public Result<FileInfo> uploadFile(
+    public ResultVO<FileInfo> uploadFile(
             @Parameter(description ="表单文件对象") @RequestParam(value = "file") MultipartFile file
     ) {
         FileInfo fileInfo = ossService.uploadFile(file);
-        return Result.success(fileInfo);
+        return ResultVO.success(fileInfo);
     }
 
     @DeleteMapping
     @Operation(summary = "文件删除")
     @SneakyThrows
-    public Result deleteFile(
+    public ResultVO deleteFile(
             @Parameter(description ="文件路径") @RequestParam String filePath
     ) {
         boolean result = ossService.deleteFile(filePath);
-        return Result.judge(result);
+        return ResultVO.judge(result);
     }
 }

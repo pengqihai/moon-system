@@ -1,5 +1,6 @@
 package cn.doug.system.service.impl;
 
+import cn.doug.common.enums.StatusEnum;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
@@ -8,7 +9,6 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.doug.system.common.constant.SystemConstants;
 import cn.doug.system.common.enums.MenuTypeEnum;
-import cn.doug.system.common.enums.StatusEnum;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.common.converter.MenuConverter;
 import cn.doug.system.mapper.SysMenuMapper;

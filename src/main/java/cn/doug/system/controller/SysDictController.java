@@ -2,8 +2,8 @@ package cn.doug.system.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.doug.system.common.model.Option;
-import cn.doug.system.common.result.PageResult;
-import cn.doug.system.common.result.Result;
+import cn.doug.common.result.vo.PageResultVO;
+import cn.doug.common.result.vo.ResultVO;
 import cn.doug.system.model.form.DictForm;
 import cn.doug.system.model.form.DictTypeForm;
 import cn.doug.system.model.query.DictPageQuery;
@@ -35,111 +35,111 @@ public class SysDictController {
 
     @Operation(summary = "字典分页列表")
     @GetMapping("/page")
-    public PageResult<DictPageVO> getDictPage(
+    public PageResultVO<DictPageVO> getDictPage(
             @ParameterObject DictPageQuery queryParams
     ) {
         Page<DictPageVO> result = dictService.getDictPage(queryParams);
-        return PageResult.success(result);
+        return PageResultVO.success(result);
     }
 
     @Operation(summary = "字典数据表单数据")
     @GetMapping("/{id}/form")
-    public Result<DictForm> getDictForm(
+    public ResultVO<DictForm> getDictForm(
             @Parameter(description ="字典ID") @PathVariable Long id
     ) {
         DictForm formData = dictService.getDictForm(id);
-        return Result.success(formData);
+        return ResultVO.success(formData);
     }
 
     @Operation(summary = "新增字典")
     @PostMapping
     @PreAuthorize("@ss.hasPerm('sys:dict:add')")
     @PreventDuplicateSubmit
-    public Result saveDict(
+    public ResultVO saveDict(
             @RequestBody DictForm DictForm
     ) {
         boolean result = dictService.saveDict(DictForm);
-        return Result.judge(result);
+        return ResultVO.judge(result);
     }
 
     @Operation(summary = "修改字典")
     @PutMapping("/{id}")
     @PreAuthorize("@ss.hasPerm('sys:dict:edit')")
-    public Result updateDict(
+    public ResultVO updateDict(
             @PathVariable Long id,
             @RequestBody DictForm DictForm
     ) {
         boolean status = dictService.updateDict(id, DictForm);
-        return Result.judge(status);
+        return ResultVO.judge(status);
     }
 
     @Operation(summary = "删除字典")
     @DeleteMapping("/{ids}")
     @PreAuthorize("@ss.hasPerm('sys:dict:delete')")
-    public Result deleteDict(
+    public ResultVO deleteDict(
             @Parameter(description ="字典ID，多个以英文逗号(,)拼接") @PathVariable String ids
     ) {
         boolean result = dictService.deleteDict(ids);
-        return Result.judge(result);
+        return ResultVO.judge(result);
     }
 
 
     @Operation(summary = "字典下拉列表")
     @GetMapping("/{typeCode}/options")
-    public Result<List<Option>> listDictOptions(
+    public ResultVO<List<Option>> listDictOptions(
             @Parameter(description ="字典类型编码") @PathVariable String typeCode
     ) {
         List<Option> list = dictService.listDictOptions(typeCode);
-        return Result.success(list);
+        return ResultVO.success(list);
     }
 
 
     /*----------------------------------------------------*/
     @Operation(summary = "字典类型分页列表")
     @GetMapping("/types/page")
-    public PageResult<DictTypePageVO> getDictTypePage(
+    public PageResultVO<DictTypePageVO> getDictTypePage(
             @ParameterObject DictTypePageQuery queryParams
     ) {
         Page<DictTypePageVO> result = dictTypeService.getDictTypePage(queryParams);
-        return PageResult.success(result);
+        return PageResultVO.success(result);
     }
 
     @Operation(summary = "字典类型表单数据")
     @GetMapping("/types/{id}/form")
-    public Result<DictTypeForm> getDictTypeForm(
+    public ResultVO<DictTypeForm> getDictTypeForm(
             @Parameter(description ="字典ID") @PathVariable Long id
     ) {
         DictTypeForm dictTypeForm = dictTypeService.getDictTypeForm(id);
-        return Result.success(dictTypeForm);
+        return ResultVO.success(dictTypeForm);
     }
 
     @Operation(summary = "新增字典类型")
     @PostMapping("/types")
     @PreAuthorize("@ss.hasPerm('sys:dict_type:add')")
     @PreventDuplicateSubmit
-    public Result saveDictType(@RequestBody DictTypeForm dictTypeForm) {
+    public ResultVO saveDictType(@RequestBody DictTypeForm dictTypeForm) {
         boolean result = dictTypeService.saveDictType(dictTypeForm);
-        return Result.judge(result);
+        return ResultVO.judge(result);
     }
 
     @Operation(summary = "修改字典类型")
     @PutMapping("/types/{id}")
     @PreAuthorize("@ss.hasPerm('sys:dict_type:edit')")
-    public Result updateDictType(@PathVariable Long id, @RequestBody DictTypeForm dictTypeForm) {
+    public ResultVO updateDictType(@PathVariable Long id, @RequestBody DictTypeForm dictTypeForm) {
         boolean status = dictTypeService.updateDictType(id, dictTypeForm);
-        return Result.judge(status);
+        return ResultVO.judge(status);
     }
 
     @Operation(summary = "删除字典类型")
     @DeleteMapping("/types/{ids}")
     @PreAuthorize("@ss.hasPerm('sys:dict_type:delete')")
-    public Result deleteDictTypes(
+    public ResultVO deleteDictTypes(
             @Parameter(description ="字典类型ID，多个以英文逗号(,)分割") @PathVariable String ids
     ) {
         boolean result = dictTypeService.deleteDictTypes(ids);
 
 
-        return Result.judge(result);
+        return ResultVO.judge(result);
     }
 
 }

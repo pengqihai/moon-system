@@ -3,7 +3,7 @@ package cn.doug.system.model.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import cn.doug.system.common.base.BaseEntity;
+import cn.doug.common.base.BaseMybatisEntity;
 import cn.doug.system.common.enums.MenuTypeEnum;
 import lombok.Data;
 
@@ -15,7 +15,7 @@ import lombok.Data;
  */
 @TableName(value ="sys_menu")
 @Data
-public class SysMenu extends BaseEntity {
+public class SysMenu extends BaseMybatisEntity {
     /**
      * 菜单ID
      */
