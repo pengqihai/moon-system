@@ -1,5 +1,6 @@
-package cn.doug.system.controller;
+package cn.doug.system.controller.file;
 
+import cn.doug.common.annotation.WebLog;
 import cn.doug.common.result.vo.ResultVO;
 import cn.doug.system.model.dto.FileInfo;
 import cn.doug.system.service.OssService;
@@ -20,6 +21,7 @@ public class FileController {
     private final OssService ossService;
 
     @PostMapping
+    @WebLog(value = "文件上传")
     @Operation(summary = "文件上传")
     public ResultVO<FileInfo> uploadFile(
             @Parameter(description ="表单文件对象") @RequestParam(value = "file") MultipartFile file
@@ -29,6 +31,7 @@ public class FileController {
     }
 
     @DeleteMapping
+    @WebLog(value = "文件删除")
     @Operation(summary = "文件删除")
     @SneakyThrows
     public ResultVO deleteFile(

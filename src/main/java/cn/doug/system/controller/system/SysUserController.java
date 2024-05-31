@@ -1,5 +1,6 @@
-package cn.doug.system.controller;
+package cn.doug.system.controller.system;
 
+import cn.doug.common.annotation.WebLog;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
@@ -50,6 +51,7 @@ public class SysUserController {
 
     private final SysUserService userService;
 
+    @WebLog(value = "用户分页列表")
     @Operation(summary = "用户分页列表")
     @GetMapping("/page")
     public PageResultVO<UserPageVO> listPagedUsers(
@@ -59,6 +61,7 @@ public class SysUserController {
         return PageResultVO.success(result);
     }
 
+    @WebLog(value = "新增用户")
     @Operation(summary = "新增用户")
     @PostMapping
     @PreAuthorize("@ss.hasPerm('sys:user:add')")
@@ -70,6 +73,7 @@ public class SysUserController {
         return ResultVO.judge(result);
     }
 
+    @WebLog(value = "用户表单数据")
     @Operation(summary = "用户表单数据")
     @GetMapping("/{userId}/form")
     public ResultVO<UserForm> getUserForm(
@@ -79,6 +83,7 @@ public class SysUserController {
         return ResultVO.success(formData);
     }
 
+    @WebLog(value = "修改用户")
     @Operation(summary = "修改用户")
     @PutMapping(value = "/{userId}")
     @PreAuthorize("@ss.hasPerm('sys:user:edit')")
@@ -89,6 +94,7 @@ public class SysUserController {
         return ResultVO.judge(result);
     }
 
+    @WebLog(value = "删除用户")
     @Operation(summary = "删除用户")
     @DeleteMapping("/{ids}")
     @PreAuthorize("@ss.hasPerm('sys:user:delete')")
@@ -99,6 +105,7 @@ public class SysUserController {
         return ResultVO.judge(result);
     }
 
+    @WebLog(value = "修改用户密码")
     @Operation(summary = "修改用户密码")
     @PatchMapping(value = "/{userId}/password")
     @PreAuthorize("@ss.hasPerm('sys:user:password:reset')")
@@ -110,6 +117,7 @@ public class SysUserController {
         return ResultVO.judge(result);
     }
 
+    @WebLog(value = "修改用户状态")
     @Operation(summary = "修改用户状态")
     @PatchMapping(value = "/{userId}/status")
     public ResultVO updateUserStatus(
@@ -123,6 +131,7 @@ public class SysUserController {
         return ResultVO.judge(result);
     }
 
+    @WebLog(value = "获取当前登录用户信息")
     @Operation(summary = "获取当前登录用户信息")
     @GetMapping("/me")
     public ResultVO<UserInfoVO> getCurrentUserInfo() {
@@ -130,6 +139,7 @@ public class SysUserController {
         return ResultVO.success(userInfoVO);
     }
 
+    @WebLog(value = "用户导入模板下载")
     @Operation(summary = "用户导入模板下载")
     @GetMapping("/template")
     public void downloadTemplate(HttpServletResponse response) throws IOException {
@@ -146,6 +156,7 @@ public class SysUserController {
         excelWriter.finish();
     }
 
+    @WebLog(value = "导入用户")
     @Operation(summary = "导入用户")
     @PostMapping("/import")
     public ResultVO importUsers(@Parameter(description = "部门ID") Long deptId, MultipartFile file) throws IOException {
@@ -154,6 +165,7 @@ public class SysUserController {
         return ResultVO.success(msg);
     }
 
+    @WebLog(value = "导出用户")
     @Operation(summary = "导出用户")
     @GetMapping("/export")
     public void exportUsers(UserPageQuery queryParams, HttpServletResponse response) throws IOException {

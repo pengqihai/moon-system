@@ -1,5 +1,6 @@
-package cn.doug.system.controller;
+package cn.doug.system.controller.system;
 
+import cn.doug.common.annotation.WebLog;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.doug.system.common.model.Option;
 import cn.doug.common.result.vo.PageResultVO;
@@ -28,6 +29,7 @@ public class SysRoleController {
 
     private final SysRoleService roleService;
 
+    @WebLog(value = "角色分页列表")
     @Operation(summary = "角色分页列表")
     @GetMapping("/page")
     public PageResultVO<RolePageVO> getRolePage(
@@ -37,6 +39,7 @@ public class SysRoleController {
         return PageResultVO.success(result);
     }
 
+    @WebLog(value = "角色下拉列表")
     @Operation(summary = "角色下拉列表")
     @GetMapping("/options")
     public ResultVO<List<Option>> listRoleOptions() {
@@ -44,6 +47,7 @@ public class SysRoleController {
         return ResultVO.success(list);
     }
 
+    @WebLog(value = "新增角色")
     @Operation(summary = "新增角色")
     @PostMapping
     @PreAuthorize("@ss.hasPerm('sys:role:add')")
@@ -53,6 +57,7 @@ public class SysRoleController {
         return ResultVO.judge(result);
     }
 
+    @WebLog(value = "角色表单数据")
     @Operation(summary = "角色表单数据")
     @GetMapping("/{roleId}/form")
     public ResultVO<RoleForm> getRoleForm(
@@ -62,6 +67,7 @@ public class SysRoleController {
         return ResultVO.success(roleForm);
     }
 
+    @WebLog(value = "修改角色")
     @Operation(summary = "修改角色")
     @PutMapping(value = "/{id}")
     @PreAuthorize("@ss.hasPerm('sys:role:edit')")
@@ -70,6 +76,7 @@ public class SysRoleController {
         return ResultVO.judge(result);
     }
 
+    @WebLog(value = "删除角色")
     @Operation(summary = "删除角色")
     @DeleteMapping("/{ids}")
     @PreAuthorize("@ss.hasPerm('sys:role:delete')")
@@ -80,6 +87,7 @@ public class SysRoleController {
         return ResultVO.judge(result);
     }
 
+    @WebLog(value = "修改角色状态")
     @Operation(summary = "修改角色状态")
     @PutMapping(value = "/{roleId}/status")
     public ResultVO updateRoleStatus(
@@ -90,6 +98,7 @@ public class SysRoleController {
         return ResultVO.judge(result);
     }
 
+    @WebLog(value = "获取角色的菜单ID集合")
     @Operation(summary = "获取角色的菜单ID集合")
     @GetMapping("/{roleId}/menuIds")
     public ResultVO<List<Long>> getRoleMenuIds(
@@ -99,6 +108,7 @@ public class SysRoleController {
         return ResultVO.success(menuIds);
     }
 
+    @WebLog(value = "分配菜单(包括按钮权限)给角色")
     @Operation(summary = "分配菜单(包括按钮权限)给角色")
     @PutMapping("/{roleId}/menus")
     public ResultVO assignMenusToRole(

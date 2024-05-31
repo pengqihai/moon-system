@@ -1,5 +1,6 @@
-package cn.doug.system.controller;
+package cn.doug.system.controller.system;
 
+import cn.doug.common.annotation.WebLog;
 import cn.doug.system.common.model.Option;
 import cn.doug.common.result.vo.ResultVO;
 import cn.doug.system.model.form.MenuForm;
@@ -34,6 +35,7 @@ public class SysMenuController {
 
     private final SysMenuService menuService;
 
+    @WebLog(value = "菜单列表")
     @Operation(summary = "菜单列表")
     @GetMapping
     public ResultVO<List<MenuVO>> listMenus( @ParameterObject MenuQuery queryParams) {
@@ -41,6 +43,7 @@ public class SysMenuController {
         return ResultVO.success(menuList);
     }
 
+    @WebLog(value = "菜单下拉列表")
     @Operation(summary = "菜单下拉列表")
     @GetMapping("/options")
     public ResultVO listMenuOptions() {
@@ -48,6 +51,7 @@ public class SysMenuController {
         return ResultVO.success(menus);
     }
 
+    @WebLog(value = "路由列表")
     @Operation(summary = "路由列表")
     @GetMapping("/routes")
     public ResultVO<List<RouteVO>> listRoutes() {
@@ -55,6 +59,7 @@ public class SysMenuController {
         return ResultVO.success(routeList);
     }
 
+    @WebLog(value = "菜单表单数据")
     @Operation(summary = "菜单表单数据")
     @GetMapping("/{id}/form")
     public ResultVO<MenuForm> getMenuForm(
@@ -64,6 +69,7 @@ public class SysMenuController {
         return ResultVO.success(menu);
     }
 
+    @WebLog(value = "新增菜单")
     @Operation(summary = "新增菜单")
     @PostMapping
     @PreAuthorize("@ss.hasPerm('sys:menu:add')")
@@ -73,6 +79,7 @@ public class SysMenuController {
         return ResultVO.judge(result);
     }
 
+    @WebLog(value = "修改菜单")
     @Operation(summary = "修改菜单")
     @PutMapping(value = "/{id}")
     @PreAuthorize("@ss.hasPerm('sys:menu:edit')")
@@ -83,6 +90,7 @@ public class SysMenuController {
         return ResultVO.judge(result);
     }
 
+    @WebLog(value = "删除菜单")
     @Operation(summary = "删除菜单")
     @DeleteMapping("/{id}")
     @PreAuthorize("@ss.hasPerm('sys:menu:delete')")
@@ -93,6 +101,7 @@ public class SysMenuController {
         return ResultVO.judge(result);
     }
 
+    @WebLog(value = "修改菜单显示状态")
     @Operation(summary = "修改菜单显示状态")
     @PatchMapping("/{menuId}")
     public ResultVO updateMenuVisible(

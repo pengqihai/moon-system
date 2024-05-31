@@ -1,5 +1,6 @@
-package cn.doug.system.controller;
+package cn.doug.system.controller.system;
 
+import cn.doug.common.annotation.WebLog;
 import cn.doug.system.common.model.Option;
 import cn.doug.common.result.vo.ResultVO;
 import cn.doug.system.model.form.DeptForm;
@@ -30,6 +31,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SysDeptController {
     private final SysDeptService deptService;
+    @WebLog(value = "获取部门列表")
     @Operation(summary = "获取部门列表")
     @GetMapping
     public ResultVO<List<DeptVO>> listDepartments(
@@ -39,6 +41,7 @@ public class SysDeptController {
         return ResultVO.success(list);
     }
 
+    @WebLog(value = "获取部门下拉选项")
     @Operation(summary = "获取部门下拉选项")
     @GetMapping("/options")
     public ResultVO<List<Option>> listDeptOptions() {
@@ -46,6 +49,7 @@ public class SysDeptController {
         return ResultVO.success(list);
     }
 
+    @WebLog(value = "获取部门表单数据")
     @Operation(summary = "获取部门表单数据")
     @GetMapping("/{deptId}/form")
     public ResultVO<DeptForm> getDeptForm(
@@ -55,6 +59,7 @@ public class SysDeptController {
         return ResultVO.success(deptForm);
     }
 
+    @WebLog(value = "新增部门")
     @Operation(summary = "新增部门")
     @PostMapping
     @PreAuthorize("@ss.hasPerm('sys:dept:add')")
@@ -66,6 +71,7 @@ public class SysDeptController {
         return ResultVO.success(id);
     }
 
+    @WebLog(value = "修改部门")
     @Operation(summary = "修改部门")
     @PutMapping(value = "/{deptId}")
     @PreAuthorize("@ss.hasPerm('sys:dept:edit')")
@@ -77,6 +83,7 @@ public class SysDeptController {
         return ResultVO.success(deptId);
     }
 
+    @WebLog(value = "删除部门")
     @Operation(summary = "删除部门")
     @DeleteMapping("/{ids}")
     @PreAuthorize("@ss.hasPerm('sys:dept:delete')")

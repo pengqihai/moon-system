@@ -1,5 +1,6 @@
-package cn.doug.system.controller;
+package cn.doug.system.controller.system;
 
+import cn.doug.common.annotation.WebLog;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.doug.system.common.model.Option;
 import cn.doug.common.result.vo.PageResultVO;
@@ -33,6 +34,7 @@ public class SysDictController {
 
     private final SysDictTypeService dictTypeService;
 
+    @WebLog(value = "字典分页列表")
     @Operation(summary = "字典分页列表")
     @GetMapping("/page")
     public PageResultVO<DictPageVO> getDictPage(
@@ -42,6 +44,7 @@ public class SysDictController {
         return PageResultVO.success(result);
     }
 
+    @WebLog(value = "字典数据表单数据")
     @Operation(summary = "字典数据表单数据")
     @GetMapping("/{id}/form")
     public ResultVO<DictForm> getDictForm(
@@ -51,6 +54,7 @@ public class SysDictController {
         return ResultVO.success(formData);
     }
 
+    @WebLog(value = "新增字典")
     @Operation(summary = "新增字典")
     @PostMapping
     @PreAuthorize("@ss.hasPerm('sys:dict:add')")
@@ -62,6 +66,7 @@ public class SysDictController {
         return ResultVO.judge(result);
     }
 
+    @WebLog(value = "修改字典")
     @Operation(summary = "修改字典")
     @PutMapping("/{id}")
     @PreAuthorize("@ss.hasPerm('sys:dict:edit')")
@@ -73,6 +78,7 @@ public class SysDictController {
         return ResultVO.judge(status);
     }
 
+    @WebLog(value = "删除字典")
     @Operation(summary = "删除字典")
     @DeleteMapping("/{ids}")
     @PreAuthorize("@ss.hasPerm('sys:dict:delete')")
@@ -84,6 +90,7 @@ public class SysDictController {
     }
 
 
+    @WebLog(value = "字典下拉列表")
     @Operation(summary = "字典下拉列表")
     @GetMapping("/{typeCode}/options")
     public ResultVO<List<Option>> listDictOptions(
@@ -95,6 +102,7 @@ public class SysDictController {
 
 
     /*----------------------------------------------------*/
+    @WebLog(value = "字典类型分页列表")
     @Operation(summary = "字典类型分页列表")
     @GetMapping("/types/page")
     public PageResultVO<DictTypePageVO> getDictTypePage(
@@ -104,6 +112,7 @@ public class SysDictController {
         return PageResultVO.success(result);
     }
 
+    @WebLog(value = "字典类型表单数据")
     @Operation(summary = "字典类型表单数据")
     @GetMapping("/types/{id}/form")
     public ResultVO<DictTypeForm> getDictTypeForm(
@@ -113,6 +122,7 @@ public class SysDictController {
         return ResultVO.success(dictTypeForm);
     }
 
+    @WebLog(value = "新增字典类型")
     @Operation(summary = "新增字典类型")
     @PostMapping("/types")
     @PreAuthorize("@ss.hasPerm('sys:dict_type:add')")
@@ -122,6 +132,7 @@ public class SysDictController {
         return ResultVO.judge(result);
     }
 
+    @WebLog(value = "修改字典类型")
     @Operation(summary = "修改字典类型")
     @PutMapping("/types/{id}")
     @PreAuthorize("@ss.hasPerm('sys:dict_type:edit')")
@@ -130,6 +141,7 @@ public class SysDictController {
         return ResultVO.judge(status);
     }
 
+    @WebLog(value = "删除字典类型")
     @Operation(summary = "删除字典类型")
     @DeleteMapping("/types/{ids}")
     @PreAuthorize("@ss.hasPerm('sys:dict_type:delete')")

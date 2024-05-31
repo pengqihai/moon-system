@@ -1,5 +1,6 @@
-package cn.doug.system.controller;
+package cn.doug.system.controller.auth;
 
+import cn.doug.common.annotation.WebLog;
 import cn.doug.common.result.vo.ResultVO;
 import cn.doug.system.model.dto.CaptchaResult;
 import cn.doug.system.model.dto.LoginResult;
@@ -20,6 +21,7 @@ public class AuthController {
 
     private final AuthService authService;
 
+    @WebLog(value = "登录")
     @Operation(summary = "登录")
     @PostMapping("/login")
     public ResultVO<LoginResult> login(
@@ -30,6 +32,7 @@ public class AuthController {
         return ResultVO.success(loginResult);
     }
 
+    @WebLog(value = "注销")
     @Operation(summary = "注销")
     @DeleteMapping("/logout")
     public ResultVO logout() {
@@ -37,6 +40,7 @@ public class AuthController {
         return ResultVO.success();
     }
 
+    @WebLog(value = "获取验证码")
     @Operation(summary = "获取验证码")
     @GetMapping("/captcha")
     public ResultVO<CaptchaResult> getCaptcha() {
