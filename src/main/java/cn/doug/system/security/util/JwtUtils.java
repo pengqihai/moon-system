@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 /**
  * JWT Token 工具类
  *
- * @author Ray Hao
+ * @author pengqihai
  * @since 2.6.0
  */
 @Component

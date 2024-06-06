@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.doug.system.mapper.RegionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.doug.system.model.entity.Region">
+        <id column="region_id" property="regionId" />
+        <result column="region_name" property="regionName" />
+        <result column="region_short_name" property="regionShortName" />
+        <result column="region_code" property="regionCode" />
+        <result column="region_parent_id" property="regionParentId" />
+        <result column="region_level" property="regionLevel" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        region_id, region_name, region_short_name, region_code, region_parent_id, region_level
+    </sql>
+
+
+    <!-- 地区表分页列表 -->
+    <select id="listPagedRegions" resultType="cn.doug.system.model.bo.RegionBO">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            t_region
+        <where>
+            is_deleted = 0
+            <if test='queryParams.keywords!=null and queryParams.keywords.trim() neq ""'>
+                AND (
+                    name LIKE CONCAT('%',#{queryParams.keywords},'%')
+                )
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+
+</mapper>

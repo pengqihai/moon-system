@@ -1,4 +1,4 @@
-package cn.doug.system.controller;
+package cn.doug.system.controller.websocket;
 
 import cn.doug.system.model.dto.ChatMessage;
 import lombok.RequiredArgsConstructor;

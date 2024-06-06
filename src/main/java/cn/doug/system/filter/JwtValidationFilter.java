@@ -24,7 +24,7 @@ import java.io.IOException;
 /**
  * JWT token 校验过滤器
  *
- * @author Ray Hao
+ * @author pengqihai
  * @since 2023/9/13
  */
 public class JwtValidationFilter extends OncePerRequestFilter {
