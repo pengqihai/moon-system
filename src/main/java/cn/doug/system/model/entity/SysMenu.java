@@ -1,8 +1,6 @@
 package cn.doug.system.model.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import cn.doug.common.base.BaseMybatisEntity;
 import cn.doug.system.common.enums.MenuTypeEnum;
 import lombok.Data;
@@ -87,5 +85,10 @@ public class SysMenu extends BaseMybatisEntity {
      */
     private Integer alwaysShow;
 
+    /**
+     * 路由参数
+     */
+    @TableField(updateStrategy = FieldStrategy.ALWAYS)
+    private String params;
 
 }

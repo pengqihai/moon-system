@@ -1,8 +1,11 @@
 package cn.doug.system.model.form;
 
 import cn.doug.system.common.enums.MenuTypeEnum;
+import cn.doug.system.common.model.KeyValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+
+import java.util.List;
 
 @Schema(description = "菜单表单对象")
 @Data
@@ -47,5 +50,7 @@ public class MenuForm {
     @Schema(description = "【目录】只有一个子路由是否始终显示", example = "1")
     private Integer alwaysShow;
 
+    @Schema(description = "路由参数")
+    private List<KeyValue> params;
 
 }
