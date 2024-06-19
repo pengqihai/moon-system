@@ -1,7 +1,7 @@
 package cn.doug.system.common.config;
 
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnProperty(name = "xxl.job.enabled") // xxl.job.enabled = true 才会自动装配
-@Slf4j
+@Log4j2
 public class XxlJobConfig {
 
     @Value("${xxl.job.admin.addresses}")

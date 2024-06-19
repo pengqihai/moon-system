@@ -1,7 +1,7 @@
 package cn.doug.system.security.exception;
 
 import cn.doug.common.result.ResultCode;
-import cn.doug.http.response.ResponseUtils;
+import cn.doug.common.util.ResponseUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

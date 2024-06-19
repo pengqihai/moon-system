@@ -8,7 +8,7 @@ import cn.doug.system.common.enums.DataScopeEnum;
 import cn.doug.system.plugin.mybatis.annotation.DataPermission;
 import cn.doug.system.security.util.SecurityUtils;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
@@ -21,7 +21,7 @@ import java.lang.reflect.Method;
  * @author zc
  * @since 2021-12-10 13:28
  */
-@Slf4j
+@Log4j2
 public class MyDataPermissionHandler implements DataPermissionHandler {
 
     @Override

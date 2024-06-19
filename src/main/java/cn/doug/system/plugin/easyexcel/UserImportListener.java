@@ -19,7 +19,7 @@ import cn.doug.system.model.vo.UserImportVO;
 import cn.doug.system.service.SysRoleService;
 import cn.doug.system.service.SysUserRoleService;
 import cn.doug.system.service.SysUserService;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  * @author pengqihai
  * @since 2022/4/10 20:49
  */
-@Slf4j
+@Log4j2
 public class UserImportListener extends MyAnalysisEventListener<UserImportVO> {
 
 

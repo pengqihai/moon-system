@@ -17,7 +17,7 @@ import cn.doug.system.security.util.JwtUtils;
 import cn.doug.system.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,7 +39,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 @RequiredArgsConstructor
-@Slf4j
+@Log4j2
 public class AuthServiceImpl implements AuthService {
 
     private final AuthenticationManager authenticationManager;

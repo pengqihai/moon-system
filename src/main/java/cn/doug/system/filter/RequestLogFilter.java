@@ -1,7 +1,7 @@
 //package cn.doug.system.filter;
 //
 //import jakarta.servlet.http.HttpServletRequest;
-//import lombok.extern.slf4j.Slf4j;
+//import lombok.extern.log4j.Log4j2;
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.web.filter.CommonsRequestLoggingFilter;
 //
@@ -12,7 +12,7 @@
 // * @since 2023/03/03
 // */
 //@Configuration
-//@Slf4j
+//@Log4j2
 //public class RequestLogFilter extends CommonsRequestLoggingFilter {
 //
 //    @Override

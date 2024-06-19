@@ -1,6 +1,6 @@
 package cn.doug.system.service.impl;
 
-import cn.doug.common.utils.DateUtils;
+import cn.doug.common.util.DateUtils;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;

@@ -7,7 +7,7 @@ import cn.hutool.jwt.JWTPayload;
 import cn.hutool.jwt.JWTUtil;
 import cn.doug.system.common.constant.SecurityConstants;
 import cn.doug.common.result.ResultCode;
-import cn.doug.http.response.ResponseUtils;
+import cn.doug.common.util.ResponseUtils;
 import cn.doug.system.security.util.JwtUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,6 +1,6 @@
 package cn.doug.system.model.query;
 
-import cn.doug.common.page.PageQuery;
+import cn.doug.common.page.BasePageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -12,7 +12,7 @@ import lombok.Data;
  */
 @Data
 @Schema 
-public class PermPageQuery extends PageQuery {
+public class PermPageQuery extends BasePageQuery {
 
     @Schema(description="权限名称")
     private String name;

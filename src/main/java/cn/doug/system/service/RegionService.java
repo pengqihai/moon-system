@@ -1,7 +1,9 @@
 package cn.doug.system.service;
 
+import cn.doug.common.result.Result;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.Region;
+import cn.doug.system.model.query.RegionCodeQuery;
 import cn.doug.system.model.vo.RegionVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.model.form.RegionForm;
@@ -31,6 +33,12 @@ public interface RegionService extends IService<Region> {
      * @return options
      */
     List<Option> listRegionOptions();
+
+    /**
+     * 根据父级区划获取列表
+     * @return options
+     */
+    Result<List<RegionVO>> listRegionByParentCode(RegionCodeQuery query);
 
     /**
      * 获取地区表表单数据
@@ -65,5 +73,6 @@ public interface RegionService extends IService<Region> {
      * @return
      */
     boolean deleteRegions(String ids);
+
 
 }

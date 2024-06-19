@@ -4,8 +4,8 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.doug.system.common.constant.SecurityConstants;
 import cn.doug.system.security.util.SecurityUtils;
+import lombok.extern.log4j.Log4j2;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.PatternMatchUtils;
@@ -20,7 +20,7 @@ import java.util.*;
  */
 @Component("ss")
 @RequiredArgsConstructor
-@Slf4j
+@Log4j2
 public class PermissionService {
 
     private final RedisTemplate<String, Object> redisTemplate;

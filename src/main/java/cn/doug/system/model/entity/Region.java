@@ -14,7 +14,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("t_region")
+@TableName("sys_region")
 public class Region implements Serializable {
 
     private static final long serialVersionUID = 1L;

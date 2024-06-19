@@ -1,21 +1,16 @@
 package cn.doug.system.controller.region;
 
-import cn.doug.common.annotation.WebLog;
+import cn.doug.common.plugin.annotation.WebLog;
+import cn.doug.common.result.Result;
 import cn.doug.system.common.model.Option;
-import cn.doug.system.model.query.DeptQuery;
-import cn.doug.system.model.vo.DeptVO;
+import cn.doug.system.model.query.RegionCodeQuery;
 import cn.doug.system.model.vo.RegionVO;
 import lombok.RequiredArgsConstructor;
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import cn.doug.system.model.form.RegionForm;
 import cn.doug.system.model.query.RegionPageQuery;
-import cn.doug.system.model.vo.RegionPageVO;
 import cn.doug.system.service.RegionService;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import cn.doug.common.result.vo.PageResultVO;
-import cn.doug.common.result.vo.ResultVO;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
@@ -43,9 +38,9 @@ public class RegionController {
         @WebLog(value = "地区下拉列表")
         @Operation(summary = "地区下拉列表")
         @GetMapping("/treeList")
-        public ResultVO<List<RegionVO>> listPagedRegions(RegionPageQuery queryParams ) {
+        public Result<List<RegionVO>> listPagedRegions(RegionPageQuery queryParams ) {
             List<RegionVO> result = regionService.listPagedRegions(queryParams);
-            return ResultVO.success(result);
+            return Result.success(result);
         }
 
     /**
@@ -55,44 +50,56 @@ public class RegionController {
     @WebLog(value = "获取地区下拉选项",logIgnore = true,maxLogChar = 200)
     @Operation(summary = "获取地区下拉选项")
     @GetMapping("/options")
-    public ResultVO<List<Option>> listRegionOptions() {
+    public Result<List<Option>> listRegionOptions() {
         List<Option> list = regionService.listRegionOptions();
-        return ResultVO.success(list);
+        return Result.success(list);
     }
+
+    /**
+     * 根据父级区划获取列表
+     * @return options
+     */
+    @WebLog(value = "根据父级区划获取列表",logIgnore = true,maxLogChar = 200)
+    @Operation(summary = "根据父级区划获取列表")
+    @GetMapping("/listRegionByParentCode")
+    public Result<List<RegionVO>> listRegionByParentCode(@RequestBody @Validated RegionCodeQuery query) {
+        return regionService.listRegionByParentCode(query);
+    }
+
 
         @WebLog(value = "新增地区")
         @Operation(summary = "新增地区")
         @PostMapping("/add")
-        public ResultVO saveRegion(@RequestBody @Valid RegionForm formData ) {
+        public Result saveRegion(@RequestBody @Valid RegionForm formData ) {
             boolean result = regionService.saveRegion(formData);
-            return ResultVO.judge(result);
+            return Result.judge(result);
         }
 
         @WebLog(value = "获取地区详情")
         @Operation(summary = "获取地区详情")
         @GetMapping("/getInfo/{id}")
-        public ResultVO<RegionForm> getRegionForm(
+        public Result<RegionForm> getRegionForm(
             @Parameter(description = "ID") @PathVariable String id
         ) {
             RegionForm formData = regionService.getRegionFormData(id);
-            return ResultVO.successRoEmpty(formData);
+            return Result.success(formData);
         }
 
         @WebLog(value = "修改地区表")
         @Operation(summary = "修改地区表")
         @PutMapping(value = "edit")
-        public ResultVO updateRegion(@RequestBody @Validated RegionForm formData) {
+        public Result updateRegion(@RequestBody @Validated RegionForm formData) {
             boolean result = regionService.updateRegion(formData);
-            return ResultVO.judge(result);
+            return Result.judge(result);
         }
 
         @WebLog(value = "删除地区表")
         @Operation(summary = "删除地区表")
         @DeleteMapping("/del/{ids}")
-        public ResultVO deleteRegions(
+        public Result deleteRegions(
             @Parameter(description = "地区表ID，多个以英文逗号(,)分割") @PathVariable String ids
         ) {
             boolean result = regionService.deleteRegions(ids);
-            return ResultVO.judge(result);
+            return Result.judge(result);
         }
 }

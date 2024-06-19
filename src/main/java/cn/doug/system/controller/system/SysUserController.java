@@ -1,12 +1,12 @@
 package cn.doug.system.controller.system;
 
-import cn.doug.common.annotation.WebLog;
+import cn.doug.common.plugin.annotation.WebLog;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import cn.doug.common.result.vo.PageResultVO;
-import cn.doug.common.result.vo.ResultVO;
+import cn.doug.common.result.PageResult;
+import cn.doug.common.result.Result;
 import cn.doug.system.common.util.ExcelUtils;
 import cn.doug.system.model.entity.SysUser;
 import cn.doug.system.model.form.UserForm;
@@ -15,7 +15,7 @@ import cn.doug.system.model.vo.UserExportVO;
 import cn.doug.system.model.vo.UserImportVO;
 import cn.doug.system.model.vo.UserInfoVO;
 import cn.doug.system.model.vo.UserPageVO;
-import cn.doug.system.plugin.dupsubmit.annotation.PreventDuplicateSubmit;
+import cn.doug.common.plugin.annotation.PreventDuplicateSubmit;
 import cn.doug.system.plugin.easyexcel.UserImportListener;
 import cn.doug.system.service.SysUserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -54,11 +54,11 @@ public class SysUserController {
     @WebLog(value = "用户分页列表")
     @Operation(summary = "用户分页列表")
     @GetMapping("/page")
-    public PageResultVO<UserPageVO> listPagedUsers(
+    public PageResult<UserPageVO> listPagedUsers(
             @ParameterObject UserPageQuery queryParams
     ) {
         IPage<UserPageVO> result = userService.listPagedUsers(queryParams);
-        return PageResultVO.success(result);
+        return PageResult.success(result);
     }
 
     @WebLog(value = "新增用户")
@@ -66,61 +66,61 @@ public class SysUserController {
     @PostMapping
     @PreAuthorize("@ss.hasPerm('sys:user:add')")
     @PreventDuplicateSubmit
-    public ResultVO saveUser(
+    public Result saveUser(
             @RequestBody @Valid UserForm userForm
     ) {
         boolean result = userService.saveUser(userForm);
-        return ResultVO.judge(result);
+        return Result.judge(result);
     }
 
     @WebLog(value = "用户表单数据")
     @Operation(summary = "用户表单数据")
     @GetMapping("/{userId}/form")
-    public ResultVO<UserForm> getUserForm(
+    public Result<UserForm> getUserForm(
             @Parameter(description = "用户ID") @PathVariable Long userId
     ) {
         UserForm formData = userService.getUserFormData(userId);
-        return ResultVO.success(formData);
+        return Result.success(formData);
     }
 
     @WebLog(value = "修改用户")
     @Operation(summary = "修改用户")
     @PutMapping(value = "/{userId}")
     @PreAuthorize("@ss.hasPerm('sys:user:edit')")
-    public ResultVO updateUser(
+    public Result updateUser(
             @Parameter(description = "用户ID") @PathVariable Long userId,
             @RequestBody @Validated UserForm userForm) {
         boolean result = userService.updateUser(userId, userForm);
-        return ResultVO.judge(result);
+        return Result.judge(result);
     }
 
     @WebLog(value = "删除用户")
     @Operation(summary = "删除用户")
     @DeleteMapping("/{ids}")
     @PreAuthorize("@ss.hasPerm('sys:user:delete')")
-    public ResultVO deleteUsers(
+    public Result deleteUsers(
             @Parameter(description = "用户ID，多个以英文逗号(,)分割") @PathVariable String ids
     ) {
         boolean result = userService.deleteUsers(ids);
-        return ResultVO.judge(result);
+        return Result.judge(result);
     }
 
     @WebLog(value = "修改用户密码")
     @Operation(summary = "修改用户密码")
     @PatchMapping(value = "/{userId}/password")
     @PreAuthorize("@ss.hasPerm('sys:user:password:reset')")
-    public ResultVO updatePassword(
+    public Result updatePassword(
             @Parameter(description = "用户ID") @PathVariable Long userId,
             @RequestParam String password
     ) {
         boolean result = userService.updatePassword(userId, password);
-        return ResultVO.judge(result);
+        return Result.judge(result);
     }
 
     @WebLog(value = "修改用户状态")
     @Operation(summary = "修改用户状态")
     @PatchMapping(value = "/{userId}/status")
-    public ResultVO updateUserStatus(
+    public Result updateUserStatus(
             @Parameter(description = "用户ID") @PathVariable Long userId,
             @Parameter(description = "用户状态(1:启用;0:禁用)") @RequestParam Integer status
     ) {
@@ -128,15 +128,15 @@ public class SysUserController {
                 .eq(SysUser::getId, userId)
                 .set(SysUser::getStatus, status)
         );
-        return ResultVO.judge(result);
+        return Result.judge(result);
     }
 
     @WebLog(value = "获取当前登录用户信息")
     @Operation(summary = "获取当前登录用户信息")
     @GetMapping("/me")
-    public ResultVO<UserInfoVO> getCurrentUserInfo() {
+    public Result<UserInfoVO> getCurrentUserInfo() {
         UserInfoVO userInfoVO = userService.getCurrentUserInfo();
-        return ResultVO.success(userInfoVO);
+        return Result.success(userInfoVO);
     }
 
     @WebLog(value = "用户导入模板下载")
@@ -159,10 +159,10 @@ public class SysUserController {
     @WebLog(value = "导入用户")
     @Operation(summary = "导入用户")
     @PostMapping("/import")
-    public ResultVO importUsers(@Parameter(description = "部门ID") Long deptId, MultipartFile file) throws IOException {
+    public Result importUsers(@Parameter(description = "部门ID") Long deptId, MultipartFile file) throws IOException {
         UserImportListener listener = new UserImportListener(deptId);
         String msg = ExcelUtils.importExcel(file.getInputStream(), UserImportVO.class, listener);
-        return ResultVO.success(msg);
+        return Result.success(msg);
     }
 
     @WebLog(value = "导出用户")

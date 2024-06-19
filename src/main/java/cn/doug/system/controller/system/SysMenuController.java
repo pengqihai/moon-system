@@ -1,19 +1,19 @@
 package cn.doug.system.controller.system;
 
-import cn.doug.common.annotation.WebLog;
+import cn.doug.common.plugin.annotation.WebLog;
 import cn.doug.system.common.model.Option;
-import cn.doug.common.result.vo.ResultVO;
+import cn.doug.common.result.Result;
 import cn.doug.system.model.form.MenuForm;
 import cn.doug.system.model.query.MenuQuery;
 import cn.doug.system.model.vo.MenuVO;
 import cn.doug.system.model.vo.RouteVO;
-import cn.doug.system.plugin.dupsubmit.annotation.PreventDuplicateSubmit;
+import cn.doug.common.plugin.annotation.PreventDuplicateSubmit;
 import cn.doug.system.service.SysMenuService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +30,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/menus")
 @RequiredArgsConstructor
-@Slf4j
+@Log4j2
 public class SysMenuController {
 
     private final SysMenuService menuService;
@@ -38,35 +38,35 @@ public class SysMenuController {
     @WebLog(value = "菜单列表")
     @Operation(summary = "菜单列表")
     @GetMapping
-    public ResultVO<List<MenuVO>> listMenus( @ParameterObject MenuQuery queryParams) {
+    public Result<List<MenuVO>> listMenus( @ParameterObject MenuQuery queryParams) {
         List<MenuVO> menuList = menuService.listMenus(queryParams);
-        return ResultVO.success(menuList);
+        return Result.success(menuList);
     }
 
     @WebLog(value = "菜单下拉列表")
     @Operation(summary = "菜单下拉列表")
     @GetMapping("/options")
-    public ResultVO listMenuOptions() {
+    public Result listMenuOptions() {
         List<Option> menus = menuService.listMenuOptions();
-        return ResultVO.success(menus);
+        return Result.success(menus);
     }
 
     @WebLog(value = "路由列表")
     @Operation(summary = "路由列表")
     @GetMapping("/routes")
-    public ResultVO<List<RouteVO>> listRoutes() {
+    public Result<List<RouteVO>> listRoutes() {
         List<RouteVO> routeList = menuService.listRoutes();
-        return ResultVO.success(routeList);
+        return Result.success(routeList);
     }
 
     @WebLog(value = "菜单表单数据")
     @Operation(summary = "菜单表单数据")
     @GetMapping("/{id}/form")
-    public ResultVO<MenuForm> getMenuForm(
+    public Result<MenuForm> getMenuForm(
             @Parameter(description =  "菜单ID") @PathVariable Long id
     ) {
         MenuForm menu = menuService.getMenuForm(id);
-        return ResultVO.success(menu);
+        return Result.success(menu);
     }
 
     @WebLog(value = "新增菜单")
@@ -74,43 +74,43 @@ public class SysMenuController {
     @PostMapping
     @PreAuthorize("@ss.hasPerm('sys:menu:add')")
     @PreventDuplicateSubmit
-    public ResultVO addMenu(@RequestBody MenuForm menuForm) {
+    public Result addMenu(@RequestBody MenuForm menuForm) {
         boolean result = menuService.saveMenu(menuForm);
-        return ResultVO.judge(result);
+        return Result.judge(result);
     }
 
     @WebLog(value = "修改菜单")
     @Operation(summary = "修改菜单")
     @PutMapping(value = "/{id}")
     @PreAuthorize("@ss.hasPerm('sys:menu:edit')")
-    public ResultVO updateMenu(
+    public Result updateMenu(
             @RequestBody MenuForm menuForm
     ) {
         boolean result = menuService.saveMenu(menuForm);
-        return ResultVO.judge(result);
+        return Result.judge(result);
     }
 
     @WebLog(value = "删除菜单")
     @Operation(summary = "删除菜单")
     @DeleteMapping("/{id}")
     @PreAuthorize("@ss.hasPerm('sys:menu:delete')")
-    public ResultVO deleteMenu(
+    public Result deleteMenu(
             @Parameter(description ="菜单ID，多个以英文(,)分割") @PathVariable("id") Long id
     ) {
         boolean result = menuService.deleteMenu(id);
-        return ResultVO.judge(result);
+        return Result.judge(result);
     }
 
     @WebLog(value = "修改菜单显示状态")
     @Operation(summary = "修改菜单显示状态")
     @PatchMapping("/{menuId}")
-    public ResultVO updateMenuVisible(
+    public Result updateMenuVisible(
             @Parameter(description =  "菜单ID") @PathVariable Long menuId,
             @Parameter(description =  "显示状态(1:显示;0:隐藏)") Integer visible
 
     ) {
         boolean result =menuService.updateMenuVisible(menuId, visible);
-        return ResultVO.judge(result);
+        return Result.judge(result);
     }
 
 

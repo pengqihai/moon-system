@@ -1,7 +1,7 @@
 package cn.doug.system.filter;
 
 import cn.doug.common.result.ResultCode;
-import cn.doug.http.response.ResponseUtils;
+import cn.doug.common.util.ResponseUtils;
 import cn.hutool.captcha.generator.CodeGenerator;
 import cn.hutool.core.util.StrUtil;
 import cn.doug.system.common.constant.SecurityConstants;

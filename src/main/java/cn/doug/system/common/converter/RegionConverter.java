@@ -1,18 +1,16 @@
 package cn.doug.system.common.converter;
 
-import cn.doug.system.model.entity.SysMenu;
-import cn.doug.system.model.vo.MenuVO;
 import cn.doug.system.model.vo.RegionVO;
-import cn.doug.system.model.vo.RouteVO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
-import cn.doug.system.model.dto.RegionDTO;
 import cn.doug.system.model.entity.Region;
 import cn.doug.system.model.vo.RegionPageVO;
 import cn.doug.system.model.form.RegionForm;
 import cn.doug.system.model.bo.RegionBO;
+
+import java.util.List;
 
 /**
  * 地区表转换器
@@ -33,4 +31,6 @@ public interface RegionConverter{
 
     @InheritInverseConfiguration(name = "entity2Form")
     Region form2Entity(RegionForm entity);
+
+    List<RegionVO> entitys2VOS(List<Region> regions);
 }

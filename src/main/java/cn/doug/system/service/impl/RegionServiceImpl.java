@@ -1,8 +1,10 @@
 package cn.doug.system.service.impl;
 
+import cn.doug.common.result.Result;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.Region;
 import cn.doug.system.mapper.RegionMapper;
+import cn.doug.system.model.query.RegionCodeQuery;
 import cn.doug.system.model.vo.RegionVO;
 import cn.doug.system.service.RegionService;
 import cn.hutool.core.collection.CollectionUtil;
@@ -115,7 +117,19 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
                 .flatMap(rootId -> recurRegionTreeOptions(rootId, regionList).stream())
                 .toList();
     }
-    
+
+    /**
+     * 根据父级区划获取列表
+     * @return options
+     */
+    @Override
+    public Result<List<RegionVO>> listRegionByParentCode(RegionCodeQuery query) {
+        LambdaQueryWrapper<Region> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(StrUtil.isNotEmpty(query.getAreaCode()),Region::getRegionParentId,query.getAreaCode());
+        List<Region> list = this.list(wrapper);
+        List<RegionVO> regionVOS = regionConverter.entitys2VOS(list);
+        return Result.success(regionVOS);
+    }
 
     /**
      * 获取地区表表单数据

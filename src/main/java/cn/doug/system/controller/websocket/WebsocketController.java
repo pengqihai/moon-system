@@ -2,7 +2,7 @@ package cn.doug.system.controller.websocket;
 
 import cn.doug.system.model.dto.ChatMessage;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -21,7 +21,7 @@ import java.security.Principal;
 @RestController
 @RequestMapping("/websocket")
 @RequiredArgsConstructor
-@Slf4j
+@Log4j2
 public class WebsocketController {
 
     private final SimpMessagingTemplate messagingTemplate;

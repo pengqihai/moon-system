@@ -1,17 +1,17 @@
 package cn.doug.system.controller.system;
 
-import cn.doug.common.annotation.WebLog;
+import cn.doug.common.plugin.annotation.WebLog;
+import cn.doug.common.result.PageResult;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.doug.system.common.model.Option;
-import cn.doug.common.result.vo.PageResultVO;
-import cn.doug.common.result.vo.ResultVO;
+import cn.doug.common.result.Result;
 import cn.doug.system.model.form.DictForm;
 import cn.doug.system.model.form.DictTypeForm;
 import cn.doug.system.model.query.DictPageQuery;
 import cn.doug.system.model.query.DictTypePageQuery;
 import cn.doug.system.model.vo.DictPageVO;
 import cn.doug.system.model.vo.DictTypePageVO;
-import cn.doug.system.plugin.dupsubmit.annotation.PreventDuplicateSubmit;
+import cn.doug.common.plugin.annotation.PreventDuplicateSubmit;
 import cn.doug.system.service.SysDictService;
 import cn.doug.system.service.SysDictTypeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,21 +37,21 @@ public class SysDictController {
     @WebLog(value = "字典分页列表")
     @Operation(summary = "字典分页列表")
     @GetMapping("/page")
-    public PageResultVO<DictPageVO> getDictPage(
+    public PageResult<DictPageVO> getDictPage(
             @ParameterObject DictPageQuery queryParams
     ) {
         Page<DictPageVO> result = dictService.getDictPage(queryParams);
-        return PageResultVO.success(result);
+        return PageResult.success(result);
     }
 
     @WebLog(value = "字典数据表单数据")
     @Operation(summary = "字典数据表单数据")
     @GetMapping("/{id}/form")
-    public ResultVO<DictForm> getDictForm(
+    public Result<DictForm> getDictForm(
             @Parameter(description ="字典ID") @PathVariable Long id
     ) {
         DictForm formData = dictService.getDictForm(id);
-        return ResultVO.success(formData);
+        return Result.success(formData);
     }
 
     @WebLog(value = "新增字典")
@@ -59,45 +59,45 @@ public class SysDictController {
     @PostMapping
     @PreAuthorize("@ss.hasPerm('sys:dict:add')")
     @PreventDuplicateSubmit
-    public ResultVO saveDict(
+    public Result saveDict(
             @RequestBody DictForm DictForm
     ) {
         boolean result = dictService.saveDict(DictForm);
-        return ResultVO.judge(result);
+        return Result.judge(result);
     }
 
     @WebLog(value = "修改字典")
     @Operation(summary = "修改字典")
     @PutMapping("/{id}")
     @PreAuthorize("@ss.hasPerm('sys:dict:edit')")
-    public ResultVO updateDict(
+    public Result updateDict(
             @PathVariable Long id,
             @RequestBody DictForm DictForm
     ) {
         boolean status = dictService.updateDict(id, DictForm);
-        return ResultVO.judge(status);
+        return Result.judge(status);
     }
 
     @WebLog(value = "删除字典")
     @Operation(summary = "删除字典")
     @DeleteMapping("/{ids}")
     @PreAuthorize("@ss.hasPerm('sys:dict:delete')")
-    public ResultVO deleteDict(
+    public Result deleteDict(
             @Parameter(description ="字典ID，多个以英文逗号(,)拼接") @PathVariable String ids
     ) {
         boolean result = dictService.deleteDict(ids);
-        return ResultVO.judge(result);
+        return Result.judge(result);
     }
 
 
     @WebLog(value = "字典下拉列表")
     @Operation(summary = "字典下拉列表")
     @GetMapping("/{typeCode}/options")
-    public ResultVO<List<Option>> listDictOptions(
+    public Result<List<Option>> listDictOptions(
             @Parameter(description ="字典类型编码") @PathVariable String typeCode
     ) {
         List<Option> list = dictService.listDictOptions(typeCode);
-        return ResultVO.success(list);
+        return Result.success(list);
     }
 
 
@@ -105,21 +105,21 @@ public class SysDictController {
     @WebLog(value = "字典类型分页列表")
     @Operation(summary = "字典类型分页列表")
     @GetMapping("/types/page")
-    public PageResultVO<DictTypePageVO> getDictTypePage(
+    public PageResult<DictTypePageVO> getDictTypePage(
             @ParameterObject DictTypePageQuery queryParams
     ) {
         Page<DictTypePageVO> result = dictTypeService.getDictTypePage(queryParams);
-        return PageResultVO.success(result);
+        return PageResult.success(result);
     }
 
     @WebLog(value = "字典类型表单数据")
     @Operation(summary = "字典类型表单数据")
     @GetMapping("/types/{id}/form")
-    public ResultVO<DictTypeForm> getDictTypeForm(
+    public Result<DictTypeForm> getDictTypeForm(
             @Parameter(description ="字典ID") @PathVariable Long id
     ) {
         DictTypeForm dictTypeForm = dictTypeService.getDictTypeForm(id);
-        return ResultVO.success(dictTypeForm);
+        return Result.success(dictTypeForm);
     }
 
     @WebLog(value = "新增字典类型")
@@ -127,31 +127,31 @@ public class SysDictController {
     @PostMapping("/types")
     @PreAuthorize("@ss.hasPerm('sys:dict_type:add')")
     @PreventDuplicateSubmit
-    public ResultVO saveDictType(@RequestBody DictTypeForm dictTypeForm) {
+    public Result saveDictType(@RequestBody DictTypeForm dictTypeForm) {
         boolean result = dictTypeService.saveDictType(dictTypeForm);
-        return ResultVO.judge(result);
+        return Result.judge(result);
     }
 
     @WebLog(value = "修改字典类型")
     @Operation(summary = "修改字典类型")
     @PutMapping("/types/{id}")
     @PreAuthorize("@ss.hasPerm('sys:dict_type:edit')")
-    public ResultVO updateDictType(@PathVariable Long id, @RequestBody DictTypeForm dictTypeForm) {
+    public Result updateDictType(@PathVariable Long id, @RequestBody DictTypeForm dictTypeForm) {
         boolean status = dictTypeService.updateDictType(id, dictTypeForm);
-        return ResultVO.judge(status);
+        return Result.judge(status);
     }
 
     @WebLog(value = "删除字典类型")
     @Operation(summary = "删除字典类型")
     @DeleteMapping("/types/{ids}")
     @PreAuthorize("@ss.hasPerm('sys:dict_type:delete')")
-    public ResultVO deleteDictTypes(
+    public Result deleteDictTypes(
             @Parameter(description ="字典类型ID，多个以英文逗号(,)分割") @PathVariable String ids
     ) {
         boolean result = dictTypeService.deleteDictTypes(ids);
 
 
-        return ResultVO.judge(result);
+        return Result.judge(result);
     }
 
 }
