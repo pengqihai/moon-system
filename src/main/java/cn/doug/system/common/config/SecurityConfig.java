@@ -25,6 +25,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 /**
  * Spring Security 权限配置
@@ -51,7 +54,7 @@ public class SecurityConfig {
         http
 
                 .authorizeHttpRequests(requestMatcherRegistry ->
-                        requestMatcherRegistry.requestMatchers(SecurityConstants.LOGIN_PATH).permitAll()
+                        requestMatcherRegistry.requestMatchers(new MvcRequestMatcher(new HandlerMappingIntrospector(),(SecurityConstants.LOGIN_PATH))).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
@@ -78,12 +81,22 @@ public class SecurityConfig {
      */
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> {
-            if (CollectionUtil.isNotEmpty(securityProperties.getIgnoreUrls())) {
-                web.ignoring().requestMatchers(securityProperties.getIgnoreUrls().toArray(new String[0]));
-            }
-        };
+        return (web) -> web.ignoring().requestMatchers(
+                AntPathRequestMatcher.antMatcher("/webjars/**"),
+                AntPathRequestMatcher.antMatcher("/doc.html"),
+                AntPathRequestMatcher.antMatcher("/swagger-resources/**"),
+                AntPathRequestMatcher.antMatcher("/v3/api-docs/**"),
+                AntPathRequestMatcher.antMatcher("/swagger-ui/**")
+        );
     }
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//        return (web) -> {
+//            if (CollectionUtil.isNotEmpty(securityProperties.getIgnoreUrls())) {
+//                web.ignoring().requestMatchers(securityProperties.getIgnoreUrls().toArray(new String[0]));
+//            }
+//        };
+//    }
 
     /**
      * 密码编码器

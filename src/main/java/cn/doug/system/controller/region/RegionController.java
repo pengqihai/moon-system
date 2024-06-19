@@ -35,7 +35,7 @@ public class RegionController {
 
     private final RegionService regionService;
 
-        @WebLog(value = "地区下拉列表")
+        @WebLog(value = "地区下拉列表", logIgnore = true,maxLogChar = 200)
         @Operation(summary = "地区下拉列表")
         @GetMapping("/treeList")
         public Result<List<RegionVO>> listPagedRegions(RegionPageQuery queryParams ) {
@@ -61,7 +61,7 @@ public class RegionController {
      */
     @WebLog(value = "根据父级区划获取列表",logIgnore = true,maxLogChar = 200)
     @Operation(summary = "根据父级区划获取列表")
-    @GetMapping("/listRegionByParentCode")
+    @PostMapping("/listRegionByParentCode")
     public Result<List<RegionVO>> listRegionByParentCode(@RequestBody @Validated RegionCodeQuery query) {
         return regionService.listRegionByParentCode(query);
     }
