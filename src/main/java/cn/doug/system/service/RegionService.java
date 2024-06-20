@@ -2,7 +2,7 @@ package cn.doug.system.service;
 
 import cn.doug.common.result.Result;
 import cn.doug.system.common.model.Option;
-import cn.doug.system.model.entity.Region;
+import cn.doug.system.model.entity.SysRegion;
 import cn.doug.system.model.query.RegionCodeQuery;
 import cn.doug.system.model.vo.RegionVO;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -17,7 +17,7 @@ import java.util.List;
  * @author pengqihai
  * @since 2024-06-05
  */
-public interface RegionService extends IService<Region> {
+public interface RegionService extends IService<SysRegion> {
 
 
     /**

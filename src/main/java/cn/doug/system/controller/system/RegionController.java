@@ -1,4 +1,4 @@
-package cn.doug.system.controller.region;
+package cn.doug.system.controller.system;
 
 import cn.doug.common.plugin.annotation.WebLog;
 import cn.doug.common.result.Result;
@@ -27,7 +27,7 @@ import java.util.List;
  * @author pengqihai
  * @since 2024-06-05
  */
-@Tag(name = "地区表接口")
+@Tag(name = "08.地区表接口")
 @RestController
 @RequestMapping("/api/v1/regions")
 @RequiredArgsConstructor

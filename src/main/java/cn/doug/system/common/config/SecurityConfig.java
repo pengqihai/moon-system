@@ -29,6 +29,9 @@ import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Spring Security 权限配置
  *
@@ -81,22 +84,16 @@ public class SecurityConfig {
      */
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers(
-                AntPathRequestMatcher.antMatcher("/webjars/**"),
-                AntPathRequestMatcher.antMatcher("/doc.html"),
-                AntPathRequestMatcher.antMatcher("/swagger-resources/**"),
-                AntPathRequestMatcher.antMatcher("/v3/api-docs/**"),
-                AntPathRequestMatcher.antMatcher("/swagger-ui/**")
-        );
+        List<String> ignoreUrls = securityProperties.getIgnoreUrls();
+
+        return (web) -> {
+            if (CollectionUtil.isNotEmpty(ignoreUrls)) {
+                for (String url : ignoreUrls) {
+                    web.ignoring().requestMatchers(new AntPathRequestMatcher(url));
+                }
+            }
+        };
     }
-//    @Bean
-//    public WebSecurityCustomizer webSecurityCustomizer() {
-//        return (web) -> {
-//            if (CollectionUtil.isNotEmpty(securityProperties.getIgnoreUrls())) {
-//                web.ignoring().requestMatchers(securityProperties.getIgnoreUrls().toArray(new String[0]));
-//            }
-//        };
-//    }
 
     /**
      * 密码编码器

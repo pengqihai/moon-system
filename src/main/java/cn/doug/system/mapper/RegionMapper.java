@@ -1,6 +1,6 @@
 package cn.doug.system.mapper;
 
-import cn.doug.system.model.entity.Region;
+import cn.doug.system.model.entity.SysRegion;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.doug.system.model.bo.RegionBO;
@@ -15,7 +15,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 
 @Mapper
-public interface RegionMapper extends BaseMapper<Region> {
+public interface RegionMapper extends BaseMapper<SysRegion> {
 
     /**
      * 获取用户分页列表

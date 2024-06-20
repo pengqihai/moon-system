@@ -5,6 +5,5 @@ spring:
   profiles:
     active: dev
 server:
-  port: 9701
   servlet:
     context-path: /moonSystem

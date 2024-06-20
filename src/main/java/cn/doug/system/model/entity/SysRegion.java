@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("sys_region")
-public class Region implements Serializable {
+public class SysRegion implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -41,9 +41,9 @@ public class Region implements Serializable {
     private String regionCode;
 
     /**
-     * 地区父id
+     * 地区父区划
      */
-    private String regionParentId;
+    private String regionParentCode;
 
     /**
      * 地区级别 1-省、自治区、直辖市 2-地级市、地区、自治州、盟 3-市辖区、县级市、县
@@ -53,5 +53,5 @@ public class Region implements Serializable {
     /**
      * 逻辑删除标识(0:未删除;1:已删除)
      */
-    private Integer isDeleted;
+    private Integer deleted;
 }

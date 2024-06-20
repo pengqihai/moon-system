@@ -33,8 +33,8 @@ public class RegionVO implements Serializable {
 
     @Schema(description = "行政地区编号")
     private String regionCode;
-    @Schema(description = "地区父id")
-    private String regionParentId;
+    @Schema(description = "地区父区划")
+    private String regionParentCode;
 
     @Schema(description = "地区级别 1-省、自治区、直辖市 2-地级市、地区、自治州、盟 3-市辖区、县级市、县")
     private Integer regionLevel;

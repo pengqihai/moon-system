@@ -3,7 +3,7 @@
 <mapper namespace="cn.doug.system.mapper.RegionMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="cn.doug.system.model.entity.Region">
+    <resultMap id="BaseResultMap" type="cn.doug.system.model.entity.SysRegion">
         <id column="region_id" property="regionId" />
         <result column="region_name" property="regionName" />
         <result column="region_short_name" property="regionShortName" />
@@ -23,9 +23,9 @@
         SELECT
             <include refid="Base_Column_List"/>
         FROM
-            t_region
+            sys_region
         <where>
-            is_deleted = 0
+            deleted = 0
             <if test='queryParams.keywords!=null and queryParams.keywords.trim() neq ""'>
                 AND (
                     name LIKE CONCAT('%',#{queryParams.keywords},'%')

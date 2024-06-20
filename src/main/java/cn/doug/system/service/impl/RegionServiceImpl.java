@@ -2,7 +2,7 @@ package cn.doug.system.service.impl;
 
 import cn.doug.common.result.Result;
 import cn.doug.system.common.model.Option;
-import cn.doug.system.model.entity.Region;
+import cn.doug.system.model.entity.SysRegion;
 import cn.doug.system.mapper.RegionMapper;
 import cn.doug.system.model.query.RegionCodeQuery;
 import cn.doug.system.model.vo.RegionVO;
@@ -36,7 +36,7 @@ import cn.hutool.core.util.StrUtil;
  */
 @Service
 @RequiredArgsConstructor
-public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> implements RegionService {
+public class RegionServiceImpl extends ServiceImpl<RegionMapper, SysRegion> implements RegionService {
 
     private final RegionConverter regionConverter;
 
@@ -49,23 +49,23 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
     @Override
     public List<RegionVO> listPagedRegions(RegionPageQuery queryParams) {
 
-        List<Region> regions = this.list(new LambdaQueryWrapper<Region>()
-                .like(StrUtil.isNotBlank(queryParams.getKeywords()), Region::getRegionName, queryParams.getKeywords())
+        List<SysRegion> regions = this.list(new LambdaQueryWrapper<SysRegion>()
+                .like(StrUtil.isNotBlank(queryParams.getKeywords()), SysRegion::getRegionName, queryParams.getKeywords())
 
         );
-        // 获取地区ID
-        Set<String> regionIds = regions.stream()
-                .map(Region::getRegionId)
+        // 获取地区编号
+        Set<String> regionCodes = regions.stream()
+                .map(SysRegion::getRegionCode)
                 .collect(Collectors.toSet());
 
-        // 获取所有父级ID
-        Set<String> parentIds = regions.stream()
-                .map(Region::getRegionParentId)
+        // 获取所有父级编号
+        Set<String> parentCodes = regions.stream()
+                .map(SysRegion::getRegionParentCode)
                 .collect(Collectors.toSet());
 
-        // 获取根节点ID（递归的起点），即父节点ID中不包含在部门ID中的节点，注意这里不能拿顶级菜单 O 作为根节点，因为菜单筛选的时候 O 会被过滤掉
-        List<String> rootIds = parentIds.stream()
-                .filter(id -> !regionIds.contains(id))
+        // 获取根节点编号（递归的起点），即父节点编号中不包含在部门编号中的节点，注意这里不能拿顶级菜单 O 作为根节点，因为菜单筛选的时候 O 会被过滤掉
+        List<String> rootIds = parentCodes.stream()
+                .filter(id -> !regionCodes.contains(id))
                 .toList();
 
         // 使用递归函数来构建菜单树
@@ -77,17 +77,17 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
     /**
      * 递归生成区划列表
      *
-     * @param parentId 父级ID
+     * @param parentCode 父级编号
      * @param regionList 区划列表
      * @return 区划列表
      */
-    private List<RegionVO> buildMenuTree(String parentId, List<Region> regionList) {
+    private List<RegionVO> buildMenuTree(String parentCode, List<SysRegion> regionList) {
         return CollectionUtil.emptyIfNull(regionList)
                 .stream()
-                .filter(menu -> menu.getRegionParentId().equals(parentId))
+                .filter(menu -> menu.getRegionParentCode().equals(parentCode))
                 .map(entity -> {
                     RegionVO menuVO = regionConverter.entity2Vo(entity);
-                    List<RegionVO> children = buildMenuTree(entity.getRegionId(), regionList);
+                    List<RegionVO> children = buildMenuTree(entity.getRegionCode(), regionList);
                     menuVO.setChildren(children);
                     return menuVO;
                 }).toList();
@@ -95,19 +95,19 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
 
     @Override
     public List<Option> listRegionOptions() {
-        List<Region> regionList = this.list(new LambdaQueryWrapper<Region>()
-                .select(Region::getRegionId, Region::getRegionParentId, Region::getRegionName)
+        List<SysRegion> regionList = this.list(new LambdaQueryWrapper<SysRegion>()
+                .select(SysRegion::getRegionCode, SysRegion::getRegionParentCode, SysRegion::getRegionName)
         );
         if (CollectionUtil.isEmpty(regionList)) {
             return Collections.EMPTY_LIST;
         }
 
         Set<String> regionIds = regionList.stream()
-                .map(Region::getRegionId)
+                .map(SysRegion::getRegionCode)
                 .collect(Collectors.toSet());
 
         Set<String> parentIds = regionList.stream()
-                .map(Region::getRegionParentId)
+                .map(SysRegion::getRegionParentCode)
                 .collect(Collectors.toSet());
 
         List<String> rootIds = CollectionUtil.subtractToList(parentIds, regionIds);
@@ -124,9 +124,9 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
      */
     @Override
     public Result<List<RegionVO>> listRegionByParentCode(RegionCodeQuery query) {
-        LambdaQueryWrapper<Region> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(StrUtil.isNotEmpty(query.getAreaCode()),Region::getRegionParentId,query.getAreaCode());
-        List<Region> list = this.list(wrapper);
+        LambdaQueryWrapper<SysRegion> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(StrUtil.isNotEmpty(query.getAreaCode()), SysRegion::getRegionParentCode,query.getAreaCode());
+        List<SysRegion> list = this.list(wrapper);
         List<RegionVO> regionVOS = regionConverter.entitys2VOS(list);
         return Result.success(regionVOS);
     }
@@ -139,7 +139,7 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
      */
     @Override
     public RegionForm getRegionFormData(String id) {
-        Region entity = this.getById(id);
+        SysRegion entity = this.getById(id);
         return regionConverter.entity2Form(entity);
     }
     
@@ -152,7 +152,7 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
     @Override
     public boolean saveRegion(RegionForm formData) {
         // 实体转换 form->entity
-        Region entity = regionConverter.form2Entity(formData);
+        SysRegion entity = regionConverter.form2Entity(formData);
         return this.save(entity);
     }
     
@@ -164,7 +164,7 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
      */
     @Override
     public boolean updateRegion(RegionForm formData) {
-        Region entity = regionConverter.form2Entity(formData);
+        SysRegion entity = regionConverter.form2Entity(formData);
         return this.updateById(entity);
     }
     
@@ -191,12 +191,12 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
      * @param regionList 部门列表
      * @return 部门表格层级列表
      */
-    public static List<Option> recurRegionTreeOptions(String parentId, List<Region> regionList) {
+    public static List<Option> recurRegionTreeOptions(String parentId, List<SysRegion> regionList) {
         List<Option> list = CollectionUtil.emptyIfNull(regionList).stream()
-                .filter(region -> region.getRegionParentId().equals(parentId))
+                .filter(region -> region.getRegionParentCode().equals(parentId))
                 .map(region -> {
-                    Option option = new Option(region.getRegionId(), region.getRegionName());
-                    List<Option> children = recurRegionTreeOptions(region.getRegionId(), regionList);
+                    Option option = new Option(region.getRegionCode(), region.getRegionName());
+                    List<Option> children = recurRegionTreeOptions(region.getRegionCode(), regionList);
                     if (CollectionUtil.isNotEmpty(children)) {
                         option.setChildren(children);
                     }
