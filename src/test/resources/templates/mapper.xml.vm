@@ -9,7 +9,7 @@
 #end
 #if(${baseResultMap})
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="${package.Entity}.${entity}">
+    <resultMap id="BaseResultMap" type="${package.Entity}.${entity}Entity">
 #foreach($field in ${table.fields})
 #if(${field.keyFlag})##生成主键排在第一位
         <id column="${field.name}" property="${field.propertyName}" />
@@ -44,17 +44,17 @@
         FROM
             ${table.name}
         <where>
-            is_deleted = 0
+            deleted = 0
             <if test='queryParams.keywords!=null and queryParams.keywords.trim() neq ""'>
                 AND (
                     name LIKE CONCAT('%',#{queryParams.keywords},'%')
                 )
             </if>
             <if test="queryParams.startTime != null">
-                AND create_time &gt;= #{queryParams.startTime}
+                AND u.create_time &gt;= #{queryParams.startTime}
             </if>
             <if test="queryParams.endTime != null">
-                AND create_time &lt;= #{queryParams.endTime}
+                AND u.create_time &lt;= #{queryParams.endTime}
             </if>
         </where>
         ORDER BY create_time DESC

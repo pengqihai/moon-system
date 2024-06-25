@@ -20,7 +20,7 @@ import java.util.*;
 public class FastAutoGeneratorTest {
 
     private static final DataSourceConfig.Builder DATA_SOURCE_CONFIG = new DataSourceConfig
-            .Builder("jdbc:mysql://localhost:3306/moon_system?serverTimezone=Asia/Shanghai", "root", "PQH123456");
+            .Builder("jdbc:mysql://localhost:3306/moon_system?serverTimezone=Asia/Shanghai", "root", "dcb123456");
 
     /**
      * 执行 run
@@ -51,7 +51,7 @@ public class FastAutoGeneratorTest {
                     customFiles.add(new CustomFile.Builder().fileName("DTO.java").templatePath("/templates/dto.java.vm").packageName("model.dto").build());
                     customFiles.add(new CustomFile.Builder().fileName("VO.java").templatePath("/templates/vo.java.vm").packageName("model.vo").build());
                     customFiles.add(new CustomFile.Builder().fileName("BO.java").templatePath("/templates/bo.java.vm").packageName("model.bo").build());
-                    customFiles.add(new CustomFile.Builder().fileName("BasePageQuery.java").templatePath("/templates/pageQuery.java.vm").packageName("model.query").build());
+                    customFiles.add(new CustomFile.Builder().fileName("PageQuery.java").templatePath("/templates/pageQuery.java.vm").packageName("model.query").build());
                     customFiles.add(new CustomFile.Builder().fileName("PageVO.java").templatePath("/templates/pageVO.java.vm").packageName("model.vo").build());
                     customFiles.add(new CustomFile.Builder().fileName("Form.java").templatePath("/templates/form.java.vm").packageName("model.form").build());
                     customFiles.add(new CustomFile.Builder().fileName("Converter.java").templatePath("/templates/converter.java.vm").packageName("converter").build());
@@ -59,7 +59,7 @@ public class FastAutoGeneratorTest {
                     consumer.beforeOutputFile((tableInfo, objectMap) -> {
                         // 为每个表生成首字母小写的实体名
                         String entityName = tableInfo.getEntityName();
-                        String lowerCaseEntity = entityName.substring(0, 1).toLowerCase() + entityName.substring(1);
+                        String lowerCaseEntity = entityName.substring(0, 1).toLowerCase() + entityName.substring(1)+ "Entity";
                         // 注入自定义参数
                         objectMap.put("firstCharLowerCaseEntity", lowerCaseEntity);
 

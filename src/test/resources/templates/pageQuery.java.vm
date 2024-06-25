@@ -1,6 +1,6 @@
 package ${package.Parent}.model.query;
 
-import com.youlai.common.base.BasePageQuery;
+import cn.doug.common.page.BasePageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -14,6 +14,9 @@ import lombok.Data;
 @Data
 public class ${entity}PageQuery extends BasePageQuery {
 
+    /**
+     * 关键字
+     */
     @Schema(description="关键字")
     private String keywords;
 

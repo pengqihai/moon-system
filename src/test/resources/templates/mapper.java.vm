@@ -1,6 +1,6 @@
 package ${package.Mapper};
 
-import ${package.Entity}.${entity};
+import ${package.Entity}.${entity}Entity;
 import ${superMapperClassPackage};
 #if(${mapperAnnotationClass})
 import ${mapperAnnotationClass.name};
@@ -21,7 +21,7 @@ import org.apache.ibatis.annotations.Mapper;
 #end
 
 @Mapper
-public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
+public interface ${table.mapperName} extends ${superMapperClass}<${entity}Entity> {
 
     /**
      * 获取用户分页列表

@@ -5,7 +5,7 @@ import org.mapstruct.Mapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import ${package.Parent}.model.dto.${entity}DTO;
-import ${package.Parent}.model.entity.${entity};
+import ${package.Parent}.model.entity.${entity}Entity;
 import ${package.Parent}.model.vo.${entity}PageVO;
 import ${package.Parent}.model.form.${entity}Form;
 import ${package.Parent}.model.bo.${entity}BO;
@@ -23,8 +23,8 @@ public interface ${entity}Converter{
 
     Page<${entity}PageVO> bo2PageVo(Page<${entity}BO> bo);
 
-    ${entity}Form entity2Form(${entity} entity);
+    ${entity}Form entity2Form(${entity}Entity entity);
 
     @InheritInverseConfiguration(name = "entity2Form")
-    ${entity} form2Entity(${entity}Form entity);
+    ${entity}Entity form2Entity(${entity}Form entity);
 }

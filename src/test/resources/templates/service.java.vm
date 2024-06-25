@@ -1,10 +1,11 @@
 package ${package.Service};
 
-import ${package.Entity}.${entity};
+import ${package.Entity}.${entity}Entity;
 import ${superServiceClassPackage};
 import ${package.Parent}.model.form.${entity}Form;
 import ${package.Parent}.model.query.${entity}PageQuery;
 import ${package.Parent}.model.vo.${entity}PageVO;
+import cn.doug.common.base.BaseIdForm;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 /**
  * $!{table.comment} 服务类
@@ -12,7 +13,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
  * @author ${author}
  * @since ${date}
  */
-public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+public interface ${table.serviceName} extends ${superServiceClass}<${entity}Entity> {
 
 
     /**
@@ -29,7 +30,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
      * @param id $!{table.comment}ID
      * @return
      */
-     ${entity}Form get${entity}FormData(Long id);
+     ${entity}Form get${entity}FormData(String id);
 
 
     /**
@@ -47,7 +48,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
      * @param formData $!{table.comment}表单对象
      * @return
      */
-    boolean update${entity}(Long id, ${entity}Form formData);
+    boolean update${entity}(${entity}Form formData);
 
 
     /**
@@ -56,6 +57,6 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
      * @param ids $!{table.comment}ID，多个以英文逗号(,)分割
      * @return
      */
-    boolean delete${entity}s(String ids);
+    boolean delete${entity}s(BaseIdForm form);
 
 }

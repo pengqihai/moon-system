@@ -1,17 +1,18 @@
 package ${package.ServiceImpl};
 
-import ${package.Entity}.${entity};
+import ${package.Entity}.${entity}Entity;
 import ${package.Mapper}.${table.mapperName};
 import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.youlai.common.util.DateUtils;
+import cn.doug.common.util.DateUtils;
 import ${package.Parent}.model.form.${entity}Form;
 import ${package.Parent}.model.query.${entity}PageQuery;
 import ${package.Parent}.model.bo.${entity}BO;
 import ${package.Parent}.model.vo.${entity}PageVO;
 import ${package.Parent}.converter.${entity}Converter;
+import cn.doug.common.base.BaseIdForm;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -31,7 +32,7 @@ import cn.hutool.core.util.StrUtil;
  */
 @Service
 @RequiredArgsConstructor
-public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}Entity> implements ${table.serviceName} {
 
     private final ${entity}Converter ${firstCharLowerCaseEntity}Converter;
 
@@ -66,8 +67,8 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
      * @return
      */
     @Override
-    public ${entity}Form get${entity}FormData(Long id) {
-        ${entity} entity = this.getById(id);
+    public ${entity}Form get${entity}FormData(String id) {
+        ${entity}Entity entity = this.getById(id);
         return ${firstCharLowerCaseEntity}Converter.entity2Form(entity);
     }
     
@@ -80,7 +81,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     @Override
     public boolean save${entity}(${entity}Form formData) {
         // 实体转换 form->entity
-        ${entity} entity = ${firstCharLowerCaseEntity}Converter.form2Entity(formData);
+        ${entity}Entity entity = ${firstCharLowerCaseEntity}Converter.form2Entity(formData);
         return this.save(entity);
     }
     
@@ -92,25 +93,23 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
      * @return
      */
     @Override
-    public boolean update${entity}(Long id,${entity}Form formData) {
-        ${entity} entity = ${firstCharLowerCaseEntity}Converter.form2Entity(formData);
+    public boolean update${entity}(${entity}Form formData) {
+        ${entity}Entity entity = ${firstCharLowerCaseEntity}Converter.form2Entity(formData);
         return this.updateById(entity);
     }
     
     /**
      * 删除$!{table.comment}
      *
-     * @param ids $!{table.comment}ID，多个以英文逗号(,)分割
+     * @param form $!{table.comment}ID，多个以英文逗号(,)分割
      * @return true|false
      */
     @Override
-    public boolean delete${entity}s(String ids) {
-        Assert.isTrue(StrUtil.isNotBlank(ids), "删除的$!{table.comment}数据为空");
+    public boolean delete${entity}s(BaseIdForm form) {
+        List<String> ids = form.getIds();
+        Assert.isTrue(CollUtil.isNotEmpty(ids), "删除的$!{table.comment}数据为空");
         // 逻辑删除
-        List<Long> idList = Arrays.stream(ids.split(","))
-                .map(Long::parseLong)
-                .toList();
-        return this.removeByIds(idList);
+        return this.removeByIds(ids);
     }
     
 

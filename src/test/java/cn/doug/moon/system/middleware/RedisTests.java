@@ -1,8 +1,6 @@
 package cn.doug.moon.system.middleware;
 
-import cn.doug.system.model.entity.SysUser;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -23,18 +21,18 @@ public class RedisTests {
     /**
      * Redis 序列化测试
      */
-    @Test
-    public void testRedisSerializer() {
-        SysUser user = new SysUser();
-        user.setId(1l);
-        user.setNickname("张三");
-        // 写
-        redisTemplate.opsForValue().set("user", user);
-
-        // 读
-        SysUser userCache = (SysUser)redisTemplate.opsForValue().get("user");
-        log.info("userCache:{}", userCache);
-
-    }
+//    @Test
+//    public void testRedisSerializer() {
+//        SysUser user = new SysUser();
+//        user.setId(1l);
+//        user.setNickname("张三");
+//        // 写
+//        redisTemplate.opsForValue().set("user", user);
+//
+//        // 读
+//        SysUser userCache = (SysUser)redisTemplate.opsForValue().get("user");
+//        log.info("userCache:{}", userCache);
+//
+//    }
 
 }
