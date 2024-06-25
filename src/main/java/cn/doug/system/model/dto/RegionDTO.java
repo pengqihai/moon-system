@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+
 /**
  * 地区表 DTO
  *

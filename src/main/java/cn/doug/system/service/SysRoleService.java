@@ -5,9 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysRole;
-import cn.doug.system.model.form.RoleForm;
-import cn.doug.system.model.query.RolePageQuery;
-import cn.doug.system.model.vo.RolePageVO;
+import cn.doug.system.model.form.sys.RoleForm;
+import cn.doug.system.model.query.sys.RolePageQuery;
+import cn.doug.system.model.vo.sys.RolePageVO;
 
 import java.util.List;
 import java.util.Set;

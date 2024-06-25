@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysDict;
-import cn.doug.system.model.form.DictForm;
-import cn.doug.system.model.query.DictPageQuery;
-import cn.doug.system.model.vo.DictPageVO;
+import cn.doug.system.model.form.sys.DictForm;
+import cn.doug.system.model.query.sys.DictPageQuery;
+import cn.doug.system.model.vo.sys.DictPageVO;
 
 import java.util.List;
 

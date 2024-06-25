@@ -3,10 +3,10 @@ package cn.doug.system.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysMenu;
-import cn.doug.system.model.form.MenuForm;
-import cn.doug.system.model.query.MenuQuery;
-import cn.doug.system.model.vo.MenuVO;
-import cn.doug.system.model.vo.RouteVO;
+import cn.doug.system.model.form.sys.MenuForm;
+import cn.doug.system.model.query.sys.MenuQuery;
+import cn.doug.system.model.vo.sys.MenuVO;
+import cn.doug.system.model.vo.sys.RouteVO;
 
 import java.util.List;
 import java.util.Set;

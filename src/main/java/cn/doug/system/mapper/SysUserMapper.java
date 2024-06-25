@@ -5,9 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.doug.system.model.bo.UserBO;
 import cn.doug.system.model.dto.UserAuthInfo;
 import cn.doug.system.model.entity.SysUser;
-import cn.doug.system.model.form.UserForm;
-import cn.doug.system.model.query.UserPageQuery;
-import cn.doug.system.model.vo.UserExportVO;
+import cn.doug.system.model.form.sys.UserForm;
+import cn.doug.system.model.query.sys.UserPageQuery;
+import cn.doug.system.model.vo.sys.UserExportVO;
 import cn.doug.system.plugin.mybatis.annotation.DataPermission;
 import org.apache.ibatis.annotations.Mapper;
 

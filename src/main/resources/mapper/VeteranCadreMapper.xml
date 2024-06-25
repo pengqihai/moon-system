@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.doug.system.mapper.VeteranCadreMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.doug.system.model.entity.VeteranCadreEntity">
+        <id column="id" property="id" />
+        <result column="full_name" property="fullName" />
+        <result column="other_name" property="otherName" />
+        <result column="id_card" property="idCard" />
+        <result column="gender" property="gender" />
+        <result column="birth_time" property="birthTime" />
+        <result column="native_place" property="nativePlace" />
+        <result column="politic" property="politic" />
+        <result column="phone" property="phone" />
+        <result column="family_adress" property="familyAdress" />
+        <result column="live_adress" property="liveAdress" />
+        <result column="marry_flag" property="marryFlag" />
+        <result column="degree" property="degree" />
+        <result column="live_flag" property="liveFlag" />
+        <result column="join_pary_time" property="joinParyTime" />
+        <result column="work_time" property="workTime" />
+        <result column="personnel_type" property="personnelType" />
+        <result column="is_committe" property="isCommitte" />
+        <result column="committe_dut" property="committeDut" />
+        <result column="branch_id" property="branchId" />
+        <result column="retire_type" property="retireType" />
+        <result column="retire_gov" property="retireGov" />
+        <result column="retire_work" property="retireWork" />
+        <result column="retire_grade" property="retireGrade" />
+        <result column="retire_time" property="retireTime" />
+        <result column="salary" property="salary" />
+        <result column="relocation" property="relocation" />
+        <result column="arrange_plac" property="arrangePlac" />
+        <result column="receive_gov" property="receiveGov" />
+        <result column="receive_phone" property="receivePhone" />
+        <result column="health_flag" property="healthFlag" />
+        <result column="disease_des" property="diseaseDes" />
+        <result column="speciality" property="speciality" />
+        <result column="hobby" property="hobby" />
+        <result column="join_corporati" property="joinCorporati" />
+        <result column="is_die" property="isDie" />
+        <result column="die_time" property="dieTime" />
+        <result column="is_delete" property="isDelete" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, full_name, other_name, id_card, gender, birth_time, native_place, politic, phone, family_adress, live_adress, marry_flag, degree, live_flag, join_pary_time, work_time, personnel_type, is_committe, committe_dut, branch_id, retire_type, retire_gov, retire_work, retire_grade, retire_time, salary, relocation, arrange_plac, receive_gov, receive_phone, health_flag, disease_des, speciality, hobby, join_corporati, is_die, die_time, is_delete, create_time, update_time
+    </sql>
+
+
+    <!-- 老干部工作人员与离退休党员	分页列表 -->
+    <select id="listPagedVeteranCadres" resultType="cn.doug.system.model.bo.VeteranCadreBO">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            t_veteran_cadre
+        <where>
+            deleted = 0
+            <if test='queryParams.keywords!=null and queryParams.keywords.trim() neq ""'>
+                AND (
+                    name LIKE CONCAT('%',#{queryParams.keywords},'%')
+                )
+            </if>
+            <if test="queryParams.startTime != null">
+                AND u.create_time &gt;= #{queryParams.startTime}
+            </if>
+            <if test="queryParams.endTime != null">
+                AND u.create_time &lt;= #{queryParams.endTime}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+
+</mapper>

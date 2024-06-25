@@ -5,11 +5,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.model.dto.UserAuthInfo;
 import cn.doug.system.model.entity.SysUser;
-import cn.doug.system.model.form.UserForm;
-import cn.doug.system.model.query.UserPageQuery;
-import cn.doug.system.model.vo.UserExportVO;
-import cn.doug.system.model.vo.UserInfoVO;
-import cn.doug.system.model.vo.UserPageVO;
+import cn.doug.system.model.form.sys.UserForm;
+import cn.doug.system.model.query.sys.UserPageQuery;
+import cn.doug.system.model.vo.sys.UserExportVO;
+import cn.doug.system.model.vo.sys.UserInfoVO;
+import cn.doug.system.model.vo.sys.UserPageVO;
 
 import java.util.List;
 

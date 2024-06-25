@@ -3,9 +3,9 @@ package cn.doug.system.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysDept;
-import cn.doug.system.model.form.DeptForm;
-import cn.doug.system.model.query.DeptQuery;
-import cn.doug.system.model.vo.DeptVO;
+import cn.doug.system.model.form.sys.DeptForm;
+import cn.doug.system.model.query.sys.DeptQuery;
+import cn.doug.system.model.vo.sys.DeptVO;
 
 import java.util.List;
 

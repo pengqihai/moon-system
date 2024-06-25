@@ -4,18 +4,18 @@ import cn.doug.common.result.Result;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysRegion;
 import cn.doug.system.mapper.RegionMapper;
-import cn.doug.system.model.query.RegionCodeQuery;
-import cn.doug.system.model.vo.RegionVO;
+import cn.doug.system.model.query.digit.RegionCodeQuery;
+import cn.doug.system.model.vo.digit.RegionVO;
 import cn.doug.system.service.RegionService;
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import cn.doug.system.model.form.RegionForm;
-import cn.doug.system.model.query.RegionPageQuery;
-import cn.doug.system.model.vo.RegionPageVO;
-import cn.doug.system.common.converter.RegionConverter;
+import cn.doug.system.model.form.digit.RegionForm;
+import cn.doug.system.model.query.digit.RegionPageQuery;
+import cn.doug.system.model.vo.digit.RegionPageVO;
+import cn.doug.system.converter.RegionConverter;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
