@@ -4,7 +4,7 @@ import cn.doug.system.model.entity.SysRegion;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.doug.system.model.bo.RegionBO;
-import cn.doug.system.model.query.digit.RegionPageQuery;
+import cn.doug.system.model.query.RegionPageQuery;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

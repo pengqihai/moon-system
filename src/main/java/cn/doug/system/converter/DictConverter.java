@@ -1,8 +1,8 @@
 package cn.doug.system.converter;
 
+import cn.doug.system.model.form.sys.SysDictForm;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.doug.system.model.entity.SysDict;
-import cn.doug.system.model.form.sys.DictForm;
 import cn.doug.system.model.vo.sys.DictPageVO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -18,8 +18,8 @@ public interface DictConverter {
 
     Page<DictPageVO> entity2Page(Page<SysDict> page);
 
-    DictForm entity2Form(SysDict entity);
+    SysDictForm entity2Form(SysDict entity);
 
     @InheritInverseConfiguration(name="entity2Form")
-    SysDict form2Entity(DictForm entity);
+    SysDict form2Entity(SysDictForm entity);
 }

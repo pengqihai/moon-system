@@ -1,4 +1,4 @@
-package cn.doug.system.model.query.sys;
+package cn.doug.system.model.query;
 
 
 import cn.doug.common.page.BasePageQuery;
@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Schema(description ="字典类型分页查询对象")
 @Data
-public class DictTypePageQuery extends BasePageQuery {
+public class SysDictTypePageQuery extends BasePageQuery {
 
     @Schema(description="关键字(类型名称/类型编码)")
     private String keywords;

@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.doug.system.common.constant.SecurityConstants;
 import cn.doug.system.mapper.SysRoleMenuMapper;
-import cn.doug.system.model.bo.RolePermsBO;
+import cn.doug.system.model.bo.SysRolePermsBO;
 import cn.doug.system.model.entity.SysRoleMenu;
 import cn.doug.system.service.SysRoleMenuService;
 import jakarta.annotation.PostConstruct;
@@ -44,7 +44,7 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
         // 清理权限缓存
         redisTemplate.opsForHash().delete(SecurityConstants.ROLE_PERMS_PREFIX, "*");
 
-        List<RolePermsBO> list = this.baseMapper.getRolePermsList(null);
+        List<SysRolePermsBO> list = this.baseMapper.getRolePermsList(null);
         if (CollectionUtil.isNotEmpty(list)) {
             list.forEach(item -> {
                 String roleCode = item.getRoleCode();
@@ -62,9 +62,9 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
         // 清理权限缓存
         redisTemplate.opsForHash().delete(SecurityConstants.ROLE_PERMS_PREFIX, roleCode);
 
-        List<RolePermsBO> list = this.baseMapper.getRolePermsList(roleCode);
+        List<SysRolePermsBO> list = this.baseMapper.getRolePermsList(roleCode);
         if (CollectionUtil.isNotEmpty(list)) {
-            RolePermsBO rolePerms = list.get(0);
+            SysRolePermsBO rolePerms = list.get(0);
             if (rolePerms == null) {
                 return;
             }
@@ -83,9 +83,9 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
         redisTemplate.opsForHash().delete(SecurityConstants.ROLE_PERMS_PREFIX, oldRoleCode);
 
         // 添加新角色权限缓存
-        List<RolePermsBO> list =this.baseMapper.getRolePermsList(newRoleCode);
+        List<SysRolePermsBO> list =this.baseMapper.getRolePermsList(newRoleCode);
         if (CollectionUtil.isNotEmpty(list)) {
-            RolePermsBO rolePerms = list.get(0);
+            SysRolePermsBO rolePerms = list.get(0);
             if (rolePerms == null) {
                 return;
             }

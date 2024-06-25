@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysDictType;
-import cn.doug.system.model.form.sys.DictTypeForm;
-import cn.doug.system.model.query.sys.DictTypePageQuery;
+import cn.doug.system.model.form.sys.SysDictTypeForm;
+import cn.doug.system.model.query.SysDictTypePageQuery;
 import cn.doug.system.model.vo.sys.DictTypePageVO;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public interface SysDictTypeService extends IService<SysDictType> {
      * @param queryParams 分页查询对象
      * @return
      */
-    Page<DictTypePageVO> getDictTypePage(DictTypePageQuery queryParams);
+    Page<DictTypePageVO> getDictTypePage(SysDictTypePageQuery queryParams);
 
 
     /**
@@ -33,7 +33,7 @@ public interface SysDictTypeService extends IService<SysDictType> {
      * @param id 字典类型ID
      * @return
      */
-    DictTypeForm getDictTypeForm(Long id);
+    SysDictTypeForm getDictTypeForm(Long id);
 
 
     /**
@@ -42,7 +42,7 @@ public interface SysDictTypeService extends IService<SysDictType> {
      * @param dictTypeForm 字典类型表单
      * @return
      */
-    boolean saveDictType(DictTypeForm dictTypeForm);
+    boolean saveDictType(SysDictTypeForm dictTypeForm);
 
 
     /**
@@ -52,7 +52,7 @@ public interface SysDictTypeService extends IService<SysDictType> {
      * @param dictTypeForm 字典类型表单
      * @return
      */
-    boolean updateDictType(Long id, DictTypeForm dictTypeForm);
+    boolean updateDictType(Long id, SysDictTypeForm dictTypeForm);
 
     /**
      * 删除字典类型

@@ -3,8 +3,8 @@ package cn.doug.system.controller.system;
 import cn.doug.common.plugin.annotation.WebLog;
 import cn.doug.system.common.model.Option;
 import cn.doug.common.result.Result;
-import cn.doug.system.model.form.sys.DeptForm;
-import cn.doug.system.model.query.sys.DeptQuery;
+import cn.doug.system.model.form.sys.SysDeptForm;
+import cn.doug.system.model.query.SysDeptQuery;
 import cn.doug.system.model.vo.sys.DeptVO;
 import cn.doug.common.plugin.annotation.PreventDuplicateSubmit;
 import cn.doug.system.service.SysDeptService;
@@ -35,7 +35,7 @@ public class SysDeptController {
     @Operation(summary = "获取部门列表")
     @GetMapping
     public Result<List<DeptVO>> listDepartments(
-            @ParameterObject DeptQuery queryParams
+            @ParameterObject SysDeptQuery queryParams
     ) {
         List<DeptVO> list = deptService.listDepartments(queryParams);
         return Result.success(list);
@@ -52,10 +52,10 @@ public class SysDeptController {
     @WebLog(value = "获取部门表单数据")
     @Operation(summary = "获取部门表单数据")
     @GetMapping("/{deptId}/form")
-    public Result<DeptForm> getDeptForm(
+    public Result<SysDeptForm> getDeptForm(
             @Parameter(description ="部门ID") @PathVariable Long deptId
     ) {
-        DeptForm deptForm = deptService.getDeptForm(deptId);
+        SysDeptForm deptForm = deptService.getDeptForm(deptId);
         return Result.success(deptForm);
     }
 
@@ -65,7 +65,7 @@ public class SysDeptController {
     @PreAuthorize("@ss.hasPerm('sys:dept:add')")
     @PreventDuplicateSubmit
     public Result saveDept(
-            @Valid @RequestBody DeptForm formData
+            @Valid @RequestBody SysDeptForm formData
     ) {
         Long id = deptService.saveDept(formData);
         return Result.success(id);
@@ -77,7 +77,7 @@ public class SysDeptController {
     @PreAuthorize("@ss.hasPerm('sys:dept:edit')")
     public Result updateDept(
             @PathVariable Long deptId,
-            @Valid @RequestBody DeptForm formData
+            @Valid @RequestBody SysDeptForm formData
     ) {
         deptId = deptService.updateDept(deptId, formData);
         return Result.success(deptId);

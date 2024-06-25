@@ -9,7 +9,7 @@ import java.util.List;
 
 @Schema(description = "菜单表单对象")
 @Data
-public class MenuForm {
+public class SysMenuForm {
 
     @Schema(description = "菜单ID")
     private Long id;

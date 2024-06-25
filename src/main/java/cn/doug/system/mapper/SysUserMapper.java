@@ -1,12 +1,12 @@
 package cn.doug.system.mapper;
 
+import cn.doug.system.model.bo.SysUserBO;
+import cn.doug.system.model.form.sys.SysUserForm;
+import cn.doug.system.model.query.SysUserPageQuery;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import cn.doug.system.model.bo.UserBO;
 import cn.doug.system.model.dto.UserAuthInfo;
 import cn.doug.system.model.entity.SysUser;
-import cn.doug.system.model.form.sys.UserForm;
-import cn.doug.system.model.query.sys.UserPageQuery;
 import cn.doug.system.model.vo.sys.UserExportVO;
 import cn.doug.system.plugin.mybatis.annotation.DataPermission;
 import org.apache.ibatis.annotations.Mapper;
@@ -30,7 +30,7 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      * @return
      */
     @DataPermission(deptAlias = "u")
-    Page<UserBO> listPagedUsers(Page<UserBO> page, UserPageQuery queryParams);
+    Page<SysUserBO> listPagedUsers(Page<SysUserBO> page, SysUserPageQuery queryParams);
 
     /**
      * 获取用户表单详情
@@ -38,7 +38,7 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      * @param userId 用户ID
      * @return
      */
-    UserForm getUserFormData(Long userId);
+    SysUserForm getUserFormData(Long userId);
 
     /**
      * 根据用户名获取认证信息
@@ -55,5 +55,5 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      * @return
      */
     @DataPermission(deptAlias = "u")
-    List<UserExportVO> listExportUsers(UserPageQuery queryParams);
+    List<UserExportVO> listExportUsers(SysUserPageQuery queryParams);
 }

@@ -1,7 +1,7 @@
 package cn.doug.system.converter;
 
 import cn.doug.system.model.entity.SysDept;
-import cn.doug.system.model.form.sys.DeptForm;
+import cn.doug.system.model.form.sys.SysDeptForm;
 import cn.doug.system.model.vo.sys.DeptVO;
 import org.mapstruct.Mapper;
 
@@ -14,9 +14,9 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface DeptConverter {
 
-    DeptForm entity2Form(SysDept entity);
+    SysDeptForm entity2Form(SysDept entity);
     DeptVO entity2Vo(SysDept entity);
 
-    SysDept form2Entity(DeptForm deptForm);
+    SysDept form2Entity(SysDeptForm deptForm);
 
 }

@@ -1,5 +1,6 @@
 package cn.doug.system.service.impl.sys;
 
+import cn.doug.system.model.form.sys.SysDictForm;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
@@ -10,8 +11,7 @@ import cn.doug.system.common.model.Option;
 import cn.doug.system.converter.DictConverter;
 import cn.doug.system.mapper.SysDictMapper;
 import cn.doug.system.model.entity.SysDict;
-import cn.doug.system.model.form.sys.DictForm;
-import cn.doug.system.model.query.sys.DictPageQuery;
+import cn.doug.system.model.query.SysDictPageQuery;
 import cn.doug.system.model.vo.sys.DictPageVO;
 import cn.doug.system.service.SysDictService;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +40,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
      * @return
      */
     @Override
-    public Page<DictPageVO> getDictPage(DictPageQuery queryParams) {
+    public Page<DictPageVO> getDictPage(SysDictPageQuery queryParams) {
         // 查询参数
         int pageNum = queryParams.getPageNum();
         int pageSize = queryParams.getPageSize();
@@ -68,7 +68,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
      * @return
      */
     @Override
-    public DictForm getDictForm(Long id) {
+    public SysDictForm getDictForm(Long id) {
         // 获取entity
         SysDict entity = this.getOne(new LambdaQueryWrapper<SysDict>()
                 .eq(SysDict::getId, id)
@@ -84,7 +84,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
         Assert.isTrue(entity != null, "字典数据项不存在");
 
         // 实体转换
-        DictForm dictForm = dictConverter.entity2Form(entity);
+        SysDictForm dictForm = dictConverter.entity2Form(entity);
         return dictForm;
     }
 
@@ -95,7 +95,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
      * @return
      */
     @Override
-    public boolean saveDict(DictForm dictForm) {
+    public boolean saveDict(SysDictForm dictForm) {
         // 实体对象转换 form->entity
         SysDict entity = dictConverter.form2Entity(dictForm);
         // 持久化
@@ -111,7 +111,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
      * @return
      */
     @Override
-    public boolean updateDict(Long id, DictForm dictForm) {
+    public boolean updateDict(Long id, SysDictForm dictForm) {
         SysDict entity = dictConverter.form2Entity(dictForm);
         boolean result = this.updateById(entity);
         return result;

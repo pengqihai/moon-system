@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Schema(description = "字典类型")
 @Data
-public class DictTypeForm {
+public class SysDictTypeForm {
 
     @Schema(description="字典类型ID")
     private Long id;

@@ -69,6 +69,7 @@ public class VeteranCadreServiceImpl extends ServiceImpl<VeteranCadreMapper, Vet
      */
     @Override
     public VeteranCadreForm getVeteranCadreFormData(String id) {
+        Assert.isTrue(StrUtil.isNotEmpty(id), "id为空");
         VeteranCadreEntity entity = this.getById(id);
         return veteranCadreEntityConverter.entity2Form(entity);
     }
@@ -108,7 +109,7 @@ public class VeteranCadreServiceImpl extends ServiceImpl<VeteranCadreMapper, Vet
     @Override
     public boolean deleteVeteranCadres(BaseIdForm form) {
         List<String> ids = form.getIds();
-        Assert.isTrue(CollUtil.isNotEmpty(ids), "删除的老干部工作人员与离退休党员	数据为空");
+        Assert.isTrue(CollUtil.isNotEmpty(ids), "ids为空");
         // 逻辑删除
         return this.removeByIds(ids);
     }

@@ -1,5 +1,6 @@
 package cn.doug.system.service.impl.sys;
 
+import cn.doug.system.model.form.sys.SysRoleForm;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ObjectUtil;
@@ -13,8 +14,7 @@ import cn.doug.system.converter.RoleConverter;
 import cn.doug.system.mapper.SysRoleMapper;
 import cn.doug.system.model.entity.SysRole;
 import cn.doug.system.model.entity.SysRoleMenu;
-import cn.doug.system.model.form.sys.RoleForm;
-import cn.doug.system.model.query.sys.RolePageQuery;
+import cn.doug.system.model.query.SysRolePageQuery;
 import cn.doug.system.model.vo.sys.RolePageVO;
 import cn.doug.system.security.util.SecurityUtils;
 import cn.doug.system.service.SysRoleMenuService;
@@ -50,7 +50,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      * @return {@link Page<RolePageVO>} – 角色分页列表
      */
     @Override
-    public Page<RolePageVO> getRolePage(RolePageQuery queryParams) {
+    public Page<RolePageVO> getRolePage(SysRolePageQuery queryParams) {
         // 查询参数
         int pageNum = queryParams.getPageNum();
         int pageSize = queryParams.getPageSize();
@@ -97,7 +97,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      * @return {@link Boolean}
      */
     @Override
-    public boolean saveRole(RoleForm roleForm) {
+    public boolean saveRole(SysRoleForm roleForm) {
 
         Long roleId = roleForm.getId();
 
@@ -137,10 +137,10 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      * 获取角色表单数据
      *
      * @param roleId 角色ID
-     * @return {@link RoleForm} – 角色表单数据
+     * @return {@link SysRoleForm} – 角色表单数据
      */
     @Override
-    public RoleForm getRoleForm(Long roleId) {
+    public SysRoleForm getRoleForm(Long roleId) {
         SysRole entity = this.getById(roleId);
         return roleConverter.entity2Form(entity);
     }

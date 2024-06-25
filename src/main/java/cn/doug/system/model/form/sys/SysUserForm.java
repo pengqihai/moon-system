@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Schema(description = "用户表单对象")
 @Data
-public class UserForm {
+public class SysUserForm {
 
     @Schema(description="用户ID")
     private Long id;

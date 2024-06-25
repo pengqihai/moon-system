@@ -1,4 +1,4 @@
-package cn.doug.system.model.query.digit;
+package cn.doug.system.model.query;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

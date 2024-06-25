@@ -1,10 +1,10 @@
 package cn.doug.system.service;
 
+import cn.doug.system.model.form.sys.SysMenuForm;
+import cn.doug.system.model.query.SysMenuQuery;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysMenu;
-import cn.doug.system.model.form.sys.MenuForm;
-import cn.doug.system.model.query.sys.MenuQuery;
 import cn.doug.system.model.vo.sys.MenuVO;
 import cn.doug.system.model.vo.sys.RouteVO;
 
@@ -24,7 +24,7 @@ public interface SysMenuService extends IService<SysMenu> {
      *
      * @return
      */
-    List<MenuVO> listMenus(MenuQuery queryParams);
+    List<MenuVO> listMenus(SysMenuQuery queryParams);
 
 
     /**
@@ -40,7 +40,7 @@ public interface SysMenuService extends IService<SysMenu> {
      * @param menu
      * @return
      */
-    boolean saveMenu(MenuForm menu);
+    boolean saveMenu(SysMenuForm menu);
 
     /**
      * 获取路由列表
@@ -72,7 +72,7 @@ public interface SysMenuService extends IService<SysMenu> {
      * @param id 菜单ID
      * @return
      */
-    MenuForm getMenuForm(Long id);
+    SysMenuForm getMenuForm(Long id);
 
     /**
      * 删除菜单

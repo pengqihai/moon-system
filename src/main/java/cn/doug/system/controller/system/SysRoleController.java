@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.doug.system.common.model.Option;
 import cn.doug.common.result.PageResult;
 import cn.doug.common.result.Result;
-import cn.doug.system.model.form.sys.RoleForm;
-import cn.doug.system.model.query.sys.RolePageQuery;
+import cn.doug.system.model.form.sys.SysRoleForm;
+import cn.doug.system.model.query.SysRolePageQuery;
 import cn.doug.system.model.vo.sys.RolePageVO;
 import cn.doug.common.plugin.annotation.PreventDuplicateSubmit;
 import cn.doug.system.service.SysRoleService;
@@ -33,7 +33,7 @@ public class SysRoleController {
     @Operation(summary = "角色分页列表")
     @GetMapping("/page")
     public PageResult<RolePageVO> getRolePage(
-            @ParameterObject RolePageQuery queryParams
+            @ParameterObject SysRolePageQuery queryParams
     ) {
         Page<RolePageVO> result = roleService.getRolePage(queryParams);
         return PageResult.success(result);
@@ -52,7 +52,7 @@ public class SysRoleController {
     @PostMapping
     @PreAuthorize("@ss.hasPerm('sys:role:add')")
     @PreventDuplicateSubmit
-    public Result addRole(@Valid @RequestBody RoleForm roleForm) {
+    public Result addRole(@Valid @RequestBody SysRoleForm roleForm) {
         boolean result = roleService.saveRole(roleForm);
         return Result.judge(result);
     }
@@ -60,10 +60,10 @@ public class SysRoleController {
     @WebLog(value = "角色表单数据")
     @Operation(summary = "角色表单数据")
     @GetMapping("/{roleId}/form")
-    public Result<RoleForm> getRoleForm(
+    public Result<SysRoleForm> getRoleForm(
             @Parameter(description = "角色ID") @PathVariable Long roleId
     ) {
-        RoleForm roleForm = roleService.getRoleForm(roleId);
+        SysRoleForm roleForm = roleService.getRoleForm(roleId);
         return Result.success(roleForm);
     }
 
@@ -71,7 +71,7 @@ public class SysRoleController {
     @Operation(summary = "修改角色")
     @PutMapping(value = "/{id}")
     @PreAuthorize("@ss.hasPerm('sys:role:edit')")
-    public Result updateRole(@Valid @RequestBody RoleForm roleForm) {
+    public Result updateRole(@Valid @RequestBody SysRoleForm roleForm) {
         boolean result = roleService.saveRole(roleForm);
         return Result.judge(result);
     }

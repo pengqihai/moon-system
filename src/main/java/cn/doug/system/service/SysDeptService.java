@@ -1,10 +1,10 @@
 package cn.doug.system.service;
 
+import cn.doug.system.model.form.sys.SysDeptForm;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysDept;
-import cn.doug.system.model.form.sys.DeptForm;
-import cn.doug.system.model.query.sys.DeptQuery;
+import cn.doug.system.model.query.SysDeptQuery;
 import cn.doug.system.model.vo.sys.DeptVO;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public interface SysDeptService extends IService<SysDept> {
      *
      * @return
      */
-    List<DeptVO> listDepartments(DeptQuery queryParams);
+    List<DeptVO> listDepartments(SysDeptQuery queryParams);
 
     /**
      * 部门树形下拉选项
@@ -36,7 +36,7 @@ public interface SysDeptService extends IService<SysDept> {
      * @param formData
      * @return
      */
-    Long saveDept(DeptForm formData);
+    Long saveDept(SysDeptForm formData);
 
     /**
      * 修改部门
@@ -45,7 +45,7 @@ public interface SysDeptService extends IService<SysDept> {
      * @param formData
      * @return
      */
-    Long updateDept(Long deptId, DeptForm formData);
+    Long updateDept(Long deptId, SysDeptForm formData);
 
     /**
      * 删除部门
@@ -61,5 +61,5 @@ public interface SysDeptService extends IService<SysDept> {
      * @param deptId
      * @return
      */
-    DeptForm getDeptForm(Long deptId);
+    SysDeptForm getDeptForm(Long deptId);
 }

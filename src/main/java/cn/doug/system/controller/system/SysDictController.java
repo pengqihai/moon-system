@@ -2,13 +2,13 @@ package cn.doug.system.controller.system;
 
 import cn.doug.common.plugin.annotation.WebLog;
 import cn.doug.common.result.PageResult;
+import cn.doug.system.model.form.sys.SysDictForm;
+import cn.doug.system.model.form.sys.SysDictTypeForm;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.doug.system.common.model.Option;
 import cn.doug.common.result.Result;
-import cn.doug.system.model.form.sys.DictForm;
-import cn.doug.system.model.form.sys.DictTypeForm;
-import cn.doug.system.model.query.sys.DictPageQuery;
-import cn.doug.system.model.query.sys.DictTypePageQuery;
+import cn.doug.system.model.query.SysDictPageQuery;
+import cn.doug.system.model.query.SysDictTypePageQuery;
 import cn.doug.system.model.vo.sys.DictPageVO;
 import cn.doug.system.model.vo.sys.DictTypePageVO;
 import cn.doug.common.plugin.annotation.PreventDuplicateSubmit;
@@ -38,7 +38,7 @@ public class SysDictController {
     @Operation(summary = "字典分页列表")
     @GetMapping("/page")
     public PageResult<DictPageVO> getDictPage(
-            @ParameterObject DictPageQuery queryParams
+            @ParameterObject SysDictPageQuery queryParams
     ) {
         Page<DictPageVO> result = dictService.getDictPage(queryParams);
         return PageResult.success(result);
@@ -47,10 +47,10 @@ public class SysDictController {
     @WebLog(value = "字典数据表单数据")
     @Operation(summary = "字典数据表单数据")
     @GetMapping("/{id}/form")
-    public Result<DictForm> getDictForm(
+    public Result<SysDictForm> getDictForm(
             @Parameter(description ="字典ID") @PathVariable Long id
     ) {
-        DictForm formData = dictService.getDictForm(id);
+        SysDictForm formData = dictService.getDictForm(id);
         return Result.success(formData);
     }
 
@@ -60,7 +60,7 @@ public class SysDictController {
     @PreAuthorize("@ss.hasPerm('sys:dict:add')")
     @PreventDuplicateSubmit
     public Result saveDict(
-            @RequestBody DictForm DictForm
+            @RequestBody SysDictForm DictForm
     ) {
         boolean result = dictService.saveDict(DictForm);
         return Result.judge(result);
@@ -72,7 +72,7 @@ public class SysDictController {
     @PreAuthorize("@ss.hasPerm('sys:dict:edit')")
     public Result updateDict(
             @PathVariable Long id,
-            @RequestBody DictForm DictForm
+            @RequestBody SysDictForm DictForm
     ) {
         boolean status = dictService.updateDict(id, DictForm);
         return Result.judge(status);
@@ -106,7 +106,7 @@ public class SysDictController {
     @Operation(summary = "字典类型分页列表")
     @GetMapping("/types/page")
     public PageResult<DictTypePageVO> getDictTypePage(
-            @ParameterObject DictTypePageQuery queryParams
+            @ParameterObject SysDictTypePageQuery queryParams
     ) {
         Page<DictTypePageVO> result = dictTypeService.getDictTypePage(queryParams);
         return PageResult.success(result);
@@ -115,10 +115,10 @@ public class SysDictController {
     @WebLog(value = "字典类型表单数据")
     @Operation(summary = "字典类型表单数据")
     @GetMapping("/types/{id}/form")
-    public Result<DictTypeForm> getDictTypeForm(
+    public Result<SysDictTypeForm> getDictTypeForm(
             @Parameter(description ="字典ID") @PathVariable Long id
     ) {
-        DictTypeForm dictTypeForm = dictTypeService.getDictTypeForm(id);
+        SysDictTypeForm dictTypeForm = dictTypeService.getDictTypeForm(id);
         return Result.success(dictTypeForm);
     }
 
@@ -127,7 +127,7 @@ public class SysDictController {
     @PostMapping("/types")
     @PreAuthorize("@ss.hasPerm('sys:dict_type:add')")
     @PreventDuplicateSubmit
-    public Result saveDictType(@RequestBody DictTypeForm dictTypeForm) {
+    public Result saveDictType(@RequestBody SysDictTypeForm dictTypeForm) {
         boolean result = dictTypeService.saveDictType(dictTypeForm);
         return Result.judge(result);
     }
@@ -136,7 +136,7 @@ public class SysDictController {
     @Operation(summary = "修改字典类型")
     @PutMapping("/types/{id}")
     @PreAuthorize("@ss.hasPerm('sys:dict_type:edit')")
-    public Result updateDictType(@PathVariable Long id, @RequestBody DictTypeForm dictTypeForm) {
+    public Result updateDictType(@PathVariable Long id, @RequestBody SysDictTypeForm dictTypeForm) {
         boolean status = dictTypeService.updateDictType(id, dictTypeForm);
         return Result.judge(status);
     }

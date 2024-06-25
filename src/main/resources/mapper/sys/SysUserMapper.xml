@@ -5,7 +5,7 @@
 <mapper namespace="cn.doug.system.mapper.SysUserMapper">
 
     <!-- 用户分页列表 -->
-    <select id="listPagedUsers" resultType="cn.doug.system.model.bo.UserBO">
+    <select id="listPagedUsers" resultType="cn.doug.system.model.bo.SysUserBO">
         SELECT
             u.id,
             u.username,
@@ -49,7 +49,7 @@
     </select>
 
     <!-- 用户表单信息映射 -->
-    <resultMap id="UserFormMap" type="cn.doug.system.model.form.sys.UserForm">
+    <resultMap id="UserFormMap" type="cn.doug.system.model.form.sys.SysUserForm">
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="username" column="username" jdbcType="VARCHAR"/>
         <result property="nickname" column="nickname" jdbcType="VARCHAR"/>

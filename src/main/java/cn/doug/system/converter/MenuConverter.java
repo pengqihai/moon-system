@@ -1,7 +1,7 @@
 package cn.doug.system.converter;
 
 import cn.doug.system.model.entity.SysMenu;
-import cn.doug.system.model.form.sys.MenuForm;
+import cn.doug.system.model.form.sys.SysMenuForm;
 import cn.doug.system.model.vo.sys.MenuVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -18,9 +18,9 @@ public interface MenuConverter {
     MenuVO entity2Vo(SysMenu entity);
 
     @Mapping(target = "params", ignore = true)
-    MenuForm convertToForm(SysMenu entity);
+    SysMenuForm convertToForm(SysMenu entity);
 
     @Mapping(target = "params", ignore = true)
-    SysMenu convertToEntity(MenuForm menuForm);
+    SysMenu convertToEntity(SysMenuForm menuForm);
 
 }

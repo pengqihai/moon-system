@@ -1,6 +1,8 @@
 package cn.doug.system.service.impl.sys;
 
 import cn.doug.common.util.DateUtils;
+import cn.doug.system.model.bo.SysUserBO;
+import cn.doug.system.model.form.sys.SysUserForm;
 import cn.doug.system.service.SysMenuService;
 import cn.doug.system.service.SysRoleService;
 import cn.doug.system.service.SysUserRoleService;
@@ -16,11 +18,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.doug.system.common.constant.SystemConstants;
 import cn.doug.system.converter.UserConverter;
 import cn.doug.system.mapper.SysUserMapper;
-import cn.doug.system.model.bo.UserBO;
 import cn.doug.system.model.dto.UserAuthInfo;
 import cn.doug.system.model.entity.SysUser;
-import cn.doug.system.model.form.sys.UserForm;
-import cn.doug.system.model.query.sys.UserPageQuery;
+import cn.doug.system.model.query.SysUserPageQuery;
 import cn.doug.system.model.vo.sys.UserExportVO;
 import cn.doug.system.model.vo.sys.UserInfoVO;
 import cn.doug.system.model.vo.sys.UserPageVO;
@@ -65,18 +65,18 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      * @return {@link IPage<UserPageVO>} 用户分页列表
      */
     @Override
-    public IPage<UserPageVO> listPagedUsers(UserPageQuery queryParams) {
+    public IPage<UserPageVO> listPagedUsers(SysUserPageQuery queryParams) {
 
         // 参数构建
         int pageNum = queryParams.getPageNum();
         int pageSize = queryParams.getPageSize();
-        Page<UserBO> page = new Page<>(pageNum, pageSize);
+        Page<SysUserBO> page = new Page<>(pageNum, pageSize);
 
         // 格式化为数据库日期格式，避免日期比较使用格式化函数导致索引失效
         DateUtils.toDatabaseFormat(queryParams, "startTime", "endTime");
 
         // 查询数据
-        Page<UserBO> userPage = this.baseMapper.listPagedUsers(page, queryParams);
+        Page<SysUserBO> userPage = this.baseMapper.listPagedUsers(page, queryParams);
 
         // 实体转换
         return userConverter.bo2PageVo(userPage);
@@ -89,7 +89,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      * @return
      */
     @Override
-    public UserForm getUserFormData(Long userId) {
+    public SysUserForm getUserFormData(Long userId) {
         return this.baseMapper.getUserFormData(userId);
     }
 
@@ -100,7 +100,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      * @return
      */
     @Override
-    public boolean saveUser(UserForm userForm) {
+    public boolean saveUser(SysUserForm userForm) {
 
         String username = userForm.getUsername();
 
@@ -133,7 +133,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      */
     @Override
     @Transactional
-    public boolean updateUser(Long userId, UserForm userForm) {
+    public boolean updateUser(Long userId, SysUserForm userForm) {
 
         String username = userForm.getUsername();
 
@@ -219,7 +219,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      * @return {@link List<UserExportVO>} 导出用户列表
      */
     @Override
-    public List<UserExportVO> listExportUsers(UserPageQuery queryParams) {
+    public List<UserExportVO> listExportUsers(SysUserPageQuery queryParams) {
         return this.baseMapper.listExportUsers(queryParams);
     }
 

@@ -44,7 +44,7 @@ public class VeteranCadreVO implements Serializable {
      * 性别((1:男;2:女))
      */
     @Schema(description = "性别((1:男;2:女))")
-    private Byte gender;
+    private Integer gender;
 
     /**
      * 出生日期
@@ -86,7 +86,7 @@ public class VeteranCadreVO implements Serializable {
      * 婚姻状况(0.已婚，1.未婚，2.丧偶，3.离婚，4.再婚)
      */
     @Schema(description = "婚姻状况(0.已婚，1.未婚，2.丧偶，3.离婚，4.再婚)")
-    private Byte marryFlag;
+    private Integer marryFlag;
 
     /**
      * 文化程度(调用字典)
@@ -122,13 +122,13 @@ public class VeteranCadreVO implements Serializable {
      * 是否关工委老同志(0.否，1.是)
      */
     @Schema(description = "是否关工委老同志(0.否，1.是)")
-    private Byte isCommitte;
+    private Boolean isCommitte;
 
     /**
      * 现任关工委职务(0.主任，1.常务副主任，2.副主任，3.其他)
      */
     @Schema(description = "现任关工委职务(0.主任，1.常务副主任，2.副主任，3.其他)")
-    private Byte committeDut;
+   private Integer committeDut;
 
     /**
      * 党支部信息
@@ -140,7 +140,7 @@ public class VeteranCadreVO implements Serializable {
      * 退/离休类型(0.退休，1.离休)
      */
     @Schema(description = "退/离休类型(0.退休，1.离休)")
-    private Byte retireType;
+    private Integer retireType;
 
     /**
      * 退/离休时工作单位
@@ -176,7 +176,7 @@ public class VeteranCadreVO implements Serializable {
      * 是否为异地安置(0.否，1.是)
      */
     @Schema(description = "是否为异地安置(0.否，1.是)")
-    private Byte relocation;
+    private Boolean relocation;
 
     /**
      * 安置地
@@ -230,7 +230,7 @@ public class VeteranCadreVO implements Serializable {
      * 是否离世(0.否，1.是)
      */
     @Schema(description = "是否离世(0.否，1.是)")
-    private Byte isDie;
+    private Boolean isDie;
 
     /**
      * 离世时间
@@ -242,7 +242,7 @@ public class VeteranCadreVO implements Serializable {
      * 删除标识(0.正常，1.删除，2.彻底删除)
      */
     @Schema(description = "删除标识(0.正常，1.删除，2.彻底删除)")
-    private Byte isDelete;
+    private Integer deleted;
 
     /**
      * 创建时间

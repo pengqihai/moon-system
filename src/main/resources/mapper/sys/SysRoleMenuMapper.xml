@@ -16,7 +16,7 @@
     </select>
 
     <!-- 权限和拥有权限的角色集合的Map -->
-    <resultMap id="PremRolesMap" type="cn.doug.system.model.bo.RolePermsBO">
+    <resultMap id="PremRolesMap" type="cn.doug.system.model.bo.SysRolePermsBO">
         <result property="roleCode" column="role_code"/>
         <collection property="perms" ofType="string" javaType="java.util.Set">
             <result column="perm"/>

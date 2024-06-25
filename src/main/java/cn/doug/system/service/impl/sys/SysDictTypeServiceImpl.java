@@ -12,8 +12,8 @@ import cn.doug.system.converter.DictTypeConverter;
 import cn.doug.system.mapper.SysDictTypeMapper;
 import cn.doug.system.model.entity.SysDict;
 import cn.doug.system.model.entity.SysDictType;
-import cn.doug.system.model.form.sys.DictTypeForm;
-import cn.doug.system.model.query.sys.DictTypePageQuery;
+import cn.doug.system.model.form.sys.SysDictTypeForm;
+import cn.doug.system.model.query.SysDictTypePageQuery;
 import cn.doug.system.model.vo.sys.DictTypePageVO;
 import cn.doug.system.service.SysDictService;
 import cn.doug.system.service.SysDictTypeService;
@@ -46,7 +46,7 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
      * @return
      */
     @Override
-    public Page<DictTypePageVO> getDictTypePage(DictTypePageQuery queryParams) {
+    public Page<DictTypePageVO> getDictTypePage(SysDictTypePageQuery queryParams) {
         // 查询参数
         int pageNum = queryParams.getPageNum();
         int pageSize = queryParams.getPageSize();
@@ -80,7 +80,7 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
      * @return
      */
     @Override
-    public DictTypeForm getDictTypeForm(Long id) {
+    public SysDictTypeForm getDictTypeForm(Long id) {
         // 获取entity
         SysDictType entity = this.getOne(new LambdaQueryWrapper<SysDictType>()
                 .eq(SysDictType::getId, id)
@@ -94,7 +94,7 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
         Assert.isTrue(entity != null, "字典类型不存在");
 
         // 实体转换
-        DictTypeForm dictTypeForm = dictTypeConverter.entity2Form(entity);
+        SysDictTypeForm dictTypeForm = dictTypeConverter.entity2Form(entity);
         return dictTypeForm;
     }
 
@@ -105,7 +105,7 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
      * @return
      */
     @Override
-    public boolean saveDictType(DictTypeForm dictTypeForm) {
+    public boolean saveDictType(SysDictTypeForm dictTypeForm) {
         // 实体对象转换 form->entity
         SysDictType entity = dictTypeConverter.form2Entity(dictTypeForm);
         // 持久化
@@ -122,7 +122,7 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
      * @return
      */
     @Override
-    public boolean updateDictType(Long id, DictTypeForm dictTypeForm) {
+    public boolean updateDictType(Long id, SysDictTypeForm dictTypeForm) {
         // 获取字典类型
         SysDictType sysDictType = this.getById(id);
         Assert.isTrue(sysDictType != null, "字典类型不存在");

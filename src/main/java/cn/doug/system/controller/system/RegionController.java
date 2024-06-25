@@ -3,13 +3,13 @@ package cn.doug.system.controller.system;
 import cn.doug.common.plugin.annotation.WebLog;
 import cn.doug.common.result.Result;
 import cn.doug.system.common.model.Option;
-import cn.doug.system.model.query.digit.RegionCodeQuery;
+import cn.doug.system.model.query.RegionCodeQuery;
 import cn.doug.system.model.vo.digit.RegionVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import cn.doug.system.model.form.digit.RegionForm;
-import cn.doug.system.model.query.digit.RegionPageQuery;
+import cn.doug.system.model.query.RegionPageQuery;
 import cn.doug.system.service.RegionService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Tag(name = "08.地区表接口")
 @RestController
-@RequestMapping("/api/v1/regions")
+@RequestMapping("/api/v1/region")
 @RequiredArgsConstructor
 public class RegionController {
 

@@ -1,17 +1,18 @@
 package cn.doug.system.model.bo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Date;
 
 /**
- * user表单持久化对象
+ * 用户持久化对象
  *
  * @author pengqihai
  * @since 2022/6/10
  */
 @Data
-public class UserFormBO {
+public class SysUserBO {
 
     /**
      * 用户ID
@@ -19,12 +20,12 @@ public class UserFormBO {
     private Long id;
 
     /**
-     * 用户名
+     * 账户名
      */
     private String username;
 
     /**
-     * 用户昵称
+     * 昵称
      */
     private String nickname;
 
@@ -34,33 +35,38 @@ public class UserFormBO {
     private String mobile;
 
     /**
-     * 性别(1:男;2:女)
+     * 性别(1->男；2->女)
      */
     private Integer gender;
 
     /**
-     * 用户头像
+     * 头像URL
      */
     private String avatar;
 
     /**
-     * 用户邮箱
+     * 邮箱
      */
     private String email;
 
     /**
-     * 状态(1:启用;0:禁用)
+     * 状态: 1->启用;0->禁用
      */
     private Integer status;
 
     /**
-     * 部门ID
+     * 部门名称
      */
-    private Long deptId;
+    private String deptName;
 
     /**
-     * 角色ID集合
+     * 角色名称，多个使用英文逗号(,)分割
      */
-    private List<Long> roleIds;
+    private String roleNames;
 
+    /**
+     * 创建时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date createTime;
 }

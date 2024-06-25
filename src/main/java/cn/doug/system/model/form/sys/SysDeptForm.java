@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Schema(description = "部门表单对象")
 @Data
-public class DeptForm {
+public class SysDeptForm {
 
     @Schema(description="部门ID")
     private Long id;

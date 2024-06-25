@@ -1,6 +1,7 @@
 package cn.doug.system.service.impl.sys;
 
 import cn.doug.common.enums.StatusEnum;
+import cn.doug.system.model.form.sys.SysDeptForm;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
@@ -11,8 +12,7 @@ import cn.doug.system.common.model.Option;
 import cn.doug.system.converter.DeptConverter;
 import cn.doug.system.mapper.SysDeptMapper;
 import cn.doug.system.model.entity.SysDept;
-import cn.doug.system.model.form.sys.DeptForm;
-import cn.doug.system.model.query.sys.DeptQuery;
+import cn.doug.system.model.query.SysDeptQuery;
 import cn.doug.system.model.vo.sys.DeptVO;
 import cn.doug.system.service.SysDeptService;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +40,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
      * 获取部门列表
      */
     @Override
-    public List<DeptVO> listDepartments(DeptQuery queryParams) {
+    public List<DeptVO> listDepartments(SysDeptQuery queryParams) {
         // 查询参数
         String keywords = queryParams.getKeywords();
         Integer status = queryParams.getStatus();
@@ -132,7 +132,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
      * @return 部门ID
      */
     @Override
-    public Long saveDept(DeptForm formData) {
+    public Long saveDept(SysDeptForm formData) {
         // 校验部门名称是否存在
         String name = formData.getName();
         long count = this.count(new LambdaQueryWrapper<SysDept>()
@@ -162,7 +162,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
      * @return 部门ID
      */
     @Override
-    public Long updateDept(Long deptId, DeptForm formData) {
+    public Long updateDept(Long deptId, SysDeptForm formData) {
         // 校验部门名称是否存在
         String name = formData.getName();
         long count = this.count(new LambdaQueryWrapper<SysDept>()
@@ -237,7 +237,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
      * @return 部门表单对象
      */
     @Override
-    public DeptForm getDeptForm(Long deptId) {
+    public SysDeptForm getDeptForm(Long deptId) {
 
         SysDept entity = this.getOne(new LambdaQueryWrapper<SysDept>()
                 .eq(SysDept::getId, deptId)

@@ -1,9 +1,9 @@
 package cn.doug.system.converter;
 
+import cn.doug.system.model.form.sys.SysRoleForm;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysRole;
-import cn.doug.system.model.form.sys.RoleForm;
 import cn.doug.system.model.vo.sys.RolePageVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -31,7 +31,7 @@ public interface RoleConverter {
 
     List<Option> entities2Options(List<SysRole> roles);
 
-    SysRole form2Entity(RoleForm roleForm);
+    SysRole form2Entity(SysRoleForm roleForm);
 
-    RoleForm entity2Form(SysRole entity);
+    SysRoleForm entity2Form(SysRole entity);
 }

@@ -1,9 +1,9 @@
 package cn.doug.system.converter;
 
+import cn.doug.system.model.bo.SysUserBO;
+import cn.doug.system.model.form.sys.SysUserForm;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import cn.doug.system.model.bo.UserBO;
 import cn.doug.system.model.entity.SysUser;
-import cn.doug.system.model.form.sys.UserForm;
 import cn.doug.system.model.vo.sys.UserImportVO;
 import cn.doug.system.model.vo.sys.UserInfoVO;
 import cn.doug.system.model.vo.sys.UserPageVO;
@@ -24,14 +24,14 @@ public interface UserConverter {
     @Mappings({
             @Mapping(target = "genderLabel", expression = "java(cn.doug.common.base.IBaseEnum.getLabelByValue(bo.getGender(), cn.doug.common.enums.GenderEnum.class))")
     })
-    UserPageVO bo2PageVo(UserBO bo);
+    UserPageVO bo2PageVo(SysUserBO bo);
 
-    Page<UserPageVO> bo2PageVo(Page<UserBO> bo);
+    Page<UserPageVO> bo2PageVo(Page<SysUserBO> bo);
 
-    UserForm entity2Form(SysUser entity);
+    SysUserForm entity2Form(SysUser entity);
 
     @InheritInverseConfiguration(name = "entity2Form")
-    SysUser form2Entity(UserForm entity);
+    SysUser form2Entity(SysUserForm entity);
 
     @Mappings({
             @Mapping(target = "userId", source = "id")

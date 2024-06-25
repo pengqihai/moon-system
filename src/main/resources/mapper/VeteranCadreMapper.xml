@@ -41,14 +41,14 @@
         <result column="join_corporati" property="joinCorporati" />
         <result column="is_die" property="isDie" />
         <result column="die_time" property="dieTime" />
-        <result column="is_delete" property="isDelete" />
+        <result column="deleted" property="deleted" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, full_name, other_name, id_card, gender, birth_time, native_place, politic, phone, family_adress, live_adress, marry_flag, degree, live_flag, join_pary_time, work_time, personnel_type, is_committe, committe_dut, branch_id, retire_type, retire_gov, retire_work, retire_grade, retire_time, salary, relocation, arrange_plac, receive_gov, receive_phone, health_flag, disease_des, speciality, hobby, join_corporati, is_die, die_time, is_delete, create_time, update_time
+        id, full_name, other_name, id_card, gender, birth_time, native_place, politic, phone, family_adress, live_adress, marry_flag, degree, live_flag, join_pary_time, work_time, personnel_type, is_committe, committe_dut, branch_id, retire_type, retire_gov, retire_work, retire_grade, retire_time, salary, relocation, arrange_plac, receive_gov, receive_phone, health_flag, disease_des, speciality, hobby, join_corporati, is_die, die_time, deleted, create_time, update_time
     </sql>
 
 
@@ -62,7 +62,7 @@
             deleted = 0
             <if test='queryParams.keywords!=null and queryParams.keywords.trim() neq ""'>
                 AND (
-                    name LIKE CONCAT('%',#{queryParams.keywords},'%')
+                    full_name LIKE CONCAT('%',#{queryParams.keywords},'%')
                 )
             </if>
             <if test="queryParams.startTime != null">

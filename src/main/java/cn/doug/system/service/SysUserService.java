@@ -1,12 +1,12 @@
 package cn.doug.system.service;
 
 
+import cn.doug.system.model.form.sys.SysUserForm;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.model.dto.UserAuthInfo;
 import cn.doug.system.model.entity.SysUser;
-import cn.doug.system.model.form.sys.UserForm;
-import cn.doug.system.model.query.sys.UserPageQuery;
+import cn.doug.system.model.query.SysUserPageQuery;
 import cn.doug.system.model.vo.sys.UserExportVO;
 import cn.doug.system.model.vo.sys.UserInfoVO;
 import cn.doug.system.model.vo.sys.UserPageVO;
@@ -26,7 +26,7 @@ public interface SysUserService extends IService<SysUser> {
      *
      * @return
      */
-    IPage<UserPageVO> listPagedUsers(UserPageQuery queryParams);
+    IPage<UserPageVO> listPagedUsers(SysUserPageQuery queryParams);
 
 
     /**
@@ -35,7 +35,7 @@ public interface SysUserService extends IService<SysUser> {
      * @param userId
      * @return
      */
-    UserForm getUserFormData(Long userId);
+    SysUserForm getUserFormData(Long userId);
 
 
     /**
@@ -44,7 +44,7 @@ public interface SysUserService extends IService<SysUser> {
      * @param userForm 用户表单对象
      * @return
      */
-    boolean saveUser(UserForm userForm);
+    boolean saveUser(SysUserForm userForm);
 
     /**
      * 修改用户
@@ -53,7 +53,7 @@ public interface SysUserService extends IService<SysUser> {
      * @param userForm 用户表单对象
      * @return
      */
-    boolean updateUser(Long userId, UserForm userForm);
+    boolean updateUser(Long userId, SysUserForm userForm);
 
 
     /**
@@ -90,7 +90,7 @@ public interface SysUserService extends IService<SysUser> {
      * @param queryParams
      * @return
      */
-    List<UserExportVO> listExportUsers(UserPageQuery queryParams);
+    List<UserExportVO> listExportUsers(SysUserPageQuery queryParams);
 
 
     /**

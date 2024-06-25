@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Schema(description = "角色表单对象")
 @Data
-public class RoleForm {
+public class SysRoleForm {
 
     @Schema(description="角色ID")
     private Long id;

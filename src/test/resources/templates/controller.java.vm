@@ -61,8 +61,8 @@ public class ${table.controllerName} {
      */
     @WebLog(value = "$!{table.comment}表单数据")
     @Operation(summary = "$!{table.comment}表单数据")
-    @GetMapping("getInfo")
-    public Result<${entity}Form> getInfo(@RequestBody @Valid BaseIdForm form) {
+    @PostMapping("getInfo")
+    public Result<${entity}Form> getInfo(@RequestBody @Validated BaseIdForm form) {
         ${entity}Form formData = ${firstCharLowerCaseEntity}Service.get${entity}FormData(form.getId());
         return Result.success(formData);
     }
@@ -76,7 +76,7 @@ public class ${table.controllerName} {
     @WebLog(value = "新增$!{table.comment}")
     @Operation(summary = "新增$!{table.comment}")
     @PostMapping("/add")
-    public Result save${entity}(@RequestBody @Valid ${entity}Form formData ) {
+    public Result save${entity}(@RequestBody @Validated ${entity}Form formData) {
         boolean result = ${firstCharLowerCaseEntity}Service.save${entity}(formData);
         return Result.judge(result);
     }

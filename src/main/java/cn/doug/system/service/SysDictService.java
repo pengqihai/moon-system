@@ -1,11 +1,11 @@
 package cn.doug.system.service;
 
+import cn.doug.system.model.form.sys.SysDictForm;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysDict;
-import cn.doug.system.model.form.sys.DictForm;
-import cn.doug.system.model.query.sys.DictPageQuery;
+import cn.doug.system.model.query.SysDictPageQuery;
 import cn.doug.system.model.vo.sys.DictPageVO;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public interface SysDictService extends IService<SysDict> {
      * @param queryParams
      * @return
      */
-    Page<DictPageVO> getDictPage(DictPageQuery queryParams);
+    Page<DictPageVO> getDictPage(SysDictPageQuery queryParams);
 
     /**
      * 字典数据项表单
@@ -31,7 +31,7 @@ public interface SysDictService extends IService<SysDict> {
      * @param id 字典数据项ID
      * @return
      */
-    DictForm getDictForm(Long id);
+    SysDictForm getDictForm(Long id);
 
     /**
      * 新增字典数据项
@@ -39,7 +39,7 @@ public interface SysDictService extends IService<SysDict> {
      * @param dictForm 字典数据项表单
      * @return
      */
-    boolean saveDict(DictForm dictForm);
+    boolean saveDict(SysDictForm dictForm);
 
     /**
      * 修改字典数据项
@@ -48,7 +48,7 @@ public interface SysDictService extends IService<SysDict> {
      * @param dictForm 字典数据项表单
      * @return
      */
-    boolean updateDict(Long id, DictForm dictForm);
+    boolean updateDict(Long id, SysDictForm dictForm);
 
     /**
      * 删除字典数据项

@@ -1,6 +1,7 @@
 package cn.doug.system.controller.system;
 
 import cn.doug.common.plugin.annotation.WebLog;
+import cn.doug.system.model.form.sys.SysUserForm;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
@@ -9,8 +10,7 @@ import cn.doug.common.result.PageResult;
 import cn.doug.common.result.Result;
 import cn.doug.system.common.util.ExcelUtils;
 import cn.doug.system.model.entity.SysUser;
-import cn.doug.system.model.form.sys.UserForm;
-import cn.doug.system.model.query.sys.UserPageQuery;
+import cn.doug.system.model.query.SysUserPageQuery;
 import cn.doug.system.model.vo.sys.UserExportVO;
 import cn.doug.system.model.vo.sys.UserImportVO;
 import cn.doug.system.model.vo.sys.UserInfoVO;
@@ -55,7 +55,7 @@ public class SysUserController {
     @Operation(summary = "用户分页列表")
     @GetMapping("/page")
     public PageResult<UserPageVO> listPagedUsers(
-            @ParameterObject UserPageQuery queryParams
+            @ParameterObject SysUserPageQuery queryParams
     ) {
         IPage<UserPageVO> result = userService.listPagedUsers(queryParams);
         return PageResult.success(result);
@@ -67,7 +67,7 @@ public class SysUserController {
     @PreAuthorize("@ss.hasPerm('sys:user:add')")
     @PreventDuplicateSubmit
     public Result saveUser(
-            @RequestBody @Valid UserForm userForm
+            @RequestBody @Valid SysUserForm userForm
     ) {
         boolean result = userService.saveUser(userForm);
         return Result.judge(result);
@@ -76,10 +76,10 @@ public class SysUserController {
     @WebLog(value = "用户表单数据")
     @Operation(summary = "用户表单数据")
     @GetMapping("/{userId}/form")
-    public Result<UserForm> getUserForm(
+    public Result<SysUserForm> getUserForm(
             @Parameter(description = "用户ID") @PathVariable Long userId
     ) {
-        UserForm formData = userService.getUserFormData(userId);
+        SysUserForm formData = userService.getUserFormData(userId);
         return Result.success(formData);
     }
 
@@ -89,7 +89,7 @@ public class SysUserController {
     @PreAuthorize("@ss.hasPerm('sys:user:edit')")
     public Result updateUser(
             @Parameter(description = "用户ID") @PathVariable Long userId,
-            @RequestBody @Validated UserForm userForm) {
+            @RequestBody @Validated SysUserForm userForm) {
         boolean result = userService.updateUser(userId, userForm);
         return Result.judge(result);
     }
@@ -168,7 +168,7 @@ public class SysUserController {
     @WebLog(value = "导出用户")
     @Operation(summary = "导出用户")
     @GetMapping("/export")
-    public void exportUsers(UserPageQuery queryParams, HttpServletResponse response) throws IOException {
+    public void exportUsers(SysUserPageQuery queryParams, HttpServletResponse response) throws IOException {
         String fileName = "用户列表.xlsx";
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8"));

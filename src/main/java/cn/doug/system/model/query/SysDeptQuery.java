@@ -1,22 +1,22 @@
-package cn.doug.system.model.query.sys;
+package cn.doug.system.model.query;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
- * 菜单查询对象
+ * 部门查询对象
  *
  * @author pengqihai
- * @since 2022/10/28
+ * @since 2022/6/11
  */
 @Schema(description ="部门分页查询对象")
 @Data
-public class MenuQuery {
+public class SysDeptQuery {
 
-    @Schema(description="关键字(菜单名称)")
+    @Schema(description="关键字(部门名称)")
     private String keywords;
 
-    @Schema(description="状态(1->显示；0->隐藏)")
+    @Schema(description="状态(1->正常；0->禁用)")
     private Integer status;
 
 }

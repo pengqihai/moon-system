@@ -3,8 +3,8 @@ package cn.doug.system.controller.system;
 import cn.doug.common.plugin.annotation.WebLog;
 import cn.doug.system.common.model.Option;
 import cn.doug.common.result.Result;
-import cn.doug.system.model.form.sys.MenuForm;
-import cn.doug.system.model.query.sys.MenuQuery;
+import cn.doug.system.model.form.sys.SysMenuForm;
+import cn.doug.system.model.query.SysMenuQuery;
 import cn.doug.system.model.vo.sys.MenuVO;
 import cn.doug.system.model.vo.sys.RouteVO;
 import cn.doug.common.plugin.annotation.PreventDuplicateSubmit;
@@ -38,7 +38,7 @@ public class SysMenuController {
     @WebLog(value = "菜单列表")
     @Operation(summary = "菜单列表")
     @GetMapping
-    public Result<List<MenuVO>> listMenus( @ParameterObject MenuQuery queryParams) {
+    public Result<List<MenuVO>> listMenus( @ParameterObject SysMenuQuery queryParams) {
         List<MenuVO> menuList = menuService.listMenus(queryParams);
         return Result.success(menuList);
     }
@@ -62,10 +62,10 @@ public class SysMenuController {
     @WebLog(value = "菜单表单数据")
     @Operation(summary = "菜单表单数据")
     @GetMapping("/{id}/form")
-    public Result<MenuForm> getMenuForm(
+    public Result<SysMenuForm> getMenuForm(
             @Parameter(description =  "菜单ID") @PathVariable Long id
     ) {
-        MenuForm menu = menuService.getMenuForm(id);
+        SysMenuForm menu = menuService.getMenuForm(id);
         return Result.success(menu);
     }
 
@@ -74,7 +74,7 @@ public class SysMenuController {
     @PostMapping
     @PreAuthorize("@ss.hasPerm('sys:menu:add')")
     @PreventDuplicateSubmit
-    public Result addMenu(@RequestBody MenuForm menuForm) {
+    public Result addMenu(@RequestBody SysMenuForm menuForm) {
         boolean result = menuService.saveMenu(menuForm);
         return Result.judge(result);
     }
@@ -84,7 +84,7 @@ public class SysMenuController {
     @PutMapping(value = "/{id}")
     @PreAuthorize("@ss.hasPerm('sys:menu:edit')")
     public Result updateMenu(
-            @RequestBody MenuForm menuForm
+            @RequestBody SysMenuForm menuForm
     ) {
         boolean result = menuService.saveMenu(menuForm);
         return Result.judge(result);

@@ -3,11 +3,11 @@ package cn.doug.system.service;
 import cn.doug.common.result.Result;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysRegion;
-import cn.doug.system.model.query.digit.RegionCodeQuery;
+import cn.doug.system.model.query.RegionCodeQuery;
 import cn.doug.system.model.vo.digit.RegionVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.model.form.digit.RegionForm;
-import cn.doug.system.model.query.digit.RegionPageQuery;
+import cn.doug.system.model.query.RegionPageQuery;
 
 import java.util.List;
 

@@ -2,6 +2,8 @@ package cn.doug.system.service.impl.sys;
 
 import cn.doug.common.enums.StatusEnum;
 import cn.doug.system.common.model.KeyValue;
+import cn.doug.system.model.form.sys.SysMenuForm;
+import cn.doug.system.model.query.SysMenuQuery;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ObjectUtil;
@@ -17,8 +19,6 @@ import cn.doug.system.converter.MenuConverter;
 import cn.doug.system.mapper.SysMenuMapper;
 import cn.doug.system.model.bo.RouteBO;
 import cn.doug.system.model.entity.SysMenu;
-import cn.doug.system.model.form.sys.MenuForm;
-import cn.doug.system.model.query.sys.MenuQuery;
 import cn.doug.system.model.vo.sys.MenuVO;
 import cn.doug.system.model.vo.sys.RouteVO;
 import cn.doug.system.service.SysMenuService;
@@ -55,10 +55,10 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     /**
      * 菜单列表
      *
-     * @param queryParams {@link MenuQuery}
+     * @param queryParams {@link SysMenuQuery}
      */
     @Override
-    public List<MenuVO> listMenus(MenuQuery queryParams) {
+    public List<MenuVO> listMenus(SysMenuQuery queryParams) {
         List<SysMenu> menus = this.list(new LambdaQueryWrapper<SysMenu>()
                 .like(StrUtil.isNotBlank(queryParams.getKeywords()), SysMenu::getName, queryParams.getKeywords())
                 .orderByAsc(SysMenu::getSort)
@@ -215,7 +215,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      */
     @Override
     @CacheEvict(cacheNames = "menu", key = "'routes'")
-    public boolean saveMenu(MenuForm menuForm) {
+    public boolean saveMenu(SysMenuForm menuForm) {
 
         MenuTypeEnum menuType = menuForm.getType();
 
@@ -303,10 +303,10 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      * @return 菜单表单数据
      */
     @Override
-    public MenuForm getMenuForm(Long id) {
+    public SysMenuForm getMenuForm(Long id) {
         SysMenu entity = this.getById(id);
         Assert.isTrue(entity != null, "菜单不存在");
-        MenuForm formData = menuConverter.convertToForm(entity);
+        SysMenuForm formData = menuConverter.convertToForm(entity);
 
         // 路由参数字符串 {"id":"1","name":"张三"} 转换为 [{key:"id", value:"1"}, {key:"name", value:"张三"}]
         String params = entity.getParams();
@@ -321,7 +321,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
                         .map(entry -> new KeyValue(entry.getKey(), entry.getValue()))
                         .toList();
 
-                // 将转换后的列表存入 MenuForm
+                // 将转换后的列表存入 SysMenuForm
                 formData.setParams(transformedList);
             } catch (Exception e) {
                 throw new RuntimeException("解析参数失败", e);

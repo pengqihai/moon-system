@@ -1,12 +1,12 @@
 package cn.doug.system.service;
 
 
+import cn.doug.system.model.form.sys.SysRoleForm;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysRole;
-import cn.doug.system.model.form.sys.RoleForm;
-import cn.doug.system.model.query.sys.RolePageQuery;
+import cn.doug.system.model.query.SysRolePageQuery;
 import cn.doug.system.model.vo.sys.RolePageVO;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public interface SysRoleService extends IService<SysRole> {
      * @param queryParams
      * @return
      */
-    Page<RolePageVO> getRolePage(RolePageQuery queryParams);
+    Page<RolePageVO> getRolePage(SysRolePageQuery queryParams);
 
 
     /**
@@ -41,15 +41,15 @@ public interface SysRoleService extends IService<SysRole> {
      * @param roleForm
      * @return
      */
-    boolean saveRole(RoleForm roleForm);
+    boolean saveRole(SysRoleForm roleForm);
 
     /**
      * 获取角色表单数据
      *
      * @param roleId 角色ID
-     * @return  {@link RoleForm} – 角色表单数据
+     * @return  {@link SysRoleForm} – 角色表单数据
      */
-    RoleForm getRoleForm(Long roleId);
+    SysRoleForm getRoleForm(Long roleId);
 
     /**
      * 修改角色状态
