@@ -2,8 +2,10 @@ package cn.doug.system.service.impl;
 
 import cn.doug.system.model.entity.VeteranCadreEntity;
 import cn.doug.system.mapper.VeteranCadreMapper;
+import cn.doug.system.model.vo.digit.VeteranCadreExportVO;
 import cn.doug.system.service.VeteranCadreService;
 import cn.hutool.core.collection.CollUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import cn.doug.common.base.BaseIdForm;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -113,6 +116,23 @@ public class VeteranCadreServiceImpl extends ServiceImpl<VeteranCadreMapper, Vet
         // 逻辑删除
         return this.removeByIds(ids);
     }
-    
 
+    /**
+     * 导出老干部工作人员与离退休党员
+     * @throws IOException
+     */
+    @Override
+    public List<VeteranCadreExportVO> listExportVeteranCadres(VeteranCadrePageQuery queryParams) {
+        int pageNum = queryParams.getPageNum();
+        int pageSize = queryParams.getPageSize();
+        Page<VeteranCadreEntity> page = new Page<>(pageNum, pageSize);
+        LambdaQueryWrapper<VeteranCadreEntity> wrapper = new LambdaQueryWrapper<>();
+        String keywords = queryParams.getKeywords();
+        if (StrUtil.isNotEmpty(keywords)) {
+            wrapper.like(VeteranCadreEntity::getFullName,keywords);
+        }
+        List<VeteranCadreEntity> records = this.page(page, wrapper).getRecords();
+        List<VeteranCadreExportVO> veteranCadreExportVOS = veteranCadreEntityConverter.entity2ExportVOList(records);
+        return veteranCadreExportVOS;
+    }
 }

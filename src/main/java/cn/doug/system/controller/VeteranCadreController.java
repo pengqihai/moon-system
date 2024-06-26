@@ -3,6 +3,7 @@ package cn.doug.system.controller;
 import cn.doug.common.plugin.annotation.WebLog;
 import cn.doug.system.common.util.ExcelUtils;
 import cn.doug.system.model.query.SysUserPageQuery;
+import cn.doug.system.model.vo.digit.VeteranCadreExportVO;
 import cn.doug.system.model.vo.sys.UserExportVO;
 import cn.doug.system.model.vo.sys.UserImportVO;
 import cn.doug.system.plugin.easyexcel.UserImportListener;
@@ -120,6 +121,11 @@ public class VeteranCadreController {
     }
 
 
+    /**
+     * 老干部工作人员与离退休党员导入模板下载
+     * @param response
+     * @throws IOException
+     */
     @WebLog(value = "老干部工作人员与离退休党员导入模板下载")
     @Operation(summary = "用户导入模板下载")
     @GetMapping("/template")
@@ -137,6 +143,10 @@ public class VeteranCadreController {
         excelWriter.finish();
     }
 
+    /**
+     * 导入老干部工作人员与离退休党员
+     * @throws IOException
+     */
     @WebLog(value = "导入老干部工作人员与离退休党员")
     @Operation(summary = "导入老干部工作人员与离退休党员")
     @PostMapping("/import")
@@ -146,16 +156,21 @@ public class VeteranCadreController {
         return Result.success(msg);
     }
 
+    /**
+     * 导出老干部工作人员与离退休党员
+     * @param response
+     * @throws IOException
+     */
     @WebLog(value = "导出老干部工作人员与离退休党员")
     @Operation(summary = "导出老干部工作人员与离退休党员")
     @GetMapping("/export")
-    public void exportUsers(SysUserPageQuery queryParams, HttpServletResponse response) throws IOException {
+    public void exportUsers(VeteranCadrePageQuery queryParams, HttpServletResponse response) throws IOException {
         String fileName = "老干部工作人员与离退休党员列表.xlsx";
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8"));
 
-        List<UserExportVO> exportUserList = veteranCadreService.listExportUsers(queryParams);
-        EasyExcel.write(response.getOutputStream(), UserExportVO.class).sheet("用户列表")
+        List<VeteranCadreExportVO> exportUserList = veteranCadreService.listExportVeteranCadres(queryParams);
+        EasyExcel.write(response.getOutputStream(), VeteranCadreExportVO.class).sheet("老干部工作人员与离退休党员列表")
                 .doWrite(exportUserList);
     }
 }

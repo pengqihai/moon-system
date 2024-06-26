@@ -1,12 +1,18 @@
 package cn.doug.system.service;
 
 import cn.doug.system.model.entity.VeteranCadreEntity;
+import cn.doug.system.model.query.SysUserPageQuery;
+import cn.doug.system.model.vo.digit.VeteranCadreExportVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.model.form.VeteranCadreForm;
 import cn.doug.system.model.query.VeteranCadrePageQuery;
 import cn.doug.system.model.vo.VeteranCadrePageVO;
 import cn.doug.common.base.BaseIdForm;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+
+import java.io.IOException;
+import java.util.List;
+
 /**
  * 老干部工作人员与离退休党员	 服务类
  *
@@ -59,4 +65,10 @@ public interface VeteranCadreService extends IService<VeteranCadreEntity> {
      */
     boolean deleteVeteranCadres(BaseIdForm form);
 
+
+    /**
+     * 导出老干部工作人员与离退休党员
+     * @throws IOException
+     */
+    List<VeteranCadreExportVO> listExportVeteranCadres(VeteranCadrePageQuery queryParams);
 }
