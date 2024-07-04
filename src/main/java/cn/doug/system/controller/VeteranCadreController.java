@@ -2,14 +2,11 @@ package cn.doug.system.controller;
 
 import cn.doug.common.plugin.annotation.WebLog;
 import cn.doug.system.common.util.ExcelUtils;
-import cn.doug.system.model.query.SysUserPageQuery;
 import cn.doug.system.model.vo.digit.VeteranCadreExportVO;
-import cn.doug.system.model.vo.sys.UserExportVO;
 import cn.doug.system.model.vo.sys.UserImportVO;
-import cn.doug.system.plugin.easyexcel.UserImportListener;
+import cn.doug.system.plugin.easyexcel.VeteranCadreListener;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
-import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -151,8 +148,8 @@ public class VeteranCadreController {
     @Operation(summary = "导入老干部工作人员与离退休党员")
     @PostMapping("/import")
     public Result importUsers(MultipartFile file) throws IOException {
-        UserImportListener listener = new UserImportListener(deptId);
-        String msg = ExcelUtils.importExcel(file.getInputStream(), UserImportVO.class, listener);
+        VeteranCadreListener veteranCadreListener = new VeteranCadreListener();
+        String msg = ExcelUtils.importExcel(file.getInputStream(), UserImportVO.class, veteranCadreListener);
         return Result.success(msg);
     }
 

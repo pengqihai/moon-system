@@ -1,6 +1,7 @@
 package cn.doug.system.converter;
 
 import cn.doug.system.model.vo.digit.VeteranCadreExportVO;
+import cn.doug.system.model.vo.digit.VeteranCadreImportVO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -32,4 +33,6 @@ public interface VeteranCadreConverter{
     VeteranCadreEntity form2Entity(VeteranCadreForm entity);
 
     List<VeteranCadreExportVO> entity2ExportVOList(List<VeteranCadreEntity> entityList);
+
+    VeteranCadreEntity importVo2Entity(VeteranCadreImportVO vo);
 }
