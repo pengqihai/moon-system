@@ -41,7 +41,7 @@ public class VeteranCadreExportVO {
      * 性别((1:男;2:女))
      */
     @ExcelProperty(value = "性别")
-    private Integer gender;
+    private String gender;
 
     /**
      * 出生日期
@@ -83,7 +83,7 @@ public class VeteranCadreExportVO {
      * 婚姻状况(0.已婚，1.未婚，2.丧偶，3.离婚，4.再婚)
      */
     @ExcelProperty(value = "婚姻状况")
-    private Integer marryFlag;
+    private String marryFlag;
 
     /**
      * 文化程度(调用字典)
@@ -113,19 +113,19 @@ public class VeteranCadreExportVO {
      * 人员类型(0.干部，1.其他)
      */
     @ExcelProperty(value = "人员类型")
-    private Integer personnelType;
+    private String personnelType;
 
     /**
      * 是否关工委老同志(0.否，1.是)
      */
     @ExcelProperty(value = "是否关工委老同志")
-    private Boolean isCommitte;
+    private String isCommitte;
 
     /**
      * 现任关工委职务(0.主任，1.常务副主任，2.副主任，3.其他)
      */
     @ExcelProperty(value = "现任关工委职务")
-    private Integer committeDut;
+    private String committeDut;
 
     /**
      * 党支部信息
@@ -173,7 +173,7 @@ public class VeteranCadreExportVO {
      * 是否为异地安置(0.否，1.是)
      */
     @ExcelProperty(value = "是否为异地安置")
-    private Boolean relocation;
+    private String relocation;
 
     /**
      * 安置地
@@ -227,7 +227,7 @@ public class VeteranCadreExportVO {
      * 是否离世(0.否，1.是)
      */
     @ExcelProperty(value = "是否离世")
-    private Boolean isDie;
+    private String isDie;
 
     /**
      * 离世时间

@@ -1,4 +1,4 @@
-package cn.doug.system.model.vo;
+package cn.doug.system.model.vo.digit;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
@@ -45,7 +45,7 @@ public class VeteranCadrePageVO implements Serializable {
      * 性别((1:男;2:女))
      */
     @Schema(description = "性别((1:男;2:女))")
-    private Integer gender;
+    private String gender;
 
     /**
      * 出生日期
@@ -87,7 +87,7 @@ public class VeteranCadrePageVO implements Serializable {
      * 婚姻状况(0.已婚，1.未婚，2.丧偶，3.离婚，4.再婚)
      */
     @Schema(description = "婚姻状况(0.已婚，1.未婚，2.丧偶，3.离婚，4.再婚)")
-    private Integer marryFlag;
+    private String marryFlag;
 
     /**
      * 文化程度(调用字典)
@@ -117,7 +117,7 @@ public class VeteranCadrePageVO implements Serializable {
      * 人员类型(0.干部，1.其他)
      */
     @Schema(description = "人员类型(0.干部，1.其他)")
-    private Integer personnelType;
+    private String personnelType;
 
     /**
      * 是否关工委老同志(0.否，1.是)
@@ -129,7 +129,7 @@ public class VeteranCadrePageVO implements Serializable {
      * 现任关工委职务(0.主任，1.常务副主任，2.副主任，3.其他)
      */
     @Schema(description = "现任关工委职务(0.主任，1.常务副主任，2.副主任，3.其他)")
-   private Integer committeDut;
+   private String committeDut;
 
     /**
      * 党支部信息
@@ -141,7 +141,7 @@ public class VeteranCadrePageVO implements Serializable {
      * 退/离休类型(0.退休，1.离休)
      */
     @Schema(description = "退/离休类型(0.退休，1.离休)")
-    private Integer retireType;
+    private String retireType;
 
     /**
      * 退/离休时工作单位

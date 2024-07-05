@@ -3,6 +3,7 @@ package cn.doug.system.service.impl;
 import cn.doug.system.model.entity.VeteranCadreEntity;
 import cn.doug.system.mapper.VeteranCadreMapper;
 import cn.doug.system.model.vo.digit.VeteranCadreExportVO;
+import cn.doug.system.model.vo.digit.VeteranCadrePageVO;
 import cn.doug.system.service.VeteranCadreService;
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -13,7 +14,6 @@ import cn.doug.common.util.DateUtils;
 import cn.doug.system.model.form.VeteranCadreForm;
 import cn.doug.system.model.query.VeteranCadrePageQuery;
 import cn.doug.system.model.bo.VeteranCadreBO;
-import cn.doug.system.model.vo.VeteranCadrePageVO;
 import cn.doug.system.converter.VeteranCadreConverter;
 import cn.doug.common.base.BaseIdForm;
 
@@ -61,7 +61,7 @@ public class VeteranCadreServiceImpl extends ServiceImpl<VeteranCadreMapper, Vet
         Page<VeteranCadreBO> boPage = this.baseMapper.listPagedVeteranCadres(page, queryParams);
     
         // 实体转换
-        return veteranCadreEntityConverter.bo2PageVo(boPage);
+        return veteranCadreEntityConverter.boPageToVoPage(boPage);
     }
     
     /**

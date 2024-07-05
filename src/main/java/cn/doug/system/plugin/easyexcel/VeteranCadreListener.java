@@ -2,19 +2,11 @@ package cn.doug.system.plugin.easyexcel;
 
 import cn.doug.common.base.IBaseEnum;
 import cn.doug.common.enums.GenderEnum;
-import cn.doug.common.enums.StatusEnum;
-import cn.doug.system.common.constant.SystemConstants;
 import cn.doug.system.common.enums.MarryEnum;
 import cn.doug.system.converter.VeteranCadreConverter;
-import cn.doug.system.model.entity.SysRole;
-import cn.doug.system.model.entity.SysUser;
-import cn.doug.system.model.entity.SysUserRole;
 import cn.doug.system.model.entity.VeteranCadreEntity;
-import cn.doug.system.model.vo.VeteranCadreVO;
 import cn.doug.system.model.vo.digit.VeteranCadreImportVO;
-import cn.doug.system.model.vo.sys.UserImportVO;
 import cn.doug.system.service.VeteranCadreService;
-import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
@@ -23,8 +15,6 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.extern.log4j.Log4j2;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @Author: pengqihai

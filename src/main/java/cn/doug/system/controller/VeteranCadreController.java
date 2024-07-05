@@ -3,6 +3,7 @@ package cn.doug.system.controller;
 import cn.doug.common.plugin.annotation.WebLog;
 import cn.doug.system.common.util.ExcelUtils;
 import cn.doug.system.model.vo.digit.VeteranCadreExportVO;
+import cn.doug.system.model.vo.digit.VeteranCadrePageVO;
 import cn.doug.system.model.vo.sys.UserImportVO;
 import cn.doug.system.plugin.easyexcel.VeteranCadreListener;
 import com.alibaba.excel.EasyExcel;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.doug.common.base.BaseIdForm;
 import cn.doug.system.model.form.VeteranCadreForm;
 import cn.doug.system.model.query.VeteranCadrePageQuery;
-import cn.doug.system.model.vo.VeteranCadrePageVO;
 import cn.doug.system.service.VeteranCadreService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import cn.doug.common.result.PageResult;
@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 
@@ -129,7 +130,7 @@ public class VeteranCadreController {
     public void downloadTemplate(HttpServletResponse response) throws IOException {
         String fileName = "老干部工作人员与离退休党员导入模板.xlsx";
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8"));
+        response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, StandardCharsets.UTF_8));
 
         String fileClassPath = "excel-templates" + File.separator + fileName;
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(fileClassPath);
@@ -164,7 +165,7 @@ public class VeteranCadreController {
     public void exportUsers(VeteranCadrePageQuery queryParams, HttpServletResponse response) throws IOException {
         String fileName = "老干部工作人员与离退休党员列表.xlsx";
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8"));
+        response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, StandardCharsets.UTF_8));
 
         List<VeteranCadreExportVO> exportUserList = veteranCadreService.listExportVeteranCadres(queryParams);
         EasyExcel.write(response.getOutputStream(), VeteranCadreExportVO.class).sheet("老干部工作人员与离退休党员列表")

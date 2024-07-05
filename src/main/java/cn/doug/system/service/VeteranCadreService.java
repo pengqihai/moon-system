@@ -1,14 +1,13 @@
 package cn.doug.system.service;
 
 import cn.doug.system.model.entity.VeteranCadreEntity;
-import cn.doug.system.model.query.SysUserPageQuery;
 import cn.doug.system.model.vo.digit.VeteranCadreExportVO;
+import cn.doug.system.model.vo.digit.VeteranCadrePageVO;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.model.form.VeteranCadreForm;
 import cn.doug.system.model.query.VeteranCadrePageQuery;
-import cn.doug.system.model.vo.VeteranCadrePageVO;
 import cn.doug.common.base.BaseIdForm;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import java.io.IOException;
 import java.util.List;
