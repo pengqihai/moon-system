@@ -8,7 +8,7 @@ package cn.doug.system.mapper;
  */
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import cn.doug.system.model.bo.RouteBO;
+import cn.doug.system.model.bo.SysRouteBO;
 import cn.doug.system.model.entity.SysMenu;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,7 +18,7 @@ import java.util.Set;
 @Mapper
 public interface SysMenuMapper extends BaseMapper<SysMenu> {
 
-    List<RouteBO> listRoutes();
+    List<SysRouteBO> listRoutes();
 
     /**
      * 获取角色权限集合

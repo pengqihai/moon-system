@@ -1,5 +1,6 @@
 package cn.doug.system.service.impl.sys;
 
+import cn.doug.system.model.vo.SysDictTypePageVO;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
@@ -8,13 +9,12 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.doug.system.common.model.Option;
-import cn.doug.system.converter.DictTypeConverter;
+import cn.doug.system.converter.SysDictTypeConverter;
 import cn.doug.system.mapper.SysDictTypeMapper;
 import cn.doug.system.model.entity.SysDict;
 import cn.doug.system.model.entity.SysDictType;
-import cn.doug.system.model.form.sys.SysDictTypeForm;
+import cn.doug.system.model.form.SysDictTypeForm;
 import cn.doug.system.model.query.SysDictTypePageQuery;
-import cn.doug.system.model.vo.sys.DictTypePageVO;
 import cn.doug.system.service.SysDictService;
 import cn.doug.system.service.SysDictTypeService;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +37,7 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
 
 
     private final SysDictService dictItemService;
-    private final DictTypeConverter dictTypeConverter;
+    private final SysDictTypeConverter dictTypeConverter;
 
     /**
      * 字典分页列表
@@ -46,7 +46,7 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
      * @return
      */
     @Override
-    public Page<DictTypePageVO> getDictTypePage(SysDictTypePageQuery queryParams) {
+    public Page<SysDictTypePageVO> getDictTypePage(SysDictTypePageQuery queryParams) {
         // 查询参数
         int pageNum = queryParams.getPageNum();
         int pageSize = queryParams.getPageSize();
@@ -69,7 +69,7 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
         );
 
         // 实体转换
-        Page<DictTypePageVO> pageResult = dictTypeConverter.entity2Page(dictTypePage);
+        Page<SysDictTypePageVO> pageResult = dictTypeConverter.entity2Page(dictTypePage);
         return pageResult;
     }
 

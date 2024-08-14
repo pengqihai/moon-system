@@ -5,7 +5,7 @@ import cn.doug.common.enums.GenderEnum;
 import cn.doug.system.common.enums.MarryEnum;
 import cn.doug.system.converter.VeteranCadreConverter;
 import cn.doug.system.model.entity.VeteranCadreEntity;
-import cn.doug.system.model.vo.digit.VeteranCadreImportVO;
+import cn.doug.system.model.vo.VeteranCadreImportVO;
 import cn.doug.system.service.VeteranCadreService;
 import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.StrUtil;

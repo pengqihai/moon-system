@@ -1,7 +1,8 @@
 package cn.doug.system.service.impl.sys;
 
 import cn.doug.common.enums.StatusEnum;
-import cn.doug.system.model.form.sys.SysDeptForm;
+import cn.doug.system.model.form.SysDeptForm;
+import cn.doug.system.model.vo.SysDeptVO;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
@@ -9,11 +10,10 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.doug.system.common.constant.SystemConstants;
 import cn.doug.system.common.model.Option;
-import cn.doug.system.converter.DeptConverter;
+import cn.doug.system.converter.SysDeptConverter;
 import cn.doug.system.mapper.SysDeptMapper;
 import cn.doug.system.model.entity.SysDept;
 import cn.doug.system.model.query.SysDeptQuery;
-import cn.doug.system.model.vo.sys.DeptVO;
 import cn.doug.system.service.SysDeptService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,13 +34,13 @@ import java.util.stream.Collectors;
 public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> implements SysDeptService {
 
 
-    private final DeptConverter deptConverter;
+    private final SysDeptConverter deptConverter;
 
     /**
      * 获取部门列表
      */
     @Override
-    public List<DeptVO> listDepartments(SysDeptQuery queryParams) {
+    public List<SysDeptVO> listDepartments(SysDeptQuery queryParams) {
         // 查询参数
         String keywords = queryParams.getKeywords();
         Integer status = queryParams.getStatus();
@@ -81,12 +81,12 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
      * @param deptList 部门列表
      * @return 部门树形列表
      */
-    public List<DeptVO> recurDeptList(Long parentId, List<SysDept> deptList) {
+    public List<SysDeptVO> recurDeptList(Long parentId, List<SysDept> deptList) {
         return deptList.stream()
                 .filter(dept -> dept.getParentId().equals(parentId))
                 .map(dept -> {
-                    DeptVO deptVO = deptConverter.entity2Vo(dept);
-                    List<DeptVO> children = recurDeptList(dept.getId(), deptList);
+                    SysDeptVO deptVO = deptConverter.entity2Vo(dept);
+                    List<SysDeptVO> children = recurDeptList(dept.getId(), deptList);
                     deptVO.setChildren(children);
                     return deptVO;
                 }).collect(Collectors.toList());

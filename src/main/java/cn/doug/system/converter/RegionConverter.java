@@ -1,13 +1,13 @@
 package cn.doug.system.converter;
 
 import cn.doug.system.model.entity.SysRegion;
-import cn.doug.system.model.vo.digit.RegionVO;
+import cn.doug.system.model.vo.RegionVO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
-import cn.doug.system.model.vo.digit.RegionPageVO;
-import cn.doug.system.model.form.digit.RegionForm;
+import cn.doug.system.model.vo.RegionPageVO;
+import cn.doug.system.model.form.RegionForm;
 import cn.doug.system.model.bo.RegionBO;
 
 import java.util.List;

@@ -2,9 +2,9 @@ package cn.doug.system.controller;
 
 import cn.doug.common.plugin.annotation.WebLog;
 import cn.doug.system.common.util.ExcelUtils;
-import cn.doug.system.model.vo.digit.VeteranCadreExportVO;
-import cn.doug.system.model.vo.digit.VeteranCadrePageVO;
-import cn.doug.system.model.vo.sys.UserImportVO;
+import cn.doug.system.model.vo.VeteranCadreExportVO;
+import cn.doug.system.model.vo.VeteranCadrePageVO;
+import cn.doug.system.model.vo.SysUserImportVO;
 import cn.doug.system.plugin.easyexcel.VeteranCadreListener;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
@@ -150,7 +150,7 @@ public class VeteranCadreController {
     @PostMapping("/import")
     public Result importUsers(MultipartFile file) throws IOException {
         VeteranCadreListener veteranCadreListener = new VeteranCadreListener();
-        String msg = ExcelUtils.importExcel(file.getInputStream(), UserImportVO.class, veteranCadreListener);
+        String msg = ExcelUtils.importExcel(file.getInputStream(), SysUserImportVO.class, veteranCadreListener);
         return Result.success(msg);
     }
 

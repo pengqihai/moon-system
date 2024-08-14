@@ -1,6 +1,6 @@
 package cn.doug.system.service.impl.sys;
 
-import cn.doug.system.model.form.sys.SysDictForm;
+import cn.doug.system.model.form.SysDictForm;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
@@ -8,11 +8,11 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.doug.system.common.model.Option;
-import cn.doug.system.converter.DictConverter;
+import cn.doug.system.converter.SysDictConverter;
 import cn.doug.system.mapper.SysDictMapper;
 import cn.doug.system.model.entity.SysDict;
 import cn.doug.system.model.query.SysDictPageQuery;
-import cn.doug.system.model.vo.sys.DictPageVO;
+import cn.doug.system.model.vo.SysDictPageVO;
 import cn.doug.system.service.SysDictService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> implements SysDictService {
 
-    private final DictConverter dictConverter;
+    private final SysDictConverter dictConverter;
 
     /**
      * 字典数据项分页列表
@@ -40,7 +40,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
      * @return
      */
     @Override
-    public Page<DictPageVO> getDictPage(SysDictPageQuery queryParams) {
+    public Page<SysDictPageVO> getDictPage(SysDictPageQuery queryParams) {
         // 查询参数
         int pageNum = queryParams.getPageNum();
         int pageSize = queryParams.getPageSize();
@@ -57,7 +57,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
         );
 
         // 实体转换
-        Page<DictPageVO> pageResult = dictConverter.entity2Page(dictItemPage);
+        Page<SysDictPageVO> pageResult = dictConverter.entity2Page(dictItemPage);
         return pageResult;
     }
 

@@ -1,13 +1,13 @@
 package cn.doug.system.controller.system;
 
 import cn.doug.common.plugin.annotation.WebLog;
+import cn.doug.system.model.vo.SysRolePageVO;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.doug.system.common.model.Option;
 import cn.doug.common.result.PageResult;
 import cn.doug.common.result.Result;
-import cn.doug.system.model.form.sys.SysRoleForm;
+import cn.doug.system.model.form.SysRoleForm;
 import cn.doug.system.model.query.SysRolePageQuery;
-import cn.doug.system.model.vo.sys.RolePageVO;
 import cn.doug.common.plugin.annotation.PreventDuplicateSubmit;
 import cn.doug.system.service.SysRoleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,10 +32,10 @@ public class SysRoleController {
     @WebLog(value = "角色分页列表")
     @Operation(summary = "角色分页列表")
     @GetMapping("/page")
-    public PageResult<RolePageVO> getRolePage(
+    public PageResult<SysRolePageVO> getRolePage(
             @ParameterObject SysRolePageQuery queryParams
     ) {
-        Page<RolePageVO> result = roleService.getRolePage(queryParams);
+        Page<SysRolePageVO> result = roleService.getRolePage(queryParams);
         return PageResult.success(result);
     }
 

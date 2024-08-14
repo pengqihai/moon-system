@@ -2,8 +2,8 @@ package cn.doug.system.service.impl;
 
 import cn.doug.system.model.entity.VeteranCadreEntity;
 import cn.doug.system.mapper.VeteranCadreMapper;
-import cn.doug.system.model.vo.digit.VeteranCadreExportVO;
-import cn.doug.system.model.vo.digit.VeteranCadrePageVO;
+import cn.doug.system.model.vo.VeteranCadreExportVO;
+import cn.doug.system.model.vo.VeteranCadrePageVO;
 import cn.doug.system.service.VeteranCadreService;
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -21,9 +21,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;

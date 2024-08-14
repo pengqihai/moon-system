@@ -1,8 +1,8 @@
 package cn.doug.system.service;
 
 import cn.doug.system.model.entity.VeteranCadreEntity;
-import cn.doug.system.model.vo.digit.VeteranCadreExportVO;
-import cn.doug.system.model.vo.digit.VeteranCadrePageVO;
+import cn.doug.system.model.vo.VeteranCadreExportVO;
+import cn.doug.system.model.vo.VeteranCadrePageVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.model.form.VeteranCadreForm;

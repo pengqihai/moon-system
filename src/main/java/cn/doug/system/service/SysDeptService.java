@@ -1,11 +1,11 @@
 package cn.doug.system.service;
 
-import cn.doug.system.model.form.sys.SysDeptForm;
+import cn.doug.system.model.form.SysDeptForm;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysDept;
 import cn.doug.system.model.query.SysDeptQuery;
-import cn.doug.system.model.vo.sys.DeptVO;
+import cn.doug.system.model.vo.SysDeptVO;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public interface SysDeptService extends IService<SysDept> {
      *
      * @return
      */
-    List<DeptVO> listDepartments(SysDeptQuery queryParams);
+    List<SysDeptVO> listDepartments(SysDeptQuery queryParams);
 
     /**
      * 部门树形下拉选项

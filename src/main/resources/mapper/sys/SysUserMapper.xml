@@ -49,7 +49,7 @@
     </select>
 
     <!-- 用户表单信息映射 -->
-    <resultMap id="UserFormMap" type="cn.doug.system.model.form.sys.SysUserForm">
+    <resultMap id="UserFormMap" type="cn.doug.system.model.form.SysUserForm">
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="username" column="username" jdbcType="VARCHAR"/>
         <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
@@ -116,7 +116,7 @@
     </select>
 
     <!-- 获取用户导出列表 -->
-    <select id="listExportUsers" resultType="cn.doug.system.model.vo.sys.UserExportVO">
+    <select id="listExportUsers" resultType="cn.doug.system.model.vo.SysUserExportVO">
         SELECT
             u.username,
             u.nickname,

@@ -1,14 +1,13 @@
 package cn.doug.system.mapper;
 
 import cn.doug.system.model.entity.VeteranCadreEntity;
-import cn.doug.system.model.vo.digit.VeteranCadreExportVO;
+import cn.doug.system.model.vo.VeteranCadreExportVO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.doug.system.model.bo.VeteranCadreBO;
 import cn.doug.system.model.query.VeteranCadrePageQuery;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.io.IOException;
 import java.util.List;
 
 /**

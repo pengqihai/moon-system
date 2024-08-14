@@ -1,7 +1,8 @@
 package cn.doug.system.controller.system;
 
 import cn.doug.common.plugin.annotation.WebLog;
-import cn.doug.system.model.form.sys.SysUserForm;
+import cn.doug.system.model.form.SysUserForm;
+import cn.doug.system.model.vo.SysUserPageVO;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
@@ -11,10 +12,9 @@ import cn.doug.common.result.Result;
 import cn.doug.system.common.util.ExcelUtils;
 import cn.doug.system.model.entity.SysUser;
 import cn.doug.system.model.query.SysUserPageQuery;
-import cn.doug.system.model.vo.sys.UserExportVO;
-import cn.doug.system.model.vo.sys.UserImportVO;
-import cn.doug.system.model.vo.sys.UserInfoVO;
-import cn.doug.system.model.vo.sys.UserPageVO;
+import cn.doug.system.model.vo.SysUserExportVO;
+import cn.doug.system.model.vo.SysUserImportVO;
+import cn.doug.system.model.vo.SysUserInfoVO;
 import cn.doug.common.plugin.annotation.PreventDuplicateSubmit;
 import cn.doug.system.plugin.easyexcel.UserImportListener;
 import cn.doug.system.service.SysUserService;
@@ -54,10 +54,10 @@ public class SysUserController {
     @WebLog(value = "用户分页列表")
     @Operation(summary = "用户分页列表")
     @GetMapping("/page")
-    public PageResult<UserPageVO> listPagedUsers(
+    public PageResult<SysUserPageVO> listPagedUsers(
             @ParameterObject SysUserPageQuery queryParams
     ) {
-        IPage<UserPageVO> result = userService.listPagedUsers(queryParams);
+        IPage<SysUserPageVO> result = userService.listPagedUsers(queryParams);
         return PageResult.success(result);
     }
 
@@ -134,8 +134,8 @@ public class SysUserController {
     @WebLog(value = "获取当前登录用户信息")
     @Operation(summary = "获取当前登录用户信息")
     @GetMapping("/me")
-    public Result<UserInfoVO> getCurrentUserInfo() {
-        UserInfoVO userInfoVO = userService.getCurrentUserInfo();
+    public Result<SysUserInfoVO> getCurrentUserInfo() {
+        SysUserInfoVO userInfoVO = userService.getCurrentUserInfo();
         return Result.success(userInfoVO);
     }
 
@@ -161,7 +161,7 @@ public class SysUserController {
     @PostMapping("/import")
     public Result importUsers(@Parameter(description = "部门ID") Long deptId, MultipartFile file) throws IOException {
         UserImportListener listener = new UserImportListener(deptId);
-        String msg = ExcelUtils.importExcel(file.getInputStream(), UserImportVO.class, listener);
+        String msg = ExcelUtils.importExcel(file.getInputStream(), SysUserImportVO.class, listener);
         return Result.success(msg);
     }
 
@@ -173,8 +173,8 @@ public class SysUserController {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8"));
 
-        List<UserExportVO> exportUserList = userService.listExportUsers(queryParams);
-        EasyExcel.write(response.getOutputStream(), UserExportVO.class).sheet("用户列表")
+        List<SysUserExportVO> exportUserList = userService.listExportUsers(queryParams);
+        EasyExcel.write(response.getOutputStream(), SysUserExportVO.class).sheet("用户列表")
                 .doWrite(exportUserList);
     }
 }

@@ -3,9 +3,9 @@ package cn.doug.system.controller.system;
 import cn.doug.common.plugin.annotation.WebLog;
 import cn.doug.system.common.model.Option;
 import cn.doug.common.result.Result;
-import cn.doug.system.model.form.sys.SysDeptForm;
+import cn.doug.system.model.form.SysDeptForm;
 import cn.doug.system.model.query.SysDeptQuery;
-import cn.doug.system.model.vo.sys.DeptVO;
+import cn.doug.system.model.vo.SysDeptVO;
 import cn.doug.common.plugin.annotation.PreventDuplicateSubmit;
 import cn.doug.system.service.SysDeptService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,10 +34,10 @@ public class SysDeptController {
     @WebLog(value = "获取部门列表")
     @Operation(summary = "获取部门列表")
     @GetMapping
-    public Result<List<DeptVO>> listDepartments(
+    public Result<List<SysDeptVO>> listDepartments(
             @ParameterObject SysDeptQuery queryParams
     ) {
-        List<DeptVO> list = deptService.listDepartments(queryParams);
+        List<SysDeptVO> list = deptService.listDepartments(queryParams);
         return Result.success(list);
     }
 

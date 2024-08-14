@@ -2,9 +2,9 @@ package cn.doug.system.controller.auth;
 
 import cn.doug.common.plugin.annotation.WebLog;
 import cn.doug.common.result.Result;
-import cn.doug.system.model.dto.CaptchaResult;
+import cn.doug.system.model.dto.SysCaptchaResult;
 import cn.doug.system.model.dto.LoginResult;
-import cn.doug.system.service.AuthService;
+import cn.doug.system.service.SysAuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @Log4j2
 public class AuthController {
 
-    private final AuthService authService;
+    private final SysAuthService authService;
 
     @WebLog(value = "登录")
     @Operation(summary = "登录")
@@ -43,8 +43,8 @@ public class AuthController {
     @WebLog(value = "获取验证码")
     @Operation(summary = "获取验证码")
     @GetMapping("/captcha")
-    public Result<CaptchaResult> getCaptcha() {
-        CaptchaResult captcha = authService.getCaptcha();
+    public Result<SysCaptchaResult> getCaptcha() {
+        SysCaptchaResult captcha = authService.getCaptcha();
         return Result.success(captcha);
     }
 

@@ -1,13 +1,13 @@
 package cn.doug.system.service;
 
 
-import cn.doug.system.model.form.sys.SysRoleForm;
+import cn.doug.system.model.form.SysRoleForm;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysRole;
 import cn.doug.system.model.query.SysRolePageQuery;
-import cn.doug.system.model.vo.sys.RolePageVO;
+import cn.doug.system.model.vo.SysRolePageVO;
 
 import java.util.List;
 import java.util.Set;
@@ -26,7 +26,7 @@ public interface SysRoleService extends IService<SysRole> {
      * @param queryParams
      * @return
      */
-    Page<RolePageVO> getRolePage(SysRolePageQuery queryParams);
+    Page<SysRolePageVO> getRolePage(SysRolePageQuery queryParams);
 
 
     /**

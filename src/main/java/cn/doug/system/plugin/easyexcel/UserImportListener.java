@@ -3,6 +3,8 @@ package cn.doug.system.plugin.easyexcel;
 import cn.doug.common.base.IBaseEnum;
 import cn.doug.common.enums.GenderEnum;
 import cn.doug.common.enums.StatusEnum;
+import cn.doug.system.converter.SysUserConverter;
+import cn.doug.system.model.vo.SysUserImportVO;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.StrUtil;
@@ -11,11 +13,9 @@ import cn.hutool.json.JSONUtil;
 import com.alibaba.excel.context.AnalysisContext;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import cn.doug.system.common.constant.SystemConstants;
-import cn.doug.system.converter.UserConverter;
 import cn.doug.system.model.entity.SysRole;
 import cn.doug.system.model.entity.SysUser;
 import cn.doug.system.model.entity.SysUserRole;
-import cn.doug.system.model.vo.sys.UserImportVO;
 import cn.doug.system.service.SysRoleService;
 import cn.doug.system.service.SysUserRoleService;
 import cn.doug.system.service.SysUserService;
@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
  * @since 2022/4/10 20:49
  */
 @Log4j2
-public class UserImportListener extends MyAnalysisEventListener<UserImportVO> {
+public class UserImportListener extends MyAnalysisEventListener<SysUserImportVO> {
 
 
     // 有效条数
@@ -53,7 +53,7 @@ public class UserImportListener extends MyAnalysisEventListener<UserImportVO> {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final UserConverter userConverter;
+    private final SysUserConverter userConverter;
 
     private final SysRoleService roleService;
 
@@ -65,7 +65,7 @@ public class UserImportListener extends MyAnalysisEventListener<UserImportVO> {
         this.passwordEncoder = SpringUtil.getBean(PasswordEncoder.class);
         this.roleService = SpringUtil.getBean(SysRoleService.class);
         this.userRoleService = SpringUtil.getBean(SysUserRoleService.class);
-        this.userConverter = SpringUtil.getBean(UserConverter.class);
+        this.userConverter = SpringUtil.getBean(SysUserConverter.class);
     }
 
     /**
@@ -78,7 +78,7 @@ public class UserImportListener extends MyAnalysisEventListener<UserImportVO> {
      * @param analysisContext
      */
     @Override
-    public void invoke(UserImportVO userImportVO, AnalysisContext analysisContext) {
+    public void invoke(SysUserImportVO userImportVO, AnalysisContext analysisContext) {
         log.info("解析到一条用户数据:{}", JSONUtil.toJsonStr(userImportVO));
         // 校验数据
         StringBuilder validationMsg = new StringBuilder();

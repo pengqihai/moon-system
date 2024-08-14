@@ -1,8 +1,8 @@
 package cn.doug.system.converter;
 
-import cn.doug.system.model.vo.digit.VeteranCadreExportVO;
-import cn.doug.system.model.vo.digit.VeteranCadreImportVO;
-import cn.doug.system.model.vo.digit.VeteranCadrePageVO;
+import cn.doug.system.model.vo.VeteranCadreExportVO;
+import cn.doug.system.model.vo.VeteranCadreImportVO;
+import cn.doug.system.model.vo.VeteranCadrePageVO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

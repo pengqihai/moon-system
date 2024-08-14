@@ -2,15 +2,15 @@ package cn.doug.system.controller.system;
 
 import cn.doug.common.plugin.annotation.WebLog;
 import cn.doug.common.result.PageResult;
-import cn.doug.system.model.form.sys.SysDictForm;
-import cn.doug.system.model.form.sys.SysDictTypeForm;
+import cn.doug.system.model.form.SysDictForm;
+import cn.doug.system.model.form.SysDictTypeForm;
+import cn.doug.system.model.vo.SysDictPageVO;
+import cn.doug.system.model.vo.SysDictTypePageVO;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.doug.system.common.model.Option;
 import cn.doug.common.result.Result;
 import cn.doug.system.model.query.SysDictPageQuery;
 import cn.doug.system.model.query.SysDictTypePageQuery;
-import cn.doug.system.model.vo.sys.DictPageVO;
-import cn.doug.system.model.vo.sys.DictTypePageVO;
 import cn.doug.common.plugin.annotation.PreventDuplicateSubmit;
 import cn.doug.system.service.SysDictService;
 import cn.doug.system.service.SysDictTypeService;
@@ -37,10 +37,10 @@ public class SysDictController {
     @WebLog(value = "字典分页列表")
     @Operation(summary = "字典分页列表")
     @GetMapping("/page")
-    public PageResult<DictPageVO> getDictPage(
+    public PageResult<SysDictPageVO> getDictPage(
             @ParameterObject SysDictPageQuery queryParams
     ) {
-        Page<DictPageVO> result = dictService.getDictPage(queryParams);
+        Page<SysDictPageVO> result = dictService.getDictPage(queryParams);
         return PageResult.success(result);
     }
 
@@ -105,10 +105,10 @@ public class SysDictController {
     @WebLog(value = "字典类型分页列表")
     @Operation(summary = "字典类型分页列表")
     @GetMapping("/types/page")
-    public PageResult<DictTypePageVO> getDictTypePage(
+    public PageResult<SysDictTypePageVO> getDictTypePage(
             @ParameterObject SysDictTypePageQuery queryParams
     ) {
-        Page<DictTypePageVO> result = dictTypeService.getDictTypePage(queryParams);
+        Page<SysDictTypePageVO> result = dictTypeService.getDictTypePage(queryParams);
         return PageResult.success(result);
     }
 

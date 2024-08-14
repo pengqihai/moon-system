@@ -3,10 +3,10 @@ package cn.doug.system.controller.system;
 import cn.doug.common.plugin.annotation.WebLog;
 import cn.doug.system.common.model.Option;
 import cn.doug.common.result.Result;
-import cn.doug.system.model.form.sys.SysMenuForm;
+import cn.doug.system.model.form.SysMenuForm;
 import cn.doug.system.model.query.SysMenuQuery;
-import cn.doug.system.model.vo.sys.MenuVO;
-import cn.doug.system.model.vo.sys.RouteVO;
+import cn.doug.system.model.vo.SysMenuVO;
+import cn.doug.system.model.vo.SysRouteVO;
 import cn.doug.common.plugin.annotation.PreventDuplicateSubmit;
 import cn.doug.system.service.SysMenuService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,8 +38,8 @@ public class SysMenuController {
     @WebLog(value = "菜单列表")
     @Operation(summary = "菜单列表")
     @GetMapping
-    public Result<List<MenuVO>> listMenus( @ParameterObject SysMenuQuery queryParams) {
-        List<MenuVO> menuList = menuService.listMenus(queryParams);
+    public Result<List<SysMenuVO>> listMenus(@ParameterObject SysMenuQuery queryParams) {
+        List<SysMenuVO> menuList = menuService.listMenus(queryParams);
         return Result.success(menuList);
     }
 
@@ -54,8 +54,8 @@ public class SysMenuController {
     @WebLog(value = "路由列表")
     @Operation(summary = "路由列表")
     @GetMapping("/routes")
-    public Result<List<RouteVO>> listRoutes() {
-        List<RouteVO> routeList = menuService.listRoutes();
+    public Result<List<SysRouteVO>> listRoutes() {
+        List<SysRouteVO> routeList = menuService.listRoutes();
         return Result.success(routeList);
     }
 

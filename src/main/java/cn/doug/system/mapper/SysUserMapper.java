@@ -1,13 +1,13 @@
 package cn.doug.system.mapper;
 
 import cn.doug.system.model.bo.SysUserBO;
-import cn.doug.system.model.form.sys.SysUserForm;
+import cn.doug.system.model.form.SysUserForm;
 import cn.doug.system.model.query.SysUserPageQuery;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.doug.system.model.dto.UserAuthInfo;
 import cn.doug.system.model.entity.SysUser;
-import cn.doug.system.model.vo.sys.UserExportVO;
+import cn.doug.system.model.vo.SysUserExportVO;
 import cn.doug.system.plugin.mybatis.annotation.DataPermission;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -55,5 +55,5 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      * @return
      */
     @DataPermission(deptAlias = "u")
-    List<UserExportVO> listExportUsers(SysUserPageQuery queryParams);
+    List<SysUserExportVO> listExportUsers(SysUserPageQuery queryParams);
 }

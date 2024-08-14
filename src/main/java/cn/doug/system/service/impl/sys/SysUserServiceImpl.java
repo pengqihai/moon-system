@@ -2,7 +2,8 @@ package cn.doug.system.service.impl.sys;
 
 import cn.doug.common.util.DateUtils;
 import cn.doug.system.model.bo.SysUserBO;
-import cn.doug.system.model.form.sys.SysUserForm;
+import cn.doug.system.model.form.SysUserForm;
+import cn.doug.system.model.vo.SysUserInfoVO;
 import cn.doug.system.service.SysMenuService;
 import cn.doug.system.service.SysRoleService;
 import cn.doug.system.service.SysUserRoleService;
@@ -16,14 +17,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.doug.system.common.constant.SystemConstants;
-import cn.doug.system.converter.UserConverter;
+import cn.doug.system.converter.SysUserConverter;
 import cn.doug.system.mapper.SysUserMapper;
 import cn.doug.system.model.dto.UserAuthInfo;
 import cn.doug.system.model.entity.SysUser;
 import cn.doug.system.model.query.SysUserPageQuery;
-import cn.doug.system.model.vo.sys.UserExportVO;
-import cn.doug.system.model.vo.sys.UserInfoVO;
-import cn.doug.system.model.vo.sys.UserPageVO;
+import cn.doug.system.model.vo.SysUserExportVO;
+import cn.doug.system.model.vo.SysUserPageVO;
 import cn.doug.system.security.service.PermissionService;
 import cn.doug.system.security.util.SecurityUtils;
 import lombok.RequiredArgsConstructor;
@@ -50,7 +50,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     private final SysUserRoleService userRoleService;
 
-    private final UserConverter userConverter;
+    private final SysUserConverter userConverter;
 
     private final SysMenuService menuService;
 
@@ -62,10 +62,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      * 获取用户分页列表
      *
      * @param queryParams 查询参数
-     * @return {@link IPage<UserPageVO>} 用户分页列表
+     * @return {@link IPage< SysUserPageVO >} 用户分页列表
      */
     @Override
-    public IPage<UserPageVO> listPagedUsers(SysUserPageQuery queryParams) {
+    public IPage<SysUserPageVO> listPagedUsers(SysUserPageQuery queryParams) {
 
         // 参数构建
         int pageNum = queryParams.getPageNum();
@@ -216,20 +216,20 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      * 获取导出用户列表
      *
      * @param queryParams 查询参数
-     * @return {@link List<UserExportVO>} 导出用户列表
+     * @return {@link List< SysUserExportVO >} 导出用户列表
      */
     @Override
-    public List<UserExportVO> listExportUsers(SysUserPageQuery queryParams) {
+    public List<SysUserExportVO> listExportUsers(SysUserPageQuery queryParams) {
         return this.baseMapper.listExportUsers(queryParams);
     }
 
     /**
      * 获取登录用户信息
      *
-     * @return {@link UserInfoVO}   用户信息
+     * @return {@link SysUserInfoVO}   用户信息
      */
     @Override
-    public UserInfoVO getCurrentUserInfo() {
+    public SysUserInfoVO getCurrentUserInfo() {
 
         String username = SecurityUtils.getUser().getUsername(); // 登录用户名
 
@@ -244,7 +244,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                 )
         );
         // entity->VO
-        UserInfoVO userInfoVO = userConverter.toUserInfoVo(user);
+        SysUserInfoVO userInfoVO = userConverter.toUserInfoVo(user);
 
         // 用户角色集合
         Set<String> roles = SecurityUtils.getRoles();

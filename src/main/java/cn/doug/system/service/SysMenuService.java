@@ -1,12 +1,12 @@
 package cn.doug.system.service;
 
-import cn.doug.system.model.form.sys.SysMenuForm;
+import cn.doug.system.model.form.SysMenuForm;
 import cn.doug.system.model.query.SysMenuQuery;
+import cn.doug.system.model.vo.SysMenuVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysMenu;
-import cn.doug.system.model.vo.sys.MenuVO;
-import cn.doug.system.model.vo.sys.RouteVO;
+import cn.doug.system.model.vo.SysRouteVO;
 
 import java.util.List;
 import java.util.Set;
@@ -24,7 +24,7 @@ public interface SysMenuService extends IService<SysMenu> {
      *
      * @return
      */
-    List<MenuVO> listMenus(SysMenuQuery queryParams);
+    List<SysMenuVO> listMenus(SysMenuQuery queryParams);
 
 
     /**
@@ -47,7 +47,7 @@ public interface SysMenuService extends IService<SysMenu> {
      *
      * @return
      */
-    List<RouteVO> listRoutes();
+    List<SysRouteVO> listRoutes();
 
     /**
      * 修改菜单显示状态

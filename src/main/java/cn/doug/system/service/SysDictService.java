@@ -1,12 +1,12 @@
 package cn.doug.system.service;
 
-import cn.doug.system.model.form.sys.SysDictForm;
+import cn.doug.system.model.form.SysDictForm;
+import cn.doug.system.model.vo.SysDictPageVO;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysDict;
 import cn.doug.system.model.query.SysDictPageQuery;
-import cn.doug.system.model.vo.sys.DictPageVO;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public interface SysDictService extends IService<SysDict> {
      * @param queryParams
      * @return
      */
-    Page<DictPageVO> getDictPage(SysDictPageQuery queryParams);
+    Page<SysDictPageVO> getDictPage(SysDictPageQuery queryParams);
 
     /**
      * 字典数据项表单

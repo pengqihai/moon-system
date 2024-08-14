@@ -1,15 +1,15 @@
 package cn.doug.system.service;
 
 
-import cn.doug.system.model.form.sys.SysUserForm;
+import cn.doug.system.model.form.SysUserForm;
+import cn.doug.system.model.vo.SysUserInfoVO;
+import cn.doug.system.model.vo.SysUserPageVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.model.dto.UserAuthInfo;
 import cn.doug.system.model.entity.SysUser;
 import cn.doug.system.model.query.SysUserPageQuery;
-import cn.doug.system.model.vo.sys.UserExportVO;
-import cn.doug.system.model.vo.sys.UserInfoVO;
-import cn.doug.system.model.vo.sys.UserPageVO;
+import cn.doug.system.model.vo.SysUserExportVO;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public interface SysUserService extends IService<SysUser> {
      *
      * @return
      */
-    IPage<UserPageVO> listPagedUsers(SysUserPageQuery queryParams);
+    IPage<SysUserPageVO> listPagedUsers(SysUserPageQuery queryParams);
 
 
     /**
@@ -90,7 +90,7 @@ public interface SysUserService extends IService<SysUser> {
      * @param queryParams
      * @return
      */
-    List<UserExportVO> listExportUsers(SysUserPageQuery queryParams);
+    List<SysUserExportVO> listExportUsers(SysUserPageQuery queryParams);
 
 
     /**
@@ -98,5 +98,5 @@ public interface SysUserService extends IService<SysUser> {
      *
      * @return
      */
-    UserInfoVO getCurrentUserInfo();
+    SysUserInfoVO getCurrentUserInfo();
 }

@@ -1,12 +1,12 @@
 package cn.doug.system.service;
 
+import cn.doug.system.model.vo.SysDictTypePageVO;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.doug.system.common.model.Option;
 import cn.doug.system.model.entity.SysDictType;
-import cn.doug.system.model.form.sys.SysDictTypeForm;
+import cn.doug.system.model.form.SysDictTypeForm;
 import cn.doug.system.model.query.SysDictTypePageQuery;
-import cn.doug.system.model.vo.sys.DictTypePageVO;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public interface SysDictTypeService extends IService<SysDictType> {
      * @param queryParams 分页查询对象
      * @return
      */
-    Page<DictTypePageVO> getDictTypePage(SysDictTypePageQuery queryParams);
+    Page<SysDictTypePageVO> getDictTypePage(SysDictTypePageQuery queryParams);
 
 
     /**

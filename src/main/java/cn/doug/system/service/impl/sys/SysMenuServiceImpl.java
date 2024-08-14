@@ -2,8 +2,9 @@ package cn.doug.system.service.impl.sys;
 
 import cn.doug.common.enums.StatusEnum;
 import cn.doug.system.common.model.KeyValue;
-import cn.doug.system.model.form.sys.SysMenuForm;
+import cn.doug.system.model.form.SysMenuForm;
 import cn.doug.system.model.query.SysMenuQuery;
+import cn.doug.system.model.vo.SysMenuVO;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ObjectUtil;
@@ -15,12 +16,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.doug.system.common.constant.SystemConstants;
 import cn.doug.system.common.enums.MenuTypeEnum;
 import cn.doug.system.common.model.Option;
-import cn.doug.system.converter.MenuConverter;
+import cn.doug.system.converter.SysMenuConverter;
 import cn.doug.system.mapper.SysMenuMapper;
-import cn.doug.system.model.bo.RouteBO;
+import cn.doug.system.model.bo.SysRouteBO;
 import cn.doug.system.model.entity.SysMenu;
-import cn.doug.system.model.vo.sys.MenuVO;
-import cn.doug.system.model.vo.sys.RouteVO;
+import cn.doug.system.model.vo.SysRouteVO;
 import cn.doug.system.service.SysMenuService;
 import cn.doug.system.service.SysRoleMenuService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -47,7 +47,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements SysMenuService {
 
-    private final MenuConverter menuConverter;
+    private final SysMenuConverter menuConverter;
 
     private final SysRoleMenuService roleMenuService;
 
@@ -58,7 +58,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      * @param queryParams {@link SysMenuQuery}
      */
     @Override
-    public List<MenuVO> listMenus(SysMenuQuery queryParams) {
+    public List<SysMenuVO> listMenus(SysMenuQuery queryParams) {
         List<SysMenu> menus = this.list(new LambdaQueryWrapper<SysMenu>()
                 .like(StrUtil.isNotBlank(queryParams.getKeywords()), SysMenu::getName, queryParams.getKeywords())
                 .orderByAsc(SysMenu::getSort)
@@ -91,13 +91,13 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      * @param menuList 菜单列表
      * @return 菜单列表
      */
-    private List<MenuVO> buildMenuTree(Long parentId, List<SysMenu> menuList) {
+    private List<SysMenuVO> buildMenuTree(Long parentId, List<SysMenu> menuList) {
         return CollectionUtil.emptyIfNull(menuList)
                 .stream()
                 .filter(menu -> menu.getParentId().equals(parentId))
                 .map(entity -> {
-                    MenuVO menuVO = menuConverter.entity2Vo(entity);
-                    List<MenuVO> children = buildMenuTree(entity.getId(), menuList);
+                    SysMenuVO menuVO = menuConverter.entity2Vo(entity);
+                    List<SysMenuVO> children = buildMenuTree(entity.getId(), menuList);
                     menuVO.setChildren(children);
                     return menuVO;
                 }).toList();
@@ -142,9 +142,9 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      */
     @Override
     @Cacheable(cacheNames = "menu", key = "'routes'")
-    public List<RouteVO> listRoutes() {
-        List<RouteBO> menuList = this.baseMapper.listRoutes();
-        List<RouteVO> routes = buildRoutes(SystemConstants.ROOT_NODE_ID, menuList);
+    public List<SysRouteVO> listRoutes() {
+        List<SysRouteBO> menuList = this.baseMapper.listRoutes();
+        List<SysRouteVO> routes = buildRoutes(SystemConstants.ROOT_NODE_ID, menuList);
         return routes;
     }
 
@@ -155,13 +155,13 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      * @param menuList 菜单列表
      * @return 路由层级列表
      */
-    private List<RouteVO> buildRoutes(Long parentId, List<RouteBO> menuList) {
-        List<RouteVO> routeList = new ArrayList<>();
+    private List<SysRouteVO> buildRoutes(Long parentId, List<SysRouteBO> menuList) {
+        List<SysRouteVO> routeList = new ArrayList<>();
 
-        for (RouteBO menu : menuList) {
+        for (SysRouteBO menu : menuList) {
             if (menu.getParentId().equals(parentId)) {
-                RouteVO routeVO = toRouteVo(menu);
-                List<RouteVO> children = buildRoutes(menu.getId(), menuList);
+                SysRouteVO routeVO = toRouteVo(menu);
+                List<SysRouteVO> children = buildRoutes(menu.getId(), menuList);
                 if (!children.isEmpty()) {
                     routeVO.setChildren(children);
                 }
@@ -175,15 +175,15 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     /**
      * 根据RouteBO创建RouteVO
      */
-    private RouteVO toRouteVo(RouteBO routeBO) {
-        RouteVO routeVO = new RouteVO();
+    private SysRouteVO toRouteVo(SysRouteBO routeBO) {
+        SysRouteVO routeVO = new SysRouteVO();
         String routeName = StringUtils.capitalize(StrUtil.toCamelCase(routeBO.getPath(), '-'));  // 路由 name 需要驼峰，首字母大写
         routeVO.setName(routeName); // 根据name路由跳转 this.$router.push({name:xxx})
         routeVO.setPath(routeBO.getPath()); // 根据path路由跳转 this.$router.push({path:xxx})
         routeVO.setRedirect(routeBO.getRedirect());
         routeVO.setComponent(routeBO.getComponent());
 
-        RouteVO.Meta meta = new RouteVO.Meta();
+        SysRouteVO.Meta meta = new SysRouteVO.Meta();
         meta.setTitle(routeBO.getName());
         meta.setIcon(routeBO.getIcon());
         meta.setRoles(routeBO.getRoles());

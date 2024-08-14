@@ -1,6 +1,7 @@
 package cn.doug.system.service.impl.sys;
 
-import cn.doug.system.model.form.sys.SysRoleForm;
+import cn.doug.system.model.form.SysRoleForm;
+import cn.doug.system.model.vo.SysRolePageVO;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ObjectUtil;
@@ -10,12 +11,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.doug.system.common.constant.SystemConstants;
 import cn.doug.system.common.model.Option;
-import cn.doug.system.converter.RoleConverter;
+import cn.doug.system.converter.SysRoleConverter;
 import cn.doug.system.mapper.SysRoleMapper;
 import cn.doug.system.model.entity.SysRole;
 import cn.doug.system.model.entity.SysRoleMenu;
 import cn.doug.system.model.query.SysRolePageQuery;
-import cn.doug.system.model.vo.sys.RolePageVO;
 import cn.doug.system.security.util.SecurityUtils;
 import cn.doug.system.service.SysRoleMenuService;
 import cn.doug.system.service.SysRoleService;
@@ -41,16 +41,16 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
     private final SysRoleMenuService roleMenuService;
     private final SysUserRoleService userRoleService;
-    private final RoleConverter roleConverter;
+    private final SysRoleConverter roleConverter;
 
     /**
      * 角色分页列表
      *
      * @param queryParams 角色查询参数
-     * @return {@link Page<RolePageVO>} – 角色分页列表
+     * @return {@link Page< SysRolePageVO >} – 角色分页列表
      */
     @Override
-    public Page<RolePageVO> getRolePage(SysRolePageQuery queryParams) {
+    public Page<SysRolePageVO> getRolePage(SysRolePageQuery queryParams) {
         // 查询参数
         int pageNum = queryParams.getPageNum();
         int pageSize = queryParams.getPageSize();
