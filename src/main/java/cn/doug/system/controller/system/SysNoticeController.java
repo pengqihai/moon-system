@@ -25,7 +25,7 @@ import jakarta.validation.Valid;
  * @author pengqihai
  * @since 2024-08-14
  */
-@Tag(name = "通知公告表接口")
+@Tag(name = "通知公告接口")
 @RestController
 @RequestMapping("/api/notice")
 @RequiredArgsConstructor
@@ -34,12 +34,12 @@ public class SysNoticeController {
     private final SysNoticeService noticeEntityService;
 
     /**
-     *通知公告表分页列表
+     * 查询公告列表
      *
-     * @return
+     * @return SysNoticePageVO
      */
-    @WebLog(value = "通知公告表分页列表")
-    @Operation(summary = "通知公告表分页列表")
+    @WebLog(value = "查询公告列表")
+    @Operation(summary = "查询公告列表")
     @GetMapping("/page")
     public PageResult<SysNoticePageVO> listPagedNotices(SysNoticePageQuery queryParams) {
         IPage<SysNoticePageVO> result = noticeEntityService.listPagedNotices(queryParams);
@@ -47,13 +47,13 @@ public class SysNoticeController {
     }
 
     /**
-     * 获取通知公告表表单数据
+     * 获取通知公告表单数据
      *
-     * @param id 通知公告表ID
-     * @return
+     * @param form 通知公告ID
+     * @return SysNoticeForm
      */
-    @WebLog(value = "通知公告表表单数据")
-    @Operation(summary = "通知公告表表单数据")
+    @WebLog(value = "通知公告表单数据")
+    @Operation(summary = "通知公告表单数据")
     @PostMapping("getInfo")
     public Result<SysNoticeForm> getInfo(@RequestBody @Validated BaseIdForm form) {
         SysNoticeForm formData = noticeEntityService.getNoticeFormData(form.getId());
@@ -80,8 +80,8 @@ public class SysNoticeController {
      * @param formData 通知公告表表单对象
      * @return
      */
-    @WebLog(value = "修改通知公告表")
-    @Operation(summary = "修改通知公告表")
+    @WebLog(value = "修改通知公告")
+    @Operation(summary = "修改通知公告")
     @PutMapping(value = "/edit")
     public Result updateNotice(@RequestBody @Validated SysNoticeForm formData) {
         boolean result = noticeEntityService.updateNotice(formData);
@@ -94,8 +94,8 @@ public class SysNoticeController {
      * @param form 通知公告表ID，多个以英文逗号(,)分割
      * @return
      */
-    @WebLog(value = "删除通知公告表")
-    @Operation(summary = "删除通知公告表")
+    @WebLog(value = "删除通知公告")
+    @Operation(summary = "删除通知公告")
     @DeleteMapping("/del")
     public Result deleteNotices(@RequestBody @Valid BaseIdForm form) {
         boolean result = noticeEntityService.deleteNotices(form);

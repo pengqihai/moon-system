@@ -32,7 +32,7 @@ public class ${entity}Entity extends ${superEntityClass}#if(${activeRecord})<${e
 #elseif(${activeRecord})
 public class ${entity}Entity extends Model<${entity}Entity> {
 #elseif(${entitySerialVersionUID})
-public class ${entity}Entity implements Serializable {
+public class ${entity}Entity  implements Serializable {
 #else
 public class ${entity}Entity {
 #end

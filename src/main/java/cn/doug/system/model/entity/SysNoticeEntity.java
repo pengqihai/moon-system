@@ -1,5 +1,6 @@
 package cn.doug.system.model.entity;
 
+import cn.doug.common.base.BaseMybatisEntity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -17,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("sys_notice")
-public class SysNoticeEntity implements Serializable {
+public class SysNoticeEntity extends BaseMybatisEntity implements Serializable  {
 
     private static final long serialVersionUID = 1L;
 
@@ -53,19 +54,10 @@ public class SysNoticeEntity implements Serializable {
     private String createBy;
 
     /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
      * 更新者
      */
     private String updateBy;
 
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
 
     /**
      * 备注

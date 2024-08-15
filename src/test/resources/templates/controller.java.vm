@@ -30,7 +30,7 @@ import ${superControllerClassPackage};
  */
 @Tag(name = "${table.comment}接口")
 @RestController
-@RequestMapping("/api/${firstCharLowerCaseEntity}s")
+@RequestMapping("/api/${firstCharLowerCase}")
 @RequiredArgsConstructor
 #if(${superControllerClass})
 public class ${table.controllerName} extends ${superControllerClass} {

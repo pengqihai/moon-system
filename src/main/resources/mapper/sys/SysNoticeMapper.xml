@@ -29,7 +29,6 @@
         FROM
             sys_notice
         <where>
-            deleted = 0
             <if test='queryParams.keywords!=null and queryParams.keywords.trim() neq ""'>
                 AND (
                     name LIKE CONCAT('%',#{queryParams.keywords},'%')
